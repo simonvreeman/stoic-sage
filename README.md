@@ -15,10 +15,11 @@ npm run dev                            # Start local dev server
 
 ## Usage
 
-Visit [stoic-sage.vreeman.workers.dev](https://stoic-sage.vreeman.workers.dev) to browse the Meditations. The homepage shows a random entry on each load — click "Show me another" for a new one.
+Visit [stoic-sage.vreeman.workers.dev](https://stoic-sage.vreeman.workers.dev) to browse the Meditations. The homepage shows a random entry on each load — click "Show me another" for a new one. Use the search box to find entries by concept (e.g., "anger", "death", "purpose").
 
 ### API
 
+- `GET /api/search?q=...&topK=5` — semantic search across all entries
 - `GET /api/entry/:book/:id` — fetch a specific entry (e.g., `/api/entry/6/26`)
 - `GET /api/random` — random entry
 

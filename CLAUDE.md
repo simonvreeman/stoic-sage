@@ -41,10 +41,10 @@ CORS is enabled on all `/api/*` routes via Hono's `cors()` middleware.
 
 | Method | Route | Description | Status |
 |--------|-------|-------------|--------|
-| GET | `/` | Frontend (search + daily entry) | Placeholder |
+| GET | `/` | Frontend (search + random entry) | Live |
 | GET | `/api/entry/:book/:id` | Get a specific entry by book (1-12) and entry ID | Live |
 | GET | `/api/random` | Random entry (`ORDER BY RANDOM()`) | Live |
-| GET | `/api/search?q=...` | Semantic search (Phase 2) | Planned |
+| GET | `/api/search?q=...&topK=5` | Semantic search (embed query → Vectorize → D1) | Live |
 | POST | `/api/explain` | AI explanation of entries (Phase 3) | Planned |
 
 ### Response format
@@ -54,6 +54,8 @@ All API routes return JSON. Entry responses have the shape:
 ```json
 { "book": 6, "entry": "26", "text": "..." }
 ```
+
+Search responses: `{ "results": [{ "book": 6, "entry": "26", "text": "...", "score": 0.76 }] }`
 
 Error responses: `{ "error": "message" }` with appropriate HTTP status (400, 404, 500).
 

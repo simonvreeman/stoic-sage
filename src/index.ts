@@ -197,11 +197,28 @@ const html = `<!DOCTYPE html>
       }
     }
 
+    async function doSearch(q) {
+      showLoading();
+      try {
+        var res = await fetch("/api/search?q=" + encodeURIComponent(q));
+        if (!res.ok) throw new Error("Search failed");
+        var data = await res.json();
+        if (!data.results || data.results.length === 0) {
+          resultsEl.innerHTML = '<div class="loading">No results found.</div>';
+          return;
+        }
+        var heading = '<p class="results-heading">' + data.results.length + ' results for \\u201c' + escapeHtml(q) + '\\u201d</p>';
+        resultsEl.innerHTML = heading + data.results.map(renderEntry).join("");
+      } catch (err) {
+        showError(err.message);
+      }
+    }
+
     searchForm.addEventListener("submit", function(e) {
       e.preventDefault();
       var q = searchInput.value.trim();
       if (!q) return;
-      resultsEl.innerHTML = '<div class="loading">Search coming soon in Phase 2\u2026</div>';
+      doSearch(q);
     });
 
     randomBtn.addEventListener("click", loadRandom);
@@ -235,6 +252,50 @@ app.get("/api/entry/:book/:id", async (c) => {
   }
 
   return c.json(row);
+});
+
+app.get("/api/search", async (c) => {
+  const query = c.req.query("q");
+  if (!query || !query.trim()) {
+    return c.json({ error: "Query parameter 'q' is required." }, 400);
+  }
+
+  const topK = Math.min(Math.max(parseInt(c.req.query("topK") || "5", 10) || 5, 1), 20);
+
+  // Embed the query
+  const embeddingResult = await c.env.AI.run("@cf/baai/bge-base-en-v1.5", {
+    text: [query.trim()],
+  });
+
+  const queryVector = embeddingResult.data[0];
+
+  // Search Vectorize
+  const vectorResults = await c.env.VECTORIZE.query(queryVector, {
+    topK,
+    returnMetadata: "all",
+  });
+
+  if (!vectorResults.matches || vectorResults.matches.length === 0) {
+    return c.json({ results: [] });
+  }
+
+  // Fetch full text from D1 for each match
+  const results = await Promise.all(
+    vectorResults.matches.map(async (match) => {
+      const meta = match.metadata as { book: number; entry: string };
+      const row = await c.env.DB.prepare(
+        "SELECT book, entry, text FROM entries WHERE book = ? AND entry = ?",
+      )
+        .bind(meta.book, meta.entry)
+        .first();
+
+      return row
+        ? { book: row.book, entry: row.entry, text: row.text, score: match.score }
+        : null;
+    }),
+  );
+
+  return c.json({ results: results.filter(Boolean) });
 });
 
 app.get("/api/random", async (c) => {
