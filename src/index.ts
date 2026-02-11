@@ -394,20 +394,21 @@ app.get("/", (c) => {
 app.get("/api/entry/:book/:id", async (c) => {
   const bookParam = c.req.param("book");
   const entryId = c.req.param("id");
+  const source = c.req.query("source") || "meditations";
 
   const book = parseInt(bookParam, 10);
-  if (isNaN(book) || book < 1 || book > 12) {
-    return c.json({ error: "Invalid book number. Must be 1-12." }, 400);
+  if (isNaN(book) || book < 1) {
+    return c.json({ error: "Invalid book/chapter number." }, 400);
   }
 
   const row = await c.env.DB.prepare(
-    "SELECT book, entry, text FROM entries WHERE book = ? AND entry = ?",
+    "SELECT source, book, entry, text FROM entries WHERE source = ? AND book = ? AND entry = ?",
   )
-    .bind(book, entryId)
+    .bind(source, book, entryId)
     .first();
 
   if (!row) {
-    return c.json({ error: `Entry ${book}.${entryId} not found.` }, 404);
+    return c.json({ error: `Entry ${source} ${book}.${entryId} not found.` }, 404);
   }
 
   return c.json(row);
@@ -441,15 +442,16 @@ app.get("/api/search", async (c) => {
   // Fetch full text from D1 for each match
   const results = await Promise.all(
     vectorResults.matches.map(async (match) => {
-      const meta = match.metadata as { book: number; entry: string };
+      const meta = match.metadata as { source: string; book: number; entry: string };
+      const source = meta.source || "meditations";
       const row = await c.env.DB.prepare(
-        "SELECT book, entry, text FROM entries WHERE book = ? AND entry = ?",
+        "SELECT source, book, entry, text FROM entries WHERE source = ? AND book = ? AND entry = ?",
       )
-        .bind(meta.book, meta.entry)
+        .bind(source, meta.book, meta.entry)
         .first();
 
       return row
-        ? { book: row.book, entry: row.entry, text: row.text, score: match.score }
+        ? { source: row.source, book: row.book, entry: row.entry, text: row.text, score: match.score }
         : null;
     }),
   );
@@ -526,7 +528,7 @@ app.get("/api/daily", async (c) => {
   const offset = ((hash % total) + total) % total;
 
   const row = await c.env.DB.prepare(
-    "SELECT book, entry, text FROM entries LIMIT 1 OFFSET ?",
+    "SELECT source, book, entry, text FROM entries LIMIT 1 OFFSET ?",
   )
     .bind(offset)
     .first();
@@ -540,7 +542,7 @@ app.get("/api/daily", async (c) => {
 
 app.get("/api/random", async (c) => {
   const row = await c.env.DB.prepare(
-    "SELECT book, entry, text FROM entries ORDER BY RANDOM() LIMIT 1",
+    "SELECT source, book, entry, text FROM entries ORDER BY RANDOM() LIMIT 1",
   ).first();
 
   if (!row) {
