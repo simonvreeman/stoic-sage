@@ -16,15 +16,15 @@ const html = `<!DOCTYPE html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Stoic Sage — Meditations by Marcus Aurelius</title>
-  <meta name="description" content="A personal semantic search engine for Meditations by Marcus Aurelius. Search by concept, browse daily reflections, and get AI-powered explanations.">
+  <title>Stoic Sage — Meditations &amp; Enchiridion</title>
+  <meta name="description" content="Semantic search through Stoic philosophy. Search the Meditations by Marcus Aurelius and the Enchiridion by Epictetus by concept, with AI-powered explanations.">
   <meta property="og:title" content="Stoic Sage">
-  <meta property="og:description" content="Semantic search through Marcus Aurelius' Meditations. Search by concept, get AI-powered explanations grounded in the text.">
+  <meta property="og:description" content="Semantic search through Stoic philosophy. Meditations by Marcus Aurelius and Enchiridion by Epictetus. AI-powered explanations grounded in the text.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://stoic-sage.vreeman.workers.dev">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Stoic Sage">
-  <meta name="twitter:description" content="Semantic search through Marcus Aurelius' Meditations.">
+  <meta name="twitter:description" content="Semantic search through Stoic philosophy. Meditations and Enchiridion.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛️</text></svg>">
   <style>
     :root {
@@ -215,14 +215,14 @@ const html = `<!DOCTYPE html>
 <body>
   <div class="container">
     <h1>Stoic Sage</h1>
-    <p class="subtitle">Meditations by Marcus Aurelius</p>
+    <p class="subtitle">Meditations &amp; Enchiridion</p>
 
     <form class="search-form" id="search-form">
       <input
         class="search-input"
         type="text"
         id="search-input"
-        placeholder="Search the Meditations\u2026"
+        placeholder="Search Stoic philosophy\u2026"
         autocomplete="off"
       >
       <button class="btn" type="submit">Search</button>
@@ -235,7 +235,7 @@ const html = `<!DOCTYPE html>
     <div id="results"></div>
 
     <footer>
-      Gregory Hays translation \u00B7 <a href="https://vreeman.com/meditations">Source text</a>
+      <a href="https://vreeman.com/meditations">Meditations</a> (Gregory Hays) \u00B7 <a href="https://vreeman.com/discourses/enchiridion">Enchiridion</a> (Robert Dobbin)
     </footer>
   </div>
 
@@ -248,10 +248,15 @@ const html = `<!DOCTYPE html>
     var lastQuery = "";
     var lastEntries = [];
 
+    function formatCitation(entry) {
+      var label = entry.source === "enchiridion" ? "Enchiridion" : "Meditations";
+      return label + ' ' + entry.book + '.' + escapeHtml(String(entry.entry));
+    }
+
     function renderEntry(entry) {
       return '<div class="entry">'
         + '<div class="entry-text">' + escapeHtml(entry.text) + '</div>'
-        + '<div class="entry-citation">Meditations ' + entry.book + '.' + escapeHtml(String(entry.entry)) + '</div>'
+        + '<div class="entry-citation">' + formatCitation(entry) + '</div>'
         + '</div>';
     }
 
@@ -332,7 +337,7 @@ const html = `<!DOCTYPE html>
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             query: lastQuery,
-            entries: lastEntries.map(function(e) { return { book: e.book, entry: e.entry, text: e.text }; })
+            entries: lastEntries.map(function(e) { return { source: e.source, book: e.book, entry: e.entry, text: e.text }; })
           })
         });
         if (!res.ok) throw new Error("Explain failed");
@@ -472,7 +477,7 @@ app.get("/api/search", async (c) => {
 app.post("/api/explain", async (c) => {
   const body = await c.req.json<{
     query: string;
-    entries: { book: number; entry: string; text: string }[];
+    entries: { source?: string; book: number; entry: string; text: string }[];
   }>();
 
   if (!body.query || !body.entries || body.entries.length === 0) {
@@ -483,14 +488,24 @@ app.post("/api/explain", async (c) => {
   }
 
   const entriesContext = body.entries
-    .map((e) => `[${e.book}.${e.entry}] ${e.text}`)
+    .map((e) => {
+      const label = e.source === "enchiridion" ? "Enchiridion" : "Meditations";
+      return `[${label} ${e.book}.${e.entry}] ${e.text}`;
+    })
     .join("\n\n");
 
-  const systemPrompt = `You are Stoic Sage, a concise guide to Marcus Aurelius' Meditations.
+  const hasMeditations = body.entries.some((e) => !e.source || e.source === "meditations");
+  const hasEnchiridion = body.entries.some((e) => e.source === "enchiridion");
+  const authors = [
+    hasMeditations ? "Marcus Aurelius (Meditations)" : "",
+    hasEnchiridion ? "Epictetus (Enchiridion)" : "",
+  ].filter(Boolean).join(" and ");
+
+  const systemPrompt = `You are Stoic Sage, a concise guide to Stoic philosophy from ${authors}.
 
 RULES:
 - ONLY use the entries provided below. Never invent or assume content not present.
-- Cite entries by number (e.g., "In 6.26, Marcus writes...").
+- Cite entries by source and number (e.g., "In Meditations 6.26, Marcus writes..." or "In Enchiridion 1.5, Epictetus says...").
 - Quote short phrases directly from the text when relevant.
 - Keep your explanation concise: 2-4 short paragraphs.
 - Write in plain, modern English.
@@ -506,7 +521,7 @@ ${entriesContext}`;
         { role: "system", content: systemPrompt },
         {
           role: "user",
-          content: `Explain what Marcus Aurelius says about: ${body.query}`,
+          content: `Explain what the Stoic philosophers say about: ${body.query}`,
         },
       ],
       stream: true,
