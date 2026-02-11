@@ -15,7 +15,7 @@ npm run dev                            # Start local dev server
 
 ## Usage
 
-Visit [stoicsage.ai](https://stoicsage.ai) to explore Stoic philosophy. The homepage shows a daily reflection — the same entry for everyone, all day. Click "Show me another" for a random entry. Use the search box to find entries by concept (e.g., "anger", "desire", "virtue"), then click "Explain these results" for an AI-powered explanation grounded in the text. Results come from the Meditations, Discourses, Enchiridion, and Fragments. Supports dark mode — follows your system preference by default, with a toggle to switch between light, dark, and system modes.
+Visit [stoicsage.ai](https://stoicsage.ai) to explore Stoic philosophy. The homepage shows a daily reflection — the same entry for everyone, all day. Click "Show me another" for a random entry. Use the search box to find entries by concept (e.g., "anger", "desire", "virtue"), then click "Explain these results" for an AI-powered explanation grounded in the text. Results come from the Meditations, Discourses, Enchiridion, and Fragments. Supports dark mode — automatically follows your system preference.
 
 ### API
 

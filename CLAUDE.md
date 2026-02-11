@@ -188,7 +188,7 @@ Single-page HTML served inline from Hono's `GET /` route. Features:
 - **Semantic search** — Search box queries `/api/search`, displays ranked results with scores
 - **AI explanations** — "Explain these results" button streams `/api/explain` via SSE
 - **Source attribution** — Citations show "Meditations 6.26", "Discourses 1.1.1", "Enchiridion 1.3", or "Fragments 8"
-- **Dark mode** — Respects `prefers-color-scheme` by default, with a three-state toggle (light/dark/system) persisted in `localStorage`. Uses CSS custom properties for all colors, with a `data-theme` attribute on `<html>` for manual override. FOUC prevention via inline `<script>` in `<head>`.
+- **Dark mode** — Follows the user's OS preference via `prefers-color-scheme` media query. All colors defined as CSS custom properties in `:root`, overridden in `@media (prefers-color-scheme: dark)`. No manual toggle — system setting only.
 - **Fade-in transitions** — Content area animates on load/update
 - **Meta tags** — OG (title, description, type, url), Twitter Card, description meta, `color-scheme` meta
 - **Favicon** — SVG emoji (🏛️)

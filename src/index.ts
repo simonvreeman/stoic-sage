@@ -27,13 +27,6 @@ const html = `<!DOCTYPE html>
   <meta name="twitter:description" content="Semantic search through Stoic philosophy. Meditations, Discourses, Enchiridion and Fragments.">
   <meta name="color-scheme" content="light dark">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛️</text></svg>">
-  <script>
-    // Prevent FOUC: apply saved theme before first paint
-    (function() {
-      var t = localStorage.getItem("theme");
-      if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
-    })();
-  </script>
   <style>
     :root {
       --sans-serif: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -54,13 +47,11 @@ const html = `<!DOCTYPE html>
       --btn-hover: #f0ede8;
       --error: #b44;
       --input-placeholder: #aaa;
-      --toggle-bg: transparent;
-      --toggle-hover: #f0ede8;
     }
 
-    /* Dark theme via system preference */
+    /* Dark theme — follows system preference */
     @media (prefers-color-scheme: dark) {
-      :root:not([data-theme="light"]) {
+      :root {
         --bg: #1a1a1a;
         --text: #e0ddd5;
         --text-muted: #9a968e;
@@ -74,28 +65,7 @@ const html = `<!DOCTYPE html>
         --btn-hover: #333028;
         --error: #d66;
         --input-placeholder: #6b6760;
-        --toggle-bg: transparent;
-        --toggle-hover: #333028;
       }
-    }
-
-    /* Dark theme via manual override */
-    :root[data-theme="dark"] {
-      --bg: #1a1a1a;
-      --text: #e0ddd5;
-      --text-muted: #9a968e;
-      --text-faint: #6b6760;
-      --accent: #c4a67a;
-      --border: #3a3835;
-      --border-light: #2e2c28;
-      --surface: #242220;
-      --surface-alt: #2a2826;
-      --surface-alt-border: #3a3835;
-      --btn-hover: #333028;
-      --error: #d66;
-      --input-placeholder: #6b6760;
-      --toggle-bg: transparent;
-      --toggle-hover: #333028;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -116,41 +86,12 @@ const html = `<!DOCTYPE html>
       width: 100%;
     }
 
-    header {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      margin-bottom: 0.25rem;
-    }
-
     h1 {
       font-size: 1.75rem;
       font-weight: 400;
       text-align: center;
+      margin-bottom: 0.25rem;
       letter-spacing: 0.02em;
-    }
-
-    .theme-toggle {
-      position: absolute;
-      right: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      background: var(--toggle-bg);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      cursor: pointer;
-      padding: 0.35rem 0.45rem;
-      font-size: 1rem;
-      line-height: 1;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .theme-toggle:hover {
-      background: var(--toggle-hover);
     }
 
     .subtitle {
@@ -308,10 +249,7 @@ const html = `<!DOCTYPE html>
 </head>
 <body>
   <div class="container">
-    <header>
-      <h1>Stoic Sage</h1>
-      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle theme" title="Toggle theme">\u2600\uFE0F</button>
-    </header>
+    <h1>Stoic Sage</h1>
     <p class="subtitle">Meditations &amp; Discourses</p>
 
     <form class="search-form" id="search-form">
@@ -485,35 +423,6 @@ const html = `<!DOCTYPE html>
     });
 
     randomBtn.addEventListener("click", loadRandom);
-
-    // Theme toggle: cycles light → dark → system
-    var themeToggle = document.getElementById("theme-toggle");
-    var themeOrder = ["system", "light", "dark"];
-    var themeIcons = { system: "\u2699\uFE0F", light: "\u2600\uFE0F", dark: "\uD83C\uDF19" };
-
-    function getStoredTheme() {
-      return localStorage.getItem("theme") || "system";
-    }
-
-    function applyTheme(theme) {
-      if (theme === "light" || theme === "dark") {
-        document.documentElement.setAttribute("data-theme", theme);
-      } else {
-        document.documentElement.removeAttribute("data-theme");
-      }
-      themeToggle.textContent = themeIcons[theme] || themeIcons.system;
-      themeToggle.setAttribute("aria-label", "Theme: " + theme + ". Click to change.");
-    }
-
-    applyTheme(getStoredTheme());
-
-    themeToggle.addEventListener("click", function() {
-      var current = getStoredTheme();
-      var idx = themeOrder.indexOf(current);
-      var next = themeOrder[(idx + 1) % themeOrder.length];
-      localStorage.setItem("theme", next);
-      applyTheme(next);
-    });
 
     loadDaily();
   </script>
