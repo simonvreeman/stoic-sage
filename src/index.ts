@@ -433,10 +433,16 @@ app.get("/", (c) => {
   return c.html(html);
 });
 
+const VALID_SOURCES = ["meditations", "discourses", "enchiridion", "fragments"];
+
 app.get("/api/entry/:book/:id", async (c) => {
   const bookParam = c.req.param("book");
   const entryId = c.req.param("id");
   const source = c.req.query("source") || "meditations";
+
+  if (!VALID_SOURCES.includes(source)) {
+    return c.json({ error: `Invalid source. Must be one of: ${VALID_SOURCES.join(", ")}` }, 400);
+  }
 
   const book = parseInt(bookParam, 10);
   if (isNaN(book) || book < 1) {
@@ -597,7 +603,7 @@ app.get("/api/daily", async (c) => {
     "SELECT COUNT(*) as total FROM entries",
   ).first<{ total: number }>();
 
-  const total = count?.total || 499;
+  const total = count?.total || 1336;
   const offset = ((hash % total) + total) % total;
 
   const row = await c.env.DB.prepare(
@@ -610,6 +616,7 @@ app.get("/api/daily", async (c) => {
     return c.json({ error: "No entries found." }, 500);
   }
 
+  c.header("Cache-Control", "public, max-age=3600");
   return c.json(row);
 });
 
@@ -622,6 +629,7 @@ app.get("/api/random", async (c) => {
     return c.json({ error: "No entries found." }, 500);
   }
 
+  c.header("Cache-Control", "no-store");
   return c.json(row);
 });
 

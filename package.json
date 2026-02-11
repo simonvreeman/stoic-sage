@@ -1,7 +1,7 @@
 {
   "name": "stoic-sage",
   "version": "1.0.0",
-  "description": "A personal semantic search engine for Meditations by Marcus Aurelius, running on Cloudflare Workers.",
+  "description": "A personal semantic search engine for Stoic philosophy — Meditations, Discourses, Enchiridion and Fragments — running on Cloudflare Workers.",
   "private": true,
   "scripts": {
     "dev": "wrangler dev",

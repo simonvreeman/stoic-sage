@@ -71,6 +71,13 @@ Explain response: Server-Sent Events stream (text/event-stream) from `@cf/meta/l
 
 Error responses: `{ "error": "message" }` with appropriate HTTP status (400, 404, 500).
 
+## Deployment
+
+- **Live URL** — https://stoicsage.ai (custom domain)
+- **Workers URL** — https://stoic-sage.vreeman.workers.dev
+- Custom domain configured in `wrangler.jsonc` via `routes` with `custom_domain: true`
+- `workers_dev: true` keeps the `.workers.dev` subdomain active alongside the custom domain
+
 ## Bindings
 
 Configured in `wrangler.jsonc`:
@@ -202,3 +209,4 @@ Single-page HTML served inline from Hono's `GET /` route. Features:
 - **Not using AutoRAG** — Need control over chunk boundaries.
 - **Date-seeded daily entry** — Hash of `YYYY-MM-DD` string for deterministic, timezone-agnostic daily selection.
 - **Source column** — `source` field in D1 and vector metadata enables multi-text support without schema changes.
+- **System-only dark mode** — No manual toggle. Pure CSS via `prefers-color-scheme` media query. Zero JS, zero localStorage. KISS.
