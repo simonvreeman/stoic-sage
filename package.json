@@ -1,0 +1,32 @@
+{
+  "name": "stoic-sage",
+  "version": "1.0.0",
+  "description": "A personal semantic search engine for Meditations by Marcus Aurelius, running on Cloudflare Workers.",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:migrate": "wrangler d1 migrations apply stoic-sage-db",
+    "db:migrate:local": "wrangler d1 migrations apply stoic-sage-db --local"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simonvreeman/stoic-sage.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/simonvreeman/stoic-sage/issues"
+  },
+  "homepage": "https://github.com/simonvreeman/stoic-sage#readme",
+  "dependencies": {
+    "hono": "^4.11.9"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260210.0",
+    "typescript": "^5.9.3",
+    "wrangler": "^4.64.0"
+  }
+}

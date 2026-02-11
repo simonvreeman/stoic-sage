@@ -1,0 +1,14 @@
+{
+  "name": "stoic-sage",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-01-01",
+
+  // D1 database for storing Meditations entries
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "stoic-sage-db",
+      "database_id": "TODO_REPLACE_WITH_ACTUAL_ID"
+    }
+  ]
+}
