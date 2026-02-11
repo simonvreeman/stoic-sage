@@ -41,9 +41,10 @@ CORS is enabled on all `/api/*` routes via Hono's `cors()` middleware.
 
 | Method | Route | Description | Status |
 |--------|-------|-------------|--------|
-| GET | `/` | Frontend (search + random entry) | Live |
+| GET | `/` | Frontend (daily reflection, search, explain) | Live |
 | GET | `/api/entry/:book/:id` | Get a specific entry by book (1-12) and entry ID | Live |
 | GET | `/api/random` | Random entry (`ORDER BY RANDOM()`) | Live |
+| GET | `/api/daily` | Daily entry (date-seeded, consistent within a day) | Live |
 | GET | `/api/search?q=...&topK=5` | Semantic search (embed query → Vectorize → D1) | Live |
 | POST | `/api/explain` | AI explanation of entries (streamed SSE) | Live |
 
@@ -114,9 +115,23 @@ npx tsx scripts/embed-entries.ts       # Embed all entries → Vectorize (499 ve
 - Metadata: `{ book, entry }` stored with each vector
 - Batches embeddings in groups of 100, upserts via `wrangler vectorize upsert`
 
+## Frontend
+
+Single-page HTML served inline from Hono's `GET /` route. Features:
+
+- **Daily reflection** — On page load, fetches `/api/daily` for a date-seeded consistent entry
+- **"Show me another"** — Fetches `/api/random` for a truly random entry
+- **Semantic search** — Search box queries `/api/search`, displays ranked results with scores
+- **AI explanations** — "Explain these results" button streams `/api/explain` via SSE
+- **Fade-in transitions** — Content area animates on load/update
+- **Meta tags** — OG (title, description, type, url), Twitter Card, description meta
+- **Favicon** — SVG emoji (🏛️)
+- **Footer** — Links to source text (Gregory Hays translation)
+
 ## Key Decisions
 
 - **Entry-level chunking** — Meditations is written as atomic thoughts. Entry = retrieval unit.
 - **Vector search only (no FTS)** — ~500 entries from one book; hybrid search is over-engineered.
 - **Hono router** — Lightweight, TypeScript-native, popular with Workers.
 - **Not using AutoRAG** — Need control over chunk boundaries.
+- **Date-seeded daily entry** — Hash of `YYYY-MM-DD` string for deterministic, timezone-agnostic daily selection.

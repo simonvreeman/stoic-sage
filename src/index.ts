@@ -17,6 +17,15 @@ const html = `<!DOCTYPE html>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Stoic Sage — Meditations by Marcus Aurelius</title>
+  <meta name="description" content="A personal semantic search engine for Meditations by Marcus Aurelius. Search by concept, browse daily reflections, and get AI-powered explanations.">
+  <meta property="og:title" content="Stoic Sage">
+  <meta property="og:description" content="Semantic search through Marcus Aurelius' Meditations. Search by concept, get AI-powered explanations grounded in the text.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://stoic-sage.vreeman.workers.dev">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Stoic Sage">
+  <meta name="twitter:description" content="Semantic search through Marcus Aurelius' Meditations.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛️</text></svg>">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -165,6 +174,36 @@ const html = `<!DOCTYPE html>
       opacity: 0.5;
       cursor: not-allowed;
     }
+
+    .daily-label {
+      font-family: -apple-system, system-ui, sans-serif;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #8b7355;
+      text-align: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .fade-in {
+      animation: fadeIn 0.3s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    footer {
+      margin-top: 3rem;
+      text-align: center;
+      font-family: -apple-system, system-ui, sans-serif;
+      font-size: 0.75rem;
+      color: #aaa;
+    }
+
+    footer a { color: #8b7355; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
@@ -188,6 +227,10 @@ const html = `<!DOCTYPE html>
     </div>
 
     <div id="results"></div>
+
+    <footer>
+      Gregory Hays translation \u00B7 <a href="https://vreeman.com/meditations">Source text</a>
+    </footer>
   </div>
 
   <script>
@@ -211,11 +254,25 @@ const html = `<!DOCTYPE html>
     }
 
     function showLoading() {
+      resultsEl.classList.remove("fade-in");
       resultsEl.innerHTML = '<div class="loading">Loading\u2026</div>';
     }
 
     function showError(msg) {
       resultsEl.innerHTML = '<div class="error">' + escapeHtml(msg) + '</div>';
+    }
+
+    async function loadDaily() {
+      showLoading();
+      try {
+        var res = await fetch("/api/daily");
+        if (!res.ok) throw new Error("Failed to load entry");
+        var entry = await res.json();
+        resultsEl.innerHTML = '<p class="daily-label">Today\\u2019s reflection</p>' + renderEntry(entry);
+        resultsEl.classList.add("fade-in");
+      } catch (err) {
+        showError(err.message);
+      }
     }
 
     async function loadRandom() {
@@ -227,6 +284,7 @@ const html = `<!DOCTYPE html>
         if (!res.ok) throw new Error("Failed to load entry");
         var entry = await res.json();
         resultsEl.innerHTML = renderEntry(entry);
+        resultsEl.classList.add("fade-in");
       } catch (err) {
         showError(err.message);
       }
@@ -248,6 +306,7 @@ const html = `<!DOCTYPE html>
         var heading = '<p class="results-heading">' + data.results.length + ' results for \\u201c' + escapeHtml(q) + '\\u201d</p>';
         var explainBtn = '<div class="actions"><button class="btn" id="explain-btn">Explain these results</button></div>';
         resultsEl.innerHTML = heading + data.results.map(renderEntry).join("") + explainBtn + '<div id="explain-container"></div>';
+        resultsEl.classList.add("fade-in");
       } catch (err) {
         showError(err.message);
       }
@@ -317,7 +376,7 @@ const html = `<!DOCTYPE html>
 
     randomBtn.addEventListener("click", loadRandom);
 
-    loadRandom();
+    loadDaily();
   </script>
 </body>
 </html>`;
@@ -443,6 +502,34 @@ ${entriesContext}`;
       "Access-Control-Allow-Origin": "*",
     },
   });
+});
+
+app.get("/api/daily", async (c) => {
+  // Use today's date as a seed for consistent daily entry
+  const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+  let hash = 0;
+  for (let i = 0; i < today.length; i++) {
+    hash = (hash * 31 + today.charCodeAt(i)) | 0;
+  }
+
+  const count = await c.env.DB.prepare(
+    "SELECT COUNT(*) as total FROM entries",
+  ).first<{ total: number }>();
+
+  const total = count?.total || 499;
+  const offset = ((hash % total) + total) % total;
+
+  const row = await c.env.DB.prepare(
+    "SELECT book, entry, text FROM entries LIMIT 1 OFFSET ?",
+  )
+    .bind(offset)
+    .first();
+
+  if (!row) {
+    return c.json({ error: "No entries found." }, 500);
+  }
+
+  return c.json(row);
 });
 
 app.get("/api/random", async (c) => {
