@@ -13,6 +13,15 @@ npx wrangler d1 create stoic-sage-db  # Create the D1 database, update wrangler.
 npm run dev                            # Start local dev server
 ```
 
+## Usage
+
+Visit [stoic-sage.vreeman.workers.dev](https://stoic-sage.vreeman.workers.dev) to browse the Meditations. The homepage shows a random entry on each load — click "Show me another" for a new one.
+
+### API
+
+- `GET /api/entry/:book/:id` — fetch a specific entry (e.g., `/api/entry/6/26`)
+- `GET /api/random` — random entry
+
 ## Development
 
 ```bash
