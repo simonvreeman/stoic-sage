@@ -10,5 +10,18 @@
       "database_name": "stoic-sage-db",
       "database_id": "5b5e0f9a-9858-464a-b65a-4f8df001862e"
     }
-  ]
+  ],
+
+  // Vectorize index for semantic search
+  "vectorize": [
+    {
+      "binding": "VECTORIZE",
+      "index_name": "meditations-index"
+    }
+  ],
+
+  // Workers AI for embeddings and LLM
+  "ai": {
+    "binding": "AI"
+  }
 }

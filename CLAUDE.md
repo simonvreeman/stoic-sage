@@ -62,8 +62,8 @@ Error responses: `{ "error": "message" }` with appropriate HTTP status (400, 404
 Configured in `wrangler.jsonc`:
 
 - `DB` — D1 database (`stoic-sage-db`)
-- `VECTORIZE` — Vectorize index (`meditations-index`) (Phase 2)
-- `AI` — Workers AI (Phase 2)
+- `VECTORIZE` — Vectorize index (`meditations-index`, 768-dim, cosine)
+- `AI` — Workers AI (embeddings + LLM)
 
 ## Source Material
 
@@ -95,6 +95,19 @@ entries (D1):
 npx tsx scripts/parse-meditations.ts   # Fetch HTML → data/meditations.json (499 entries)
 npx tsx scripts/seed-d1.ts             # Insert JSON → D1 database
 ```
+
+### Vectorize Pipeline
+
+```bash
+# Requires CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_API_TOKEN env vars
+npx tsx scripts/embed-entries.ts       # Embed all entries → Vectorize (499 vectors)
+```
+
+- Embedding model: `@cf/baai/bge-base-en-v1.5` (768 dimensions, mean pooling)
+- Index: `meditations-index` (cosine similarity)
+- Vector IDs: `{book}-{entry}` (e.g., `6-26`, `4-49a`)
+- Metadata: `{ book, entry }` stored with each vector
+- Batches embeddings in groups of 100, upserts via `wrangler vectorize upsert`
 
 ## Key Decisions
 

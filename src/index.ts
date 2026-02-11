@@ -3,6 +3,8 @@ import { cors } from "hono/cors";
 
 type Bindings = {
   DB: D1Database;
+  VECTORIZE: VectorizeIndex;
+  AI: Ai;
 };
 
 const app = new Hono<{ Bindings: Bindings }>();
