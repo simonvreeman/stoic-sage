@@ -37,13 +37,25 @@ npm run db:migrate:local # Apply D1 migrations (local)
 
 ## API Routes
 
-| Method | Route | Description |
-|--------|-------|-------------|
-| GET | `/` | Frontend (search + daily entry) |
-| GET | `/api/entry/:book/:id` | Get a specific entry |
-| GET | `/api/random` | Random entry |
-| GET | `/api/search?q=...` | Semantic search (Phase 2) |
-| POST | `/api/explain` | AI explanation of entries (Phase 3) |
+CORS is enabled on all `/api/*` routes via Hono's `cors()` middleware.
+
+| Method | Route | Description | Status |
+|--------|-------|-------------|--------|
+| GET | `/` | Frontend (search + daily entry) | Placeholder |
+| GET | `/api/entry/:book/:id` | Get a specific entry by book (1-12) and entry ID | Live |
+| GET | `/api/random` | Random entry (`ORDER BY RANDOM()`) | Live |
+| GET | `/api/search?q=...` | Semantic search (Phase 2) | Planned |
+| POST | `/api/explain` | AI explanation of entries (Phase 3) | Planned |
+
+### Response format
+
+All API routes return JSON. Entry responses have the shape:
+
+```json
+{ "book": 6, "entry": "26", "text": "..." }
+```
+
+Error responses: `{ "error": "message" }` with appropriate HTTP status (400, 404, 500).
 
 ## Bindings
 
