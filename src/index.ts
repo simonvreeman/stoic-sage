@@ -456,7 +456,17 @@ app.get("/api/search", async (c) => {
     }),
   );
 
-  return c.json({ results: results.filter(Boolean) });
+  // Deduplicate by source+book+entry (old vectors without source prefix may duplicate new ones)
+  const seen = new Set<string>();
+  const deduped = results.filter((r) => {
+    if (!r) return false;
+    const key = `${r.source}-${r.book}-${r.entry}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+
+  return c.json({ results: deduped });
 });
 
 app.post("/api/explain", async (c) => {

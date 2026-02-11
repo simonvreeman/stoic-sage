@@ -1,14 +1,19 @@
 /**
- * Generate embeddings for all Meditations entries and upsert to Vectorize.
+ * Generate embeddings for entries and upsert to Vectorize.
  *
- * Reads data/meditations.json, calls Workers AI REST API for embeddings,
+ * Reads a JSON data file, calls Workers AI REST API for embeddings,
  * writes NDJSON file, then uses `wrangler vectorize upsert` to insert vectors.
+ *
+ * Vector IDs: `{source}-{book}-{entry}` (e.g., `meditations-6-26`, `enchiridion-1-3`)
+ * Metadata: `{ source, book, entry }` stored with each vector.
  *
  * Requires environment variables:
  *   CLOUDFLARE_ACCOUNT_ID — Cloudflare account ID
  *   CLOUDFLARE_API_TOKEN  — API token with Workers AI permissions
  *
- * Usage: npx tsx scripts/embed-entries.ts
+ * Usage:
+ *   npx tsx scripts/embed-entries.ts data/meditations.json
+ *   npx tsx scripts/embed-entries.ts data/enchiridion.json
  */
 
 import { readFileSync, writeFileSync, unlinkSync } from "node:fs";
@@ -17,6 +22,7 @@ import { fileURLToPath } from "node:url";
 import { execSync } from "node:child_process";
 
 interface Entry {
+  source?: string;
   book: number;
   entry: string;
   text: string;
@@ -32,7 +38,6 @@ interface EmbeddingResponse {
 }
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const DATA_PATH = resolve(__dirname, "../data/meditations.json");
 const NDJSON_PATH = resolve(__dirname, "../.vectors-temp.ndjson");
 const INDEX_NAME = "meditations-index";
 const EMBED_BATCH_SIZE = 100; // Workers AI max per request
@@ -46,6 +51,16 @@ if (!ACCOUNT_ID || !API_TOKEN) {
   );
   process.exit(1);
 }
+
+// First non-flag argument is the data file path
+const dataFileArg = process.argv.slice(2).find((a) => !a.startsWith("--"));
+if (!dataFileArg) {
+  console.error("Usage: npx tsx scripts/embed-entries.ts <data-file.json>");
+  console.error("Example: npx tsx scripts/embed-entries.ts data/enchiridion.json");
+  process.exit(1);
+}
+
+const DATA_PATH = resolve(dataFileArg);
 
 const AI_URL = `https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/ai/run/@cf/baai/bge-base-en-v1.5`;
 
@@ -68,8 +83,16 @@ async function getEmbeddings(texts: string[]): Promise<number[][]> {
 }
 
 async function main() {
-  const entries: Entry[] = JSON.parse(readFileSync(DATA_PATH, "utf-8"));
-  console.log(`Loaded ${entries.length} entries`);
+  const rawEntries: Entry[] = JSON.parse(readFileSync(DATA_PATH, "utf-8"));
+
+  // Infer source from data or default to "meditations"
+  const entries = rawEntries.map((e) => ({
+    ...e,
+    source: e.source || "meditations",
+  }));
+
+  const source = entries[0]?.source;
+  console.log(`Loaded ${entries.length} entries (source: ${source}) from ${DATA_PATH}`);
 
   const vectors: string[] = [];
 
@@ -87,9 +110,9 @@ async function main() {
       const e = batch[j];
       vectors.push(
         JSON.stringify({
-          id: `${e.book}-${e.entry}`,
+          id: `${e.source}-${e.book}-${e.entry}`,
           values: embeddings[j],
-          metadata: { book: e.book, entry: e.entry },
+          metadata: { source: e.source, book: e.book, entry: e.entry },
         }),
       );
     }
