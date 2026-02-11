@@ -27,10 +27,16 @@ const html = `<!DOCTYPE html>
   <meta name="twitter:description" content="Semantic search through Marcus Aurelius' Meditations.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛️</text></svg>">
   <style>
+    :root {
+      --sans-serif: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      --serif: ui-serif, -apple-system-ui-serif, Palatino, Georgia, Cambria, "Times New Roman", Times, serif;
+      --monospace: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, "Roboto Mono", "Liberation Mono", "Courier New", monospace;
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: Georgia, "Times New Roman", serif;
+      font-family: var(--serif);
       background: #faf9f6;
       color: #2c2c2c;
       min-height: 100vh;
@@ -86,7 +92,7 @@ const html = `<!DOCTYPE html>
 
     .btn {
       padding: 0.6rem 1rem;
-      font-family: -apple-system, system-ui, sans-serif;
+      font-family: var(--sans-serif);
       font-size: 0.875rem;
       border: 1px solid #ccc;
       border-radius: 4px;
@@ -123,7 +129,7 @@ const html = `<!DOCTYPE html>
       font-size: 0.85rem;
       color: #6b6b6b;
       margin-bottom: 1rem;
-      font-family: -apple-system, system-ui, sans-serif;
+      font-family: var(--sans-serif);
     }
 
     .loading {
@@ -156,7 +162,7 @@ const html = `<!DOCTYPE html>
     }
 
     .explain-label {
-      font-family: -apple-system, system-ui, sans-serif;
+      font-family: var(--sans-serif);
       font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
@@ -176,7 +182,7 @@ const html = `<!DOCTYPE html>
     }
 
     .daily-label {
-      font-family: -apple-system, system-ui, sans-serif;
+      font-family: var(--sans-serif);
       font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
@@ -197,7 +203,7 @@ const html = `<!DOCTYPE html>
     footer {
       margin-top: 3rem;
       text-align: center;
-      font-family: -apple-system, system-ui, sans-serif;
+      font-family: var(--sans-serif);
       font-size: 0.75rem;
       color: #aaa;
     }
