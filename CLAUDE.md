@@ -45,7 +45,7 @@ CORS is enabled on all `/api/*` routes via Hono's `cors()` middleware.
 | GET | `/api/entry/:book/:id` | Get a specific entry by book (1-12) and entry ID | Live |
 | GET | `/api/random` | Random entry (`ORDER BY RANDOM()`) | Live |
 | GET | `/api/search?q=...&topK=5` | Semantic search (embed query → Vectorize → D1) | Live |
-| POST | `/api/explain` | AI explanation of entries (Phase 3) | Planned |
+| POST | `/api/explain` | AI explanation of entries (streamed SSE) | Live |
 
 ### Response format
 
@@ -56,6 +56,9 @@ All API routes return JSON. Entry responses have the shape:
 ```
 
 Search responses: `{ "results": [{ "book": 6, "entry": "26", "text": "...", "score": 0.76 }] }`
+
+Explain request: `POST { "query": "...", "entries": [{ "book": 6, "entry": "26", "text": "..." }] }`
+Explain response: Server-Sent Events stream (text/event-stream) from `@cf/meta/llama-3.3-70b-instruct-fp8-fast`.
 
 Error responses: `{ "error": "message" }` with appropriate HTTP status (400, 404, 500).
 

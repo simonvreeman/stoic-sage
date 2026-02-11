@@ -133,7 +133,37 @@ const html = `<!DOCTYPE html>
     .actions {
       display: flex;
       justify-content: center;
+      gap: 0.5rem;
       margin-bottom: 2rem;
+    }
+
+    .explain-box {
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: #f5f1eb;
+      border: 1px solid #e0d9ce;
+      border-radius: 6px;
+    }
+
+    .explain-label {
+      font-family: -apple-system, system-ui, sans-serif;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #8b7355;
+      margin-bottom: 0.75rem;
+    }
+
+    .explain-text {
+      font-size: 1rem;
+      line-height: 1.7;
+      white-space: pre-wrap;
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
     }
   </style>
 </head>
@@ -166,6 +196,9 @@ const html = `<!DOCTYPE html>
     const searchInput = document.getElementById("search-input");
     const randomBtn = document.getElementById("random-btn");
 
+    var lastQuery = "";
+    var lastEntries = [];
+
     function renderEntry(entry) {
       return '<div class="entry">'
         + '<div class="entry-text">' + escapeHtml(entry.text) + '</div>'
@@ -186,11 +219,13 @@ const html = `<!DOCTYPE html>
     }
 
     async function loadRandom() {
+      lastQuery = "";
+      lastEntries = [];
       showLoading();
       try {
-        const res = await fetch("/api/random");
+        var res = await fetch("/api/random");
         if (!res.ok) throw new Error("Failed to load entry");
-        const entry = await res.json();
+        var entry = await res.json();
         resultsEl.innerHTML = renderEntry(entry);
       } catch (err) {
         showError(err.message);
@@ -198,6 +233,8 @@ const html = `<!DOCTYPE html>
     }
 
     async function doSearch(q) {
+      lastQuery = q;
+      lastEntries = [];
       showLoading();
       try {
         var res = await fetch("/api/search?q=" + encodeURIComponent(q));
@@ -207,12 +244,69 @@ const html = `<!DOCTYPE html>
           resultsEl.innerHTML = '<div class="loading">No results found.</div>';
           return;
         }
+        lastEntries = data.results;
         var heading = '<p class="results-heading">' + data.results.length + ' results for \\u201c' + escapeHtml(q) + '\\u201d</p>';
-        resultsEl.innerHTML = heading + data.results.map(renderEntry).join("");
+        var explainBtn = '<div class="actions"><button class="btn" id="explain-btn">Explain these results</button></div>';
+        resultsEl.innerHTML = heading + data.results.map(renderEntry).join("") + explainBtn + '<div id="explain-container"></div>';
       } catch (err) {
         showError(err.message);
       }
     }
+
+    async function doExplain() {
+      if (!lastQuery || lastEntries.length === 0) return;
+      var btn = document.getElementById("explain-btn");
+      if (btn) { btn.disabled = true; btn.textContent = "Explaining\u2026"; }
+      var container = document.getElementById("explain-container");
+      container.innerHTML = '<div class="explain-box"><p class="explain-label">AI Explanation</p><div class="explain-text" id="explain-text">Thinking\u2026</div></div>';
+      var explainText = document.getElementById("explain-text");
+
+      try {
+        var res = await fetch("/api/explain", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            query: lastQuery,
+            entries: lastEntries.map(function(e) { return { book: e.book, entry: e.entry, text: e.text }; })
+          })
+        });
+        if (!res.ok) throw new Error("Explain failed");
+
+        var reader = res.body.getReader();
+        var decoder = new TextDecoder();
+        var text = "";
+        var buffer = "";
+
+        while (true) {
+          var chunk = await reader.read();
+          if (chunk.done) break;
+          buffer += decoder.decode(chunk.value, { stream: true });
+          var lines = buffer.split("\\n");
+          buffer = lines.pop();
+          for (var i = 0; i < lines.length; i++) {
+            var line = lines[i].trim();
+            if (!line.startsWith("data: ")) continue;
+            var payload = line.slice(6);
+            if (payload === "[DONE]") continue;
+            try {
+              var parsed = JSON.parse(payload);
+              if (parsed.response) text += parsed.response;
+            } catch(e) {}
+          }
+          explainText.textContent = text || "Thinking\u2026";
+        }
+        if (!text) explainText.textContent = "No explanation generated.";
+      } catch (err) {
+        explainText.textContent = "Error: " + err.message;
+      }
+      if (btn) { btn.disabled = false; btn.textContent = "Explain these results"; }
+    }
+
+    resultsEl.addEventListener("click", function(e) {
+      if (e.target && e.target.id === "explain-btn") {
+        doExplain();
+      }
+    });
 
     searchForm.addEventListener("submit", function(e) {
       e.preventDefault();
@@ -296,6 +390,59 @@ app.get("/api/search", async (c) => {
   );
 
   return c.json({ results: results.filter(Boolean) });
+});
+
+app.post("/api/explain", async (c) => {
+  const body = await c.req.json<{
+    query: string;
+    entries: { book: number; entry: string; text: string }[];
+  }>();
+
+  if (!body.query || !body.entries || body.entries.length === 0) {
+    return c.json(
+      { error: "Request body must include 'query' and 'entries'." },
+      400,
+    );
+  }
+
+  const entriesContext = body.entries
+    .map((e) => `[${e.book}.${e.entry}] ${e.text}`)
+    .join("\n\n");
+
+  const systemPrompt = `You are Stoic Sage, a concise guide to Marcus Aurelius' Meditations.
+
+RULES:
+- ONLY use the entries provided below. Never invent or assume content not present.
+- Cite entries by number (e.g., "In 6.26, Marcus writes...").
+- Quote short phrases directly from the text when relevant.
+- Keep your explanation concise: 2-4 short paragraphs.
+- Write in plain, modern English.
+- Do not add Stoic philosophy beyond what the entries contain.
+
+ENTRIES:
+${entriesContext}`;
+
+  const stream = await c.env.AI.run(
+    "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+    {
+      messages: [
+        { role: "system", content: systemPrompt },
+        {
+          role: "user",
+          content: `Explain what Marcus Aurelius says about: ${body.query}`,
+        },
+      ],
+      stream: true,
+    },
+  );
+
+  return new Response(stream as ReadableStream, {
+    headers: {
+      "Content-Type": "text/event-stream",
+      "Cache-Control": "no-cache",
+      "Access-Control-Allow-Origin": "*",
+    },
+  });
 });
 
 app.get("/api/random", async (c) => {
