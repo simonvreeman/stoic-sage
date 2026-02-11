@@ -21,7 +21,7 @@ scripts/
   seed-d1.ts            — Seeds D1 from meditations.json
   embed-entries.ts      — Generates embeddings and upserts to Vectorize
 data/
-  meditations.json      — Parsed entries (488 records)
+  meditations.json      — Parsed entries (499 records)
 migrations/
   0001_create_entries.sql — D1 schema
 ```
@@ -55,7 +55,7 @@ Configured in `wrangler.jsonc`:
 
 ## Source Material
 
-Gregory Hays translation of *Meditations* from vreeman.com/meditations. 12 books, 488 entries total. Entry-level chunking — each entry is one atomic thought, the natural retrieval unit.
+Gregory Hays translation of *Meditations* from vreeman.com/meditations. 12 books, 499 entries total. Entry-level chunking — each entry is one atomic thought, the natural retrieval unit. 11 entries have letter suffixes (e.g., 4.49a) — these are separate thoughts sharing a number in the original text.
 
 ### HTML Structure (see `docs/html-structure.md` for full details)
 
@@ -72,14 +72,21 @@ Gregory Hays translation of *Meditations* from vreeman.com/meditations. 12 books
 entries (D1):
   id       INTEGER PRIMARY KEY AUTOINCREMENT
   book     INTEGER NOT NULL
-  entry    INTEGER NOT NULL
+  entry    TEXT NOT NULL          -- string to support "49a" suffixes
   text     TEXT NOT NULL
   UNIQUE(book, entry)
+```
+
+### Data Pipeline
+
+```bash
+npx tsx scripts/parse-meditations.ts   # Fetch HTML → data/meditations.json (499 entries)
+npx tsx scripts/seed-d1.ts             # Insert JSON → D1 database
 ```
 
 ## Key Decisions
 
 - **Entry-level chunking** — Meditations is written as atomic thoughts. Entry = retrieval unit.
-- **Vector search only (no FTS)** — ~270 entries from one book; hybrid search is over-engineered.
+- **Vector search only (no FTS)** — ~500 entries from one book; hybrid search is over-engineered.
 - **Hono router** — Lightweight, TypeScript-native, popular with Workers.
 - **Not using AutoRAG** — Need control over chunk boundaries.
