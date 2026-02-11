@@ -1,6 +1,6 @@
 # Stoic Sage
 
-A personal semantic search engine for Stoic philosophy, running entirely on Cloudflare's free tier. Currently indexes *Meditations* by Marcus Aurelius, and the *Enchiridion* and *Fragments* by Epictetus.
+A personal semantic search engine for Stoic philosophy, running entirely on Cloudflare's free tier. Currently indexes *Meditations* by Marcus Aurelius, and the *Discourses*, *Enchiridion* and *Fragments* by Epictetus.
 
 ## Architecture
 
@@ -20,12 +20,14 @@ scripts/
   parse-meditations.ts    — HTML parser for Meditations (generates data/meditations.json)
   parse-enchiridion.ts    — HTML parser for Enchiridion (generates data/enchiridion.json)
   parse-fragments.ts      — HTML parser for Fragments (generates data/fragments.json)
+  parse-discourses.ts     — HTML parser for Discourses (generates data/discourses.json)
   seed-d1.ts              — Seeds D1 from any data JSON file
   embed-entries.ts        — Generates embeddings and upserts to Vectorize
 data/
   meditations.json        — Parsed Meditations entries (499 records)
   enchiridion.json        — Parsed Enchiridion entries (84 records)
   fragments.json          — Parsed Fragments entries (31 records)
+  discourses.json         — Parsed Discourses entries (722 records)
 migrations/
   0001_create_entries.sql  — D1 schema
   0002_add_source_column.sql — Add source column for multi-text support
@@ -104,6 +106,23 @@ Robert Dobbin translation from vreeman.com/discourses/enchiridion. 53 chapters, 
 - Footnotes section at end (`<h2 id="fn">`) — excluded from parsing
 - Superscript footnote refs (`<sup>`) — stripped during parsing
 
+### Discourses — Epictetus
+
+Robert Dobbin translation (selected discourses) from vreeman.com/discourses/. 4 books, 64 chapters, 722 entries total. Entry-level chunking using Schenkl paragraph numbers `[N]`. Non-consecutive chapter numbering in Books 2–4 (Dobbin's selection). Entry format: `{chapter}.{N}` (e.g., `"1.1"` for chapter 1, entry [1]).
+
+#### Discourses HTML Structure
+
+- Flat `<main>` element with no sections
+- Chapter headings: `<h3 id="book{B}-{C}">` with `<strong>{B}.{C}</strong>` inside
+- Entries: `<p>` tags with `[N]` markers at start of text content
+- Continuation `<p>` tags (no `[N]`) belong to preceding numbered entry
+- Blockquotes (7 total) — continuation content for preceding entry
+- `<br>` in poetry/verse — converted to newline
+- Edge case: Chapter 2.22 has bare text nodes (`[12]`, `[14]`) directly under `<main>`
+- Content between `<h2#book1>` and `<h2#glossary>` (skip intro, glossary, notes)
+- Superscript footnote refs (`<sup>`) — stripped during parsing
+- Per-book chapters: Book 1 (1–30), Book 2 (1–6, 8, 10–23), Book 3 (3–5, 8, 16, 20, 22–23), Book 4 (1–4, 13)
+
 ### Fragments — Epictetus
 
 Robert Dobbin translation from vreeman.com/discourses/fragments. 31 entries (numbered 1–28, plus 10a, 28a, 28b). Letter-suffixed entries are separate fragments sharing a number.
@@ -124,8 +143,8 @@ Robert Dobbin translation from vreeman.com/discourses/fragments. 31 entries (num
 ```
 entries (D1):
   id       INTEGER PRIMARY KEY AUTOINCREMENT
-  source   TEXT NOT NULL DEFAULT 'meditations'  -- 'meditations', 'enchiridion', or 'fragments'
-  book     INTEGER NOT NULL                     -- book (1-12), chapter (1-53), or fragment number (1-28)
+  source   TEXT NOT NULL DEFAULT 'meditations'  -- 'meditations', 'discourses', 'enchiridion', or 'fragments'
+  book     INTEGER NOT NULL                     -- book (1-12 / 1-4), chapter (1-53), or fragment number (1-28)
   entry    TEXT NOT NULL                         -- string to support "49a" suffixes
   text     TEXT NOT NULL
   UNIQUE(source, book, entry)
@@ -137,9 +156,11 @@ entries (D1):
 npx tsx scripts/parse-meditations.ts           # Fetch HTML → data/meditations.json (499 entries)
 npx tsx scripts/parse-enchiridion.ts           # Fetch HTML → data/enchiridion.json (84 entries)
 npx tsx scripts/parse-fragments.ts             # Fetch HTML → data/fragments.json (31 entries)
+npx tsx scripts/parse-discourses.ts            # Fetch HTML → data/discourses.json (722 entries)
 npx tsx scripts/seed-d1.ts data/meditations.json   # Insert → D1 database
 npx tsx scripts/seed-d1.ts data/enchiridion.json   # Insert → D1 database
 npx tsx scripts/seed-d1.ts data/fragments.json     # Insert → D1 database
+npx tsx scripts/seed-d1.ts data/discourses.json    # Insert → D1 database
 ```
 
 ### Vectorize Pipeline
@@ -149,11 +170,12 @@ npx tsx scripts/seed-d1.ts data/fragments.json     # Insert → D1 database
 npx tsx scripts/embed-entries.ts data/meditations.json   # Embed → Vectorize (499 vectors)
 npx tsx scripts/embed-entries.ts data/enchiridion.json   # Embed → Vectorize (84 vectors)
 npx tsx scripts/embed-entries.ts data/fragments.json     # Embed → Vectorize (31 vectors)
+npx tsx scripts/embed-entries.ts data/discourses.json    # Embed → Vectorize (722 vectors)
 ```
 
 - Embedding model: `@cf/baai/bge-base-en-v1.5` (768 dimensions, mean pooling)
 - Index: `meditations-index` (cosine similarity)
-- Vector IDs: `{source}-{book}-{entry}` (e.g., `meditations-6-26`, `enchiridion-1-3`, `fragments-10-10a`)
+- Vector IDs: `{source}-{book}-{entry}` (e.g., `meditations-6-26`, `enchiridion-1-3`, `fragments-10-10a`, `discourses-1-1.1`)
 - Metadata: `{ source, book, entry }` stored with each vector
 - Batches embeddings in groups of 100, upserts via `wrangler vectorize upsert`
 
@@ -165,7 +187,7 @@ Single-page HTML served inline from Hono's `GET /` route. Features:
 - **"Show me another"** — Fetches `/api/random` for a truly random entry
 - **Semantic search** — Search box queries `/api/search`, displays ranked results with scores
 - **AI explanations** — "Explain these results" button streams `/api/explain` via SSE
-- **Source attribution** — Citations show "Meditations 6.26", "Enchiridion 1.3", or "Fragments 8"
+- **Source attribution** — Citations show "Meditations 6.26", "Discourses 1.1.1", "Enchiridion 1.3", or "Fragments 8"
 - **Fade-in transitions** — Content area animates on load/update
 - **Meta tags** — OG (title, description, type, url), Twitter Card, description meta
 - **Favicon** — SVG emoji (🏛️)
@@ -174,7 +196,7 @@ Single-page HTML served inline from Hono's `GET /` route. Features:
 ## Key Decisions
 
 - **Entry-level chunking** — Meditations is written as atomic thoughts. Entry = retrieval unit.
-- **Vector search only (no FTS)** — ~614 entries from three texts; hybrid search is over-engineered.
+- **Vector search only (no FTS)** — ~1336 entries from four texts; hybrid search is over-engineered.
 - **Hono router** — Lightweight, TypeScript-native, popular with Workers.
 - **Not using AutoRAG** — Need control over chunk boundaries.
 - **Date-seeded daily entry** — Hash of `YYYY-MM-DD` string for deterministic, timezone-agnostic daily selection.

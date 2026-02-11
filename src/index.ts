@@ -16,15 +16,15 @@ const html = `<!DOCTYPE html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Stoic Sage — Meditations, Enchiridion &amp; Fragments</title>
-  <meta name="description" content="Semantic search through Stoic philosophy. Search the Meditations by Marcus Aurelius, and the Enchiridion and Fragments by Epictetus, with AI-powered explanations.">
+  <title>Stoic Sage — Meditations &amp; Discourses</title>
+  <meta name="description" content="Semantic search through Stoic philosophy. Search the Meditations by Marcus Aurelius, and the Discourses, Enchiridion and Fragments by Epictetus, with AI-powered explanations.">
   <meta property="og:title" content="Stoic Sage">
-  <meta property="og:description" content="Semantic search through Stoic philosophy. Meditations by Marcus Aurelius, Enchiridion and Fragments by Epictetus. AI-powered explanations grounded in the text.">
+  <meta property="og:description" content="Semantic search through Stoic philosophy. Meditations by Marcus Aurelius, Discourses, Enchiridion and Fragments by Epictetus. AI-powered explanations.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://stoic-sage.vreeman.workers.dev">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Stoic Sage">
-  <meta name="twitter:description" content="Semantic search through Stoic philosophy. Meditations, Enchiridion and Fragments.">
+  <meta name="twitter:description" content="Semantic search through Stoic philosophy. Meditations, Discourses, Enchiridion and Fragments.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛️</text></svg>">
   <style>
     :root {
@@ -215,7 +215,7 @@ const html = `<!DOCTYPE html>
 <body>
   <div class="container">
     <h1>Stoic Sage</h1>
-    <p class="subtitle">Meditations, Enchiridion &amp; Fragments</p>
+    <p class="subtitle">Meditations &amp; Discourses</p>
 
     <form class="search-form" id="search-form">
       <input
@@ -235,7 +235,7 @@ const html = `<!DOCTYPE html>
     <div id="results"></div>
 
     <footer>
-      <a href="https://vreeman.com/meditations">Meditations</a> (Gregory Hays) \u00B7 <a href="https://vreeman.com/discourses/enchiridion">Enchiridion</a> \u00B7 <a href="https://vreeman.com/discourses/fragments">Fragments</a> (Robert Dobbin)
+      <a href="https://vreeman.com/meditations">Meditations</a> (Gregory Hays) \u00B7 <a href="https://vreeman.com/discourses/">Discourses</a> \u00B7 <a href="https://vreeman.com/discourses/enchiridion">Enchiridion</a> \u00B7 <a href="https://vreeman.com/discourses/fragments">Fragments</a> (Robert Dobbin)
     </footer>
   </div>
 
@@ -249,8 +249,10 @@ const html = `<!DOCTYPE html>
     var lastEntries = [];
 
     function formatCitation(entry) {
-      var label = entry.source === "enchiridion" ? "Enchiridion" : entry.source === "fragments" ? "Fragments" : "Meditations";
-      return label + ' ' + entry.book + '.' + escapeHtml(String(entry.entry));
+      if (entry.source === "discourses") return "Discourses " + entry.book + '.' + escapeHtml(String(entry.entry));
+      if (entry.source === "enchiridion") return "Enchiridion " + entry.book + '.' + escapeHtml(String(entry.entry));
+      if (entry.source === "fragments") return "Fragments " + entry.book + '.' + escapeHtml(String(entry.entry));
+      return "Meditations " + entry.book + '.' + escapeHtml(String(entry.entry));
     }
 
     function renderEntry(entry) {
@@ -487,18 +489,27 @@ app.post("/api/explain", async (c) => {
     );
   }
 
+  const sourceLabels: Record<string, string> = {
+    meditations: "Meditations",
+    discourses: "Discourses",
+    enchiridion: "Enchiridion",
+    fragments: "Fragments",
+  };
+
   const entriesContext = body.entries
     .map((e) => {
-      const label = e.source === "enchiridion" ? "Enchiridion" : e.source === "fragments" ? "Fragments" : "Meditations";
+      const label = sourceLabels[e.source || "meditations"] || "Meditations";
       return `[${label} ${e.book}.${e.entry}] ${e.text}`;
     })
     .join("\n\n");
 
   const hasMeditations = body.entries.some((e) => !e.source || e.source === "meditations");
+  const hasDiscourses = body.entries.some((e) => e.source === "discourses");
   const hasEnchiridion = body.entries.some((e) => e.source === "enchiridion");
   const hasFragments = body.entries.some((e) => e.source === "fragments");
   const authors = [
     hasMeditations ? "Marcus Aurelius (Meditations)" : "",
+    hasDiscourses ? "Epictetus (Discourses)" : "",
     hasEnchiridion ? "Epictetus (Enchiridion)" : "",
     hasFragments ? "Epictetus (Fragments)" : "",
   ].filter(Boolean).join(" and ");
@@ -507,7 +518,7 @@ app.post("/api/explain", async (c) => {
 
 RULES:
 - ONLY use the entries provided below. Never invent or assume content not present.
-- Cite entries by source and number (e.g., "In Meditations 6.26, Marcus writes...", "In Enchiridion 1.5, Epictetus says...", or "In Fragments 8, Epictetus states...").
+- Cite entries by source and number (e.g., "In Meditations 6.26, Marcus writes...", "In Discourses 1.1.1, Epictetus teaches...", "In Enchiridion 1.5, Epictetus says...", or "In Fragments 8, Epictetus states...").
 - Quote short phrases directly from the text when relevant.
 - Keep your explanation concise: 2-4 short paragraphs.
 - Write in plain, modern English.

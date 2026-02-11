@@ -1,6 +1,6 @@
 # Stoic Sage
 
-A personal semantic search engine for Stoic philosophy. Search *Meditations* by Marcus Aurelius, and the *Enchiridion* and *Fragments* by Epictetus by concept, retrieve exact entries, and get AI-powered explanations grounded in the text.
+A personal semantic search engine for Stoic philosophy. Search *Meditations* by Marcus Aurelius, and the *Discourses*, *Enchiridion* and *Fragments* by Epictetus by concept, retrieve exact entries, and get AI-powered explanations grounded in the text.
 
 Built entirely on Cloudflare's free tier: Workers, D1, Vectorize, and Workers AI.
 
@@ -15,7 +15,7 @@ npm run dev                            # Start local dev server
 
 ## Usage
 
-Visit [stoic-sage.vreeman.workers.dev](https://stoic-sage.vreeman.workers.dev) to explore Stoic philosophy. The homepage shows a daily reflection — the same entry for everyone, all day. Click "Show me another" for a random entry. Use the search box to find entries by concept (e.g., "anger", "desire", "virtue"), then click "Explain these results" for an AI-powered explanation grounded in the text. Results come from the Meditations, Enchiridion, and Fragments.
+Visit [stoic-sage.vreeman.workers.dev](https://stoic-sage.vreeman.workers.dev) to explore Stoic philosophy. The homepage shows a daily reflection — the same entry for everyone, all day. Click "Show me another" for a random entry. Use the search box to find entries by concept (e.g., "anger", "desire", "virtue"), then click "Explain these results" for an AI-powered explanation grounded in the text. Results come from the Meditations, Discourses, Enchiridion, and Fragments.
 
 ### API
 
