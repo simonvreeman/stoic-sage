@@ -25,20 +25,85 @@ const html = `<!DOCTYPE html>
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Stoic Sage">
   <meta name="twitter:description" content="Semantic search through Stoic philosophy. Meditations, Discourses, Enchiridion and Fragments.">
+  <meta name="color-scheme" content="light dark">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛️</text></svg>">
+  <script>
+    // Prevent FOUC: apply saved theme before first paint
+    (function() {
+      var t = localStorage.getItem("theme");
+      if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
   <style>
     :root {
       --sans-serif: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
       --serif: ui-serif, -apple-system-ui-serif, Palatino, Georgia, Cambria, "Times New Roman", Times, serif;
       --monospace: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, "Roboto Mono", "Liberation Mono", "Courier New", monospace;
+
+      /* Light theme colors */
+      --bg: #faf9f6;
+      --text: #2c2c2c;
+      --text-muted: #6b6b6b;
+      --text-faint: #aaa;
+      --accent: #8b7355;
+      --border: #ccc;
+      --border-light: #e8e4de;
+      --surface: #fff;
+      --surface-alt: #f5f1eb;
+      --surface-alt-border: #e0d9ce;
+      --btn-hover: #f0ede8;
+      --error: #b44;
+      --input-placeholder: #aaa;
+      --toggle-bg: transparent;
+      --toggle-hover: #f0ede8;
+    }
+
+    /* Dark theme via system preference */
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #1a1a1a;
+        --text: #e0ddd5;
+        --text-muted: #9a968e;
+        --text-faint: #6b6760;
+        --accent: #c4a67a;
+        --border: #3a3835;
+        --border-light: #2e2c28;
+        --surface: #242220;
+        --surface-alt: #2a2826;
+        --surface-alt-border: #3a3835;
+        --btn-hover: #333028;
+        --error: #d66;
+        --input-placeholder: #6b6760;
+        --toggle-bg: transparent;
+        --toggle-hover: #333028;
+      }
+    }
+
+    /* Dark theme via manual override */
+    :root[data-theme="dark"] {
+      --bg: #1a1a1a;
+      --text: #e0ddd5;
+      --text-muted: #9a968e;
+      --text-faint: #6b6760;
+      --accent: #c4a67a;
+      --border: #3a3835;
+      --border-light: #2e2c28;
+      --surface: #242220;
+      --surface-alt: #2a2826;
+      --surface-alt-border: #3a3835;
+      --btn-hover: #333028;
+      --error: #d66;
+      --input-placeholder: #6b6760;
+      --toggle-bg: transparent;
+      --toggle-hover: #333028;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: var(--serif);
-      background: #faf9f6;
-      color: #2c2c2c;
+      background: var(--bg);
+      color: var(--text);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -51,17 +116,46 @@ const html = `<!DOCTYPE html>
       width: 100%;
     }
 
+    header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      margin-bottom: 0.25rem;
+    }
+
     h1 {
       font-size: 1.75rem;
       font-weight: 400;
       text-align: center;
-      margin-bottom: 0.25rem;
       letter-spacing: 0.02em;
+    }
+
+    .theme-toggle {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--toggle-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      cursor: pointer;
+      padding: 0.35rem 0.45rem;
+      font-size: 1rem;
+      line-height: 1;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .theme-toggle:hover {
+      background: var(--toggle-hover);
     }
 
     .subtitle {
       text-align: center;
-      color: #6b6b6b;
+      color: var(--text-muted);
       font-size: 0.9rem;
       margin-bottom: 2rem;
     }
@@ -77,38 +171,38 @@ const html = `<!DOCTYPE html>
       padding: 0.6rem 0.9rem;
       font-family: inherit;
       font-size: 1rem;
-      border: 1px solid #ccc;
+      border: 1px solid var(--border);
       border-radius: 4px;
-      background: #fff;
-      color: #2c2c2c;
+      background: var(--surface);
+      color: var(--text);
     }
 
     .search-input:focus {
       outline: none;
-      border-color: #8b7355;
+      border-color: var(--accent);
     }
 
-    .search-input::placeholder { color: #aaa; }
+    .search-input::placeholder { color: var(--input-placeholder); }
 
     .btn {
       padding: 0.6rem 1rem;
       font-family: var(--sans-serif);
       font-size: 0.875rem;
-      border: 1px solid #ccc;
+      border: 1px solid var(--border);
       border-radius: 4px;
-      background: #fff;
-      color: #2c2c2c;
+      background: var(--surface);
+      color: var(--text);
       cursor: pointer;
       white-space: nowrap;
     }
 
-    .btn:hover { background: #f0ede8; }
+    .btn:hover { background: var(--btn-hover); }
 
     .entry {
       margin-bottom: 2rem;
       padding: 1.5rem;
-      background: #fff;
-      border: 1px solid #e8e4de;
+      background: var(--surface);
+      border: 1px solid var(--border-light);
       border-radius: 6px;
     }
 
@@ -121,27 +215,27 @@ const html = `<!DOCTYPE html>
     .entry-citation {
       margin-top: 1rem;
       font-size: 0.85rem;
-      color: #8b7355;
+      color: var(--accent);
       font-style: italic;
     }
 
     .results-heading {
       font-size: 0.85rem;
-      color: #6b6b6b;
+      color: var(--text-muted);
       margin-bottom: 1rem;
       font-family: var(--sans-serif);
     }
 
     .loading {
       text-align: center;
-      color: #aaa;
+      color: var(--text-faint);
       padding: 2rem;
       font-style: italic;
     }
 
     .error {
       text-align: center;
-      color: #b44;
+      color: var(--error);
       padding: 2rem;
     }
 
@@ -156,8 +250,8 @@ const html = `<!DOCTYPE html>
       margin-top: 1rem;
       margin-bottom: 2rem;
       padding: 1.5rem;
-      background: #f5f1eb;
-      border: 1px solid #e0d9ce;
+      background: var(--surface-alt);
+      border: 1px solid var(--surface-alt-border);
       border-radius: 6px;
     }
 
@@ -166,7 +260,7 @@ const html = `<!DOCTYPE html>
       font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      color: #8b7355;
+      color: var(--accent);
       margin-bottom: 0.75rem;
     }
 
@@ -186,7 +280,7 @@ const html = `<!DOCTYPE html>
       font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      color: #8b7355;
+      color: var(--accent);
       text-align: center;
       margin-bottom: 0.75rem;
     }
@@ -205,16 +299,19 @@ const html = `<!DOCTYPE html>
       text-align: center;
       font-family: var(--sans-serif);
       font-size: 0.75rem;
-      color: #aaa;
+      color: var(--text-faint);
     }
 
-    footer a { color: #8b7355; text-decoration: none; }
+    footer a { color: var(--accent); text-decoration: none; }
     footer a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Stoic Sage</h1>
+    <header>
+      <h1>Stoic Sage</h1>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle theme" title="Toggle theme">\u2600\uFE0F</button>
+    </header>
     <p class="subtitle">Meditations &amp; Discourses</p>
 
     <form class="search-form" id="search-form">
@@ -388,6 +485,35 @@ const html = `<!DOCTYPE html>
     });
 
     randomBtn.addEventListener("click", loadRandom);
+
+    // Theme toggle: cycles light → dark → system
+    var themeToggle = document.getElementById("theme-toggle");
+    var themeOrder = ["system", "light", "dark"];
+    var themeIcons = { system: "\u2699\uFE0F", light: "\u2600\uFE0F", dark: "\uD83C\uDF19" };
+
+    function getStoredTheme() {
+      return localStorage.getItem("theme") || "system";
+    }
+
+    function applyTheme(theme) {
+      if (theme === "light" || theme === "dark") {
+        document.documentElement.setAttribute("data-theme", theme);
+      } else {
+        document.documentElement.removeAttribute("data-theme");
+      }
+      themeToggle.textContent = themeIcons[theme] || themeIcons.system;
+      themeToggle.setAttribute("aria-label", "Theme: " + theme + ". Click to change.");
+    }
+
+    applyTheme(getStoredTheme());
+
+    themeToggle.addEventListener("click", function() {
+      var current = getStoredTheme();
+      var idx = themeOrder.indexOf(current);
+      var next = themeOrder[(idx + 1) % themeOrder.length];
+      localStorage.setItem("theme", next);
+      applyTheme(next);
+    });
 
     loadDaily();
   </script>
