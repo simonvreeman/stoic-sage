@@ -2,8 +2,14 @@
   "name": "stoic-sage",
   "main": "src/index.ts",
   "compatibility_date": "2025-01-01",
+  "workers_dev": true,
 
-  // D1 database for storing Meditations entries
+  // Custom domain
+  "routes": [
+    { "pattern": "stoicsage.ai", "custom_domain": true }
+  ],
+
+  // D1 database for storing entries
   "d1_databases": [
     {
       "binding": "DB",

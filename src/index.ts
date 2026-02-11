@@ -21,7 +21,7 @@ const html = `<!DOCTYPE html>
   <meta property="og:title" content="Stoic Sage">
   <meta property="og:description" content="Semantic search through Stoic philosophy. Meditations by Marcus Aurelius, Discourses, Enchiridion and Fragments by Epictetus. AI-powered explanations.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://stoic-sage.vreeman.workers.dev">
+  <meta property="og:url" content="https://stoicsage.ai">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Stoic Sage">
   <meta name="twitter:description" content="Semantic search through Stoic philosophy. Meditations, Discourses, Enchiridion and Fragments.">
