@@ -21,7 +21,7 @@ scripts/
   seed-d1.ts            — Seeds D1 from meditations.json
   embed-entries.ts      — Generates embeddings and upserts to Vectorize
 data/
-  meditations.json      — Parsed entries (~270 records)
+  meditations.json      — Parsed entries (488 records)
 migrations/
   0001_create_entries.sql — D1 schema
 ```
@@ -55,7 +55,16 @@ Configured in `wrangler.jsonc`:
 
 ## Source Material
 
-Gregory Hays translation of *Meditations* from vreeman.com/meditations. 12 books, ~270 entries. Entry-level chunking — each entry is one atomic thought, the natural retrieval unit.
+Gregory Hays translation of *Meditations* from vreeman.com/meditations. 12 books, 488 entries total. Entry-level chunking — each entry is one atomic thought, the natural retrieval unit.
+
+### HTML Structure (see `docs/html-structure.md` for full details)
+
+- Each book is a `<section id="bookN">`
+- **Book 1** uses `<h3 id="book1-N">` headings per entry, with `<p>` content below
+- **Books 2-12** use `<p>` tags with `<strong id="bookN-M">N.M</strong>` as entry markers
+- Multi-paragraph entries: continuation `<p>` tags without the strong/anchor prefix
+- Special elements within entries: `<blockquote>`, `<ol>`, `<ul>`, `<mark>`, `<em>`, person links
+- Parser must use a DOM library (cheerio/linkedom) to handle nested HTML correctly
 
 ## Data Model
 
