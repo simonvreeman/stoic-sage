@@ -1,6 +1,6 @@
 # Stoic Sage
 
-A personal semantic search engine for Stoic philosophy, running entirely on Cloudflare's free tier. Currently indexes *Meditations* by Marcus Aurelius and the *Enchiridion* by Epictetus.
+A personal semantic search engine for Stoic philosophy, running entirely on Cloudflare's free tier. Currently indexes *Meditations* by Marcus Aurelius, and the *Enchiridion* and *Fragments* by Epictetus.
 
 ## Architecture
 
@@ -19,11 +19,13 @@ src/
 scripts/
   parse-meditations.ts    — HTML parser for Meditations (generates data/meditations.json)
   parse-enchiridion.ts    — HTML parser for Enchiridion (generates data/enchiridion.json)
+  parse-fragments.ts      — HTML parser for Fragments (generates data/fragments.json)
   seed-d1.ts              — Seeds D1 from any data JSON file
   embed-entries.ts        — Generates embeddings and upserts to Vectorize
 data/
   meditations.json        — Parsed Meditations entries (499 records)
   enchiridion.json        — Parsed Enchiridion entries (84 records)
+  fragments.json          — Parsed Fragments entries (31 records)
 migrations/
   0001_create_entries.sql  — D1 schema
   0002_add_source_column.sql — Add source column for multi-text support
@@ -102,13 +104,28 @@ Robert Dobbin translation from vreeman.com/discourses/enchiridion. 53 chapters, 
 - Footnotes section at end (`<h2 id="fn">`) — excluded from parsing
 - Superscript footnote refs (`<sup>`) — stripped during parsing
 
+### Fragments — Epictetus
+
+Robert Dobbin translation from vreeman.com/discourses/fragments. 31 entries (numbered 1–28, plus 10a, 28a, 28b). Letter-suffixed entries are separate fragments sharing a number.
+
+#### Fragments HTML Structure
+
+- All fragments under single `<h2 id="fragments">`
+- Content ends at `<h2 id="fn">` (footnotes section)
+- Only `<p>` tags in content area (no bare text nodes)
+- Fragment detection: regex `/^\d+[a-z]?\.\s/` on paragraph text content
+- Continuation `<p>` tags (no number prefix) belong to preceding fragment
+- 7 multi-paragraph fragments (1, 9, 10, 13, 23, 28a, 28b)
+- Some fragments include bracketed source attributions (e.g., `[from Aulus Gellius, ...]`)
+- Superscript footnote refs (`<sup>`) — stripped during parsing
+
 ## Data Model
 
 ```
 entries (D1):
   id       INTEGER PRIMARY KEY AUTOINCREMENT
-  source   TEXT NOT NULL DEFAULT 'meditations'  -- 'meditations' or 'enchiridion'
-  book     INTEGER NOT NULL                     -- book (1-12) or chapter (1-53)
+  source   TEXT NOT NULL DEFAULT 'meditations'  -- 'meditations', 'enchiridion', or 'fragments'
+  book     INTEGER NOT NULL                     -- book (1-12), chapter (1-53), or fragment number (1-28)
   entry    TEXT NOT NULL                         -- string to support "49a" suffixes
   text     TEXT NOT NULL
   UNIQUE(source, book, entry)
@@ -119,8 +136,10 @@ entries (D1):
 ```bash
 npx tsx scripts/parse-meditations.ts           # Fetch HTML → data/meditations.json (499 entries)
 npx tsx scripts/parse-enchiridion.ts           # Fetch HTML → data/enchiridion.json (84 entries)
+npx tsx scripts/parse-fragments.ts             # Fetch HTML → data/fragments.json (31 entries)
 npx tsx scripts/seed-d1.ts data/meditations.json   # Insert → D1 database
 npx tsx scripts/seed-d1.ts data/enchiridion.json   # Insert → D1 database
+npx tsx scripts/seed-d1.ts data/fragments.json     # Insert → D1 database
 ```
 
 ### Vectorize Pipeline
@@ -129,11 +148,12 @@ npx tsx scripts/seed-d1.ts data/enchiridion.json   # Insert → D1 database
 # Requires CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_API_TOKEN env vars
 npx tsx scripts/embed-entries.ts data/meditations.json   # Embed → Vectorize (499 vectors)
 npx tsx scripts/embed-entries.ts data/enchiridion.json   # Embed → Vectorize (84 vectors)
+npx tsx scripts/embed-entries.ts data/fragments.json     # Embed → Vectorize (31 vectors)
 ```
 
 - Embedding model: `@cf/baai/bge-base-en-v1.5` (768 dimensions, mean pooling)
 - Index: `meditations-index` (cosine similarity)
-- Vector IDs: `{source}-{book}-{entry}` (e.g., `meditations-6-26`, `enchiridion-1-3`)
+- Vector IDs: `{source}-{book}-{entry}` (e.g., `meditations-6-26`, `enchiridion-1-3`, `fragments-10-10a`)
 - Metadata: `{ source, book, entry }` stored with each vector
 - Batches embeddings in groups of 100, upserts via `wrangler vectorize upsert`
 
@@ -145,16 +165,16 @@ Single-page HTML served inline from Hono's `GET /` route. Features:
 - **"Show me another"** — Fetches `/api/random` for a truly random entry
 - **Semantic search** — Search box queries `/api/search`, displays ranked results with scores
 - **AI explanations** — "Explain these results" button streams `/api/explain` via SSE
-- **Source attribution** — Citations show "Meditations 6.26" or "Enchiridion 1.3"
+- **Source attribution** — Citations show "Meditations 6.26", "Enchiridion 1.3", or "Fragments 8"
 - **Fade-in transitions** — Content area animates on load/update
 - **Meta tags** — OG (title, description, type, url), Twitter Card, description meta
 - **Favicon** — SVG emoji (🏛️)
-- **Footer** — Links to both source texts with translator attribution
+- **Footer** — Links to all source texts with translator attribution
 
 ## Key Decisions
 
 - **Entry-level chunking** — Meditations is written as atomic thoughts. Entry = retrieval unit.
-- **Vector search only (no FTS)** — ~583 entries from two books; hybrid search is over-engineered.
+- **Vector search only (no FTS)** — ~614 entries from three texts; hybrid search is over-engineered.
 - **Hono router** — Lightweight, TypeScript-native, popular with Workers.
 - **Not using AutoRAG** — Need control over chunk boundaries.
 - **Date-seeded daily entry** — Hash of `YYYY-MM-DD` string for deterministic, timezone-agnostic daily selection.

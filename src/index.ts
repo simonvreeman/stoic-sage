@@ -16,15 +16,15 @@ const html = `<!DOCTYPE html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Stoic Sage — Meditations &amp; Enchiridion</title>
-  <meta name="description" content="Semantic search through Stoic philosophy. Search the Meditations by Marcus Aurelius and the Enchiridion by Epictetus by concept, with AI-powered explanations.">
+  <title>Stoic Sage — Meditations, Enchiridion &amp; Fragments</title>
+  <meta name="description" content="Semantic search through Stoic philosophy. Search the Meditations by Marcus Aurelius, and the Enchiridion and Fragments by Epictetus, with AI-powered explanations.">
   <meta property="og:title" content="Stoic Sage">
-  <meta property="og:description" content="Semantic search through Stoic philosophy. Meditations by Marcus Aurelius and Enchiridion by Epictetus. AI-powered explanations grounded in the text.">
+  <meta property="og:description" content="Semantic search through Stoic philosophy. Meditations by Marcus Aurelius, Enchiridion and Fragments by Epictetus. AI-powered explanations grounded in the text.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://stoic-sage.vreeman.workers.dev">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Stoic Sage">
-  <meta name="twitter:description" content="Semantic search through Stoic philosophy. Meditations and Enchiridion.">
+  <meta name="twitter:description" content="Semantic search through Stoic philosophy. Meditations, Enchiridion and Fragments.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛️</text></svg>">
   <style>
     :root {
@@ -215,7 +215,7 @@ const html = `<!DOCTYPE html>
 <body>
   <div class="container">
     <h1>Stoic Sage</h1>
-    <p class="subtitle">Meditations &amp; Enchiridion</p>
+    <p class="subtitle">Meditations, Enchiridion &amp; Fragments</p>
 
     <form class="search-form" id="search-form">
       <input
@@ -235,7 +235,7 @@ const html = `<!DOCTYPE html>
     <div id="results"></div>
 
     <footer>
-      <a href="https://vreeman.com/meditations">Meditations</a> (Gregory Hays) \u00B7 <a href="https://vreeman.com/discourses/enchiridion">Enchiridion</a> (Robert Dobbin)
+      <a href="https://vreeman.com/meditations">Meditations</a> (Gregory Hays) \u00B7 <a href="https://vreeman.com/discourses/enchiridion">Enchiridion</a> \u00B7 <a href="https://vreeman.com/discourses/fragments">Fragments</a> (Robert Dobbin)
     </footer>
   </div>
 
@@ -249,7 +249,7 @@ const html = `<!DOCTYPE html>
     var lastEntries = [];
 
     function formatCitation(entry) {
-      var label = entry.source === "enchiridion" ? "Enchiridion" : "Meditations";
+      var label = entry.source === "enchiridion" ? "Enchiridion" : entry.source === "fragments" ? "Fragments" : "Meditations";
       return label + ' ' + entry.book + '.' + escapeHtml(String(entry.entry));
     }
 
@@ -489,23 +489,25 @@ app.post("/api/explain", async (c) => {
 
   const entriesContext = body.entries
     .map((e) => {
-      const label = e.source === "enchiridion" ? "Enchiridion" : "Meditations";
+      const label = e.source === "enchiridion" ? "Enchiridion" : e.source === "fragments" ? "Fragments" : "Meditations";
       return `[${label} ${e.book}.${e.entry}] ${e.text}`;
     })
     .join("\n\n");
 
   const hasMeditations = body.entries.some((e) => !e.source || e.source === "meditations");
   const hasEnchiridion = body.entries.some((e) => e.source === "enchiridion");
+  const hasFragments = body.entries.some((e) => e.source === "fragments");
   const authors = [
     hasMeditations ? "Marcus Aurelius (Meditations)" : "",
     hasEnchiridion ? "Epictetus (Enchiridion)" : "",
+    hasFragments ? "Epictetus (Fragments)" : "",
   ].filter(Boolean).join(" and ");
 
   const systemPrompt = `You are Stoic Sage, a concise guide to Stoic philosophy from ${authors}.
 
 RULES:
 - ONLY use the entries provided below. Never invent or assume content not present.
-- Cite entries by source and number (e.g., "In Meditations 6.26, Marcus writes..." or "In Enchiridion 1.5, Epictetus says...").
+- Cite entries by source and number (e.g., "In Meditations 6.26, Marcus writes...", "In Enchiridion 1.5, Epictetus says...", or "In Fragments 8, Epictetus states...").
 - Quote short phrases directly from the text when relevant.
 - Keep your explanation concise: 2-4 short paragraphs.
 - Write in plain, modern English.
