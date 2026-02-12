@@ -25,6 +25,88 @@ Visit [stoicsage.ai](https://stoicsage.ai) to explore Stoic philosophy. The home
 - `GET /api/random` — random entry from any source
 - `POST /api/explain` — AI explanation of search results (streamed SSE)
 
+### Admin API
+
+The admin routes manage the **reflectable** flag on entries. Entries with `reflectable = 0` are excluded from the daily reflection and random endpoints, keeping cryptic fragments and mid-argument dialogue out of the reflection pool. Search and entry lookup are unaffected.
+
+All admin routes require an `API_KEY` secret set on the Worker:
+
+```bash
+npx wrangler secret put API_KEY
+```
+
+Pass the key in every request as a Bearer token:
+
+```
+Authorization: Bearer <your-api-key>
+```
+
+#### List entries by reflectable status
+
+```bash
+# Show all excluded entries
+curl -H "Authorization: Bearer $API_KEY" \
+  "https://stoicsage.ai/api/admin/entries?reflectable=false"
+
+# Show all included entries
+curl -H "Authorization: Bearer $API_KEY" \
+  "https://stoicsage.ai/api/admin/entries?reflectable=true"
+
+# Show all entries (no filter)
+curl -H "Authorization: Bearer $API_KEY" \
+  "https://stoicsage.ai/api/admin/entries"
+```
+
+Response:
+
+```json
+{
+  "entries": [
+    { "source": "meditations", "book": 7, "entry": "12", "text": "Straight, not straightened.", "reflectable": 0 }
+  ],
+  "count": 32
+}
+```
+
+#### Exclude an entry from reflections
+
+```bash
+curl -X PUT \
+  -H "Authorization: Bearer $API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"reflectable": false}' \
+  "https://stoicsage.ai/api/admin/entry/meditations/7/12/reflectable"
+```
+
+The URL path is `/api/admin/entry/:source/:book/:entry/reflectable`. Valid sources: `meditations`, `discourses`, `enchiridion`, `fragments`.
+
+#### Re-include an entry
+
+```bash
+curl -X PUT \
+  -H "Authorization: Bearer $API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"reflectable": true}' \
+  "https://stoicsage.ai/api/admin/entry/meditations/7/12/reflectable"
+```
+
+Response:
+
+```json
+{ "source": "meditations", "book": 7, "entry": "12", "reflectable": true }
+```
+
+#### Bulk reset
+
+To reset all reflectable flags to their scripted defaults, re-run the seed script:
+
+```bash
+npx tsx scripts/set-reflectable.ts          # remote
+npx tsx scripts/set-reflectable.ts --local  # local
+```
+
+This resets every entry to `reflectable = 1`, then re-applies the exclusion rules (short fragments under 10 words and manually listed mid-argument continuations). Any manual toggles made via the admin API will be overwritten.
+
 ## Development
 
 ```bash

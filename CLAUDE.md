@@ -23,6 +23,7 @@ scripts/
   parse-fragments.ts      — HTML parser for Fragments (generates data/fragments.json)
   parse-discourses.ts     — HTML parser for Discourses (generates data/discourses.json)
   seed-d1.ts              — Seeds D1 from any data JSON file
+  set-reflectable.ts      — Sets reflectable=0 on non-standalone entries
   embed-entries.ts        — Generates embeddings and upserts to Vectorize
 data/
   meditations.json        — Parsed Meditations entries (499 records, includes heading and marked fields)
@@ -34,6 +35,7 @@ migrations/
   0002_add_source_column.sql — Add source column for multi-text support
   0003_rebuild_unique_constraint.sql — UNIQUE(source, book, entry)
   0004_add_marked_heading.sql — Add marked and heading columns
+  0005_add_reflectable_column.sql — Add reflectable column for daily/random filtering
 ```
 
 ## Commands
@@ -57,6 +59,8 @@ CORS is enabled on all `/api/*` routes via Hono's `cors()` middleware.
 | GET | `/api/daily` | Daily entry (date-seeded, consistent within a day) | Live |
 | GET | `/api/search?q=...&topK=5` | Semantic search across all sources, weighted by source priority | Live |
 | POST | `/api/explain` | AI explanation of entries (streamed SSE) | Live |
+| PUT | `/api/admin/entry/:source/:book/:entry/reflectable` | Toggle reflectable status (auth required) | Live |
+| GET | `/api/admin/entries?reflectable=false` | List entries by reflectable status (auth required) | Live |
 
 ### Response format
 
@@ -89,6 +93,7 @@ Configured in `wrangler.jsonc`:
 - `DB` — D1 database (`stoic-sage-db`)
 - `VECTORIZE` — Vectorize index (`meditations-index`, 768-dim, cosine)
 - `AI` — Workers AI (embeddings + LLM)
+- `API_KEY` — Secret for admin route authentication (set via `npx wrangler secret put API_KEY`)
 
 ## Source Material
 
@@ -166,6 +171,7 @@ entries (D1):
   text     TEXT NOT NULL
   marked   INTEGER NOT NULL DEFAULT 0           -- 1 if entry contains <mark> highlights in source HTML
   heading  TEXT                                 -- Book 1 Meditations only: person/topic name (e.g., "Rusticus")
+  reflectable INTEGER NOT NULL DEFAULT 1       -- 1 = eligible for daily/random, 0 = excluded (too short, mid-argument)
   UNIQUE(source, book, entry)
 ```
 
@@ -180,6 +186,8 @@ npx tsx scripts/seed-d1.ts data/meditations.json   # Insert → D1 database
 npx tsx scripts/seed-d1.ts data/enchiridion.json   # Insert → D1 database
 npx tsx scripts/seed-d1.ts data/fragments.json     # Insert → D1 database
 npx tsx scripts/seed-d1.ts data/discourses.json    # Insert → D1 database
+npx tsx scripts/set-reflectable.ts                 # Set reflectable=0 on non-standalone entries (remote)
+npx tsx scripts/set-reflectable.ts --local         # Set reflectable=0 (local)
 ```
 
 ### Vectorize Pipeline
@@ -223,4 +231,5 @@ Single-page HTML served inline from Hono's `GET /` route. Features:
 - **Source column** — `source` field in D1 and vector metadata enables multi-text support without schema changes.
 - **Source priority weighting** — Search results weighted by `SOURCE_WEIGHTS` (Meditations 1.0, Discourses/Enchiridion 0.85, Fragments 0.75). Post-processing step after Vectorize; returns both `score` and `weightedScore`. Tunable via the constant in `src/index.ts`.
 - **Weighted daily/random selection** — Daily and random entries are selected using weighted reservoir sampling (`src/weighted-random.ts`). Three-layer weighting stack: `final_weight = marked_boost × source_weight × rating_multiplier`. Layer 1 (marked boost, 1.3x) and Layer 2 (source weight) are active. Layer 3 (user ratings) is a 1.0x placeholder for VRE-271. Tunable via `REFLECTION_WEIGHTS` constant.
+- **Reflectable filter** — `reflectable` column in D1 excludes non-standalone entries from daily/random selection. 32 entries excluded: 11 Meditations (cryptic fragments under 10 words) and 21 Discourses (mid-argument dialogue continuations). Reflection pool: 1,304 entries. Admin routes allow toggling any entry's status. Managed by `scripts/set-reflectable.ts` (idempotent, resets all to 1 first). Search and entry lookup are unaffected.
 - **System-only dark mode** — No manual toggle. Pure CSS via `prefers-color-scheme` media query. Zero JS, zero localStorage. KISS.

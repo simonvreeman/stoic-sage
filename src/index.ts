@@ -6,11 +6,25 @@ type Bindings = {
   DB: D1Database;
   VECTORIZE: VectorizeIndex;
   AI: Ai;
+  API_KEY: string;
 };
 
 const app = new Hono<{ Bindings: Bindings }>();
 
 app.use("/api/*", cors());
+
+// Admin auth middleware — checks Authorization: Bearer <API_KEY>
+app.use("/api/admin/*", async (c, next) => {
+  const apiKey = c.env.API_KEY;
+  if (!apiKey) {
+    return c.json({ error: "Admin API not configured." }, 503);
+  }
+  const auth = c.req.header("Authorization");
+  if (!auth || auth !== `Bearer ${apiKey}`) {
+    return c.json({ error: "Unauthorized." }, 401);
+  }
+  await next();
+});
 
 const html = `<!DOCTYPE html>
 <html lang="en">
@@ -620,9 +634,9 @@ app.get("/api/daily", async (c) => {
     hash = (hash * 31 + today.charCodeAt(i)) | 0;
   }
 
-  // Lightweight query for weighted selection (id, source, marked only)
+  // Lightweight query for weighted selection (only reflectable entries)
   const allEntries = await c.env.DB.prepare(
-    "SELECT id, source, marked FROM entries",
+    "SELECT id, source, marked FROM entries WHERE reflectable = 1",
   ).all<{ id: number; source: string; marked: number }>();
 
   if (!allEntries.results || allEntries.results.length === 0) {
@@ -647,9 +661,9 @@ app.get("/api/daily", async (c) => {
 });
 
 app.get("/api/random", async (c) => {
-  // Lightweight query for weighted selection
+  // Lightweight query for weighted selection (only reflectable entries)
   const allEntries = await c.env.DB.prepare(
-    "SELECT id, source, marked FROM entries",
+    "SELECT id, source, marked FROM entries WHERE reflectable = 1",
   ).all<{ id: number; source: string; marked: number }>();
 
   if (!allEntries.results || allEntries.results.length === 0) {
@@ -671,6 +685,66 @@ app.get("/api/random", async (c) => {
 
   c.header("Cache-Control", "no-store");
   return c.json(row);
+});
+
+// ---------------------------------------------------------------------------
+// Admin routes (protected by API_KEY via middleware above)
+// ---------------------------------------------------------------------------
+
+app.put("/api/admin/entry/:source/:book/:entry/reflectable", async (c) => {
+  const source = c.req.param("source");
+  const book = parseInt(c.req.param("book"), 10);
+  const entry = c.req.param("entry");
+
+  if (!VALID_SOURCES.includes(source)) {
+    return c.json(
+      {
+        error: `Invalid source. Must be one of: ${VALID_SOURCES.join(", ")}`,
+      },
+      400,
+    );
+  }
+  if (isNaN(book) || book < 1) {
+    return c.json({ error: "Invalid book number." }, 400);
+  }
+
+  const body = await c.req.json<{ reflectable: boolean }>();
+  if (typeof body.reflectable !== "boolean") {
+    return c.json(
+      { error: "Body must include 'reflectable' as boolean." },
+      400,
+    );
+  }
+
+  const result = await c.env.DB.prepare(
+    "UPDATE entries SET reflectable = ? WHERE source = ? AND book = ? AND entry = ?",
+  )
+    .bind(body.reflectable ? 1 : 0, source, book, entry)
+    .run();
+
+  if (result.meta.changes === 0) {
+    return c.json(
+      { error: `Entry ${source} ${book}.${entry} not found.` },
+      404,
+    );
+  }
+
+  return c.json({ source, book, entry, reflectable: body.reflectable });
+});
+
+app.get("/api/admin/entries", async (c) => {
+  const reflectable = c.req.query("reflectable");
+
+  let query = "SELECT source, book, entry, text, reflectable FROM entries";
+  if (reflectable === "false") {
+    query += " WHERE reflectable = 0";
+  } else if (reflectable === "true") {
+    query += " WHERE reflectable = 1";
+  }
+  query += " ORDER BY source, book, entry";
+
+  const rows = await c.env.DB.prepare(query).all();
+  return c.json({ entries: rows.results, count: rows.results?.length || 0 });
 });
 
 export default app;
