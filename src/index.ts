@@ -1,5 +1,6 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
+import { selectDailyEntry, selectRandomEntry } from "./weighted-random";
 
 type Bindings = {
   DB: D1Database;
@@ -612,28 +613,33 @@ ${entriesContext}`;
 });
 
 app.get("/api/daily", async (c) => {
-  // Use today's date as a seed for consistent daily entry
+  // Date-seeded hash for deterministic daily selection
   const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
   let hash = 0;
   for (let i = 0; i < today.length; i++) {
     hash = (hash * 31 + today.charCodeAt(i)) | 0;
   }
 
-  const count = await c.env.DB.prepare(
-    "SELECT COUNT(*) as total FROM entries",
-  ).first<{ total: number }>();
+  // Lightweight query for weighted selection (id, source, marked only)
+  const allEntries = await c.env.DB.prepare(
+    "SELECT id, source, marked FROM entries",
+  ).all<{ id: number; source: string; marked: number }>();
 
-  const total = count?.total || 1336;
-  const offset = ((hash % total) + total) % total;
+  if (!allEntries.results || allEntries.results.length === 0) {
+    return c.json({ error: "No entries found." }, 500);
+  }
+
+  // Weighted random selection using date seed (same entry all day)
+  const selectedId = selectDailyEntry(allEntries.results, hash);
 
   const row = await c.env.DB.prepare(
-    "SELECT source, book, entry, text FROM entries LIMIT 1 OFFSET ?",
+    "SELECT source, book, entry, text FROM entries WHERE id = ?",
   )
-    .bind(offset)
+    .bind(selectedId)
     .first();
 
   if (!row) {
-    return c.json({ error: "No entries found." }, 500);
+    return c.json({ error: "Entry not found." }, 500);
   }
 
   c.header("Cache-Control", "public, max-age=3600");
@@ -641,12 +647,26 @@ app.get("/api/daily", async (c) => {
 });
 
 app.get("/api/random", async (c) => {
+  // Lightweight query for weighted selection
+  const allEntries = await c.env.DB.prepare(
+    "SELECT id, source, marked FROM entries",
+  ).all<{ id: number; source: string; marked: number }>();
+
+  if (!allEntries.results || allEntries.results.length === 0) {
+    return c.json({ error: "No entries found." }, 500);
+  }
+
+  // Weighted random selection (unseeded — different each call)
+  const selectedId = selectRandomEntry(allEntries.results);
+
   const row = await c.env.DB.prepare(
-    "SELECT source, book, entry, text FROM entries ORDER BY RANDOM() LIMIT 1",
-  ).first();
+    "SELECT source, book, entry, text FROM entries WHERE id = ?",
+  )
+    .bind(selectedId)
+    .first();
 
   if (!row) {
-    return c.json({ error: "No entries found." }, 500);
+    return c.json({ error: "Entry not found." }, 500);
   }
 
   c.header("Cache-Control", "no-store");

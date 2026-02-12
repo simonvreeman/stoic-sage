@@ -16,6 +16,7 @@ All infrastructure runs on Cloudflare:
 ```
 src/
   index.ts                — Hono app, all API routes
+  weighted-random.ts      — Weighted random selection utility (daily/random endpoints)
 scripts/
   parse-meditations.ts    — HTML parser for Meditations (generates data/meditations.json)
   parse-enchiridion.ts    — HTML parser for Enchiridion (generates data/enchiridion.json)
@@ -218,7 +219,8 @@ Single-page HTML served inline from Hono's `GET /` route. Features:
 - **Vector search only (no FTS)** — ~1336 entries from four texts; hybrid search is over-engineered.
 - **Hono router** — Lightweight, TypeScript-native, popular with Workers.
 - **Not using AutoRAG** — Need control over chunk boundaries.
-- **Date-seeded daily entry** — Hash of `YYYY-MM-DD` string for deterministic, timezone-agnostic daily selection.
+- **Date-seeded daily entry** — Hash of `YYYY-MM-DD` string for deterministic, timezone-agnostic daily selection. Uses Mulberry32 seeded PRNG for weighted random sampling.
 - **Source column** — `source` field in D1 and vector metadata enables multi-text support without schema changes.
 - **Source priority weighting** — Search results weighted by `SOURCE_WEIGHTS` (Meditations 1.0, Discourses/Enchiridion 0.85, Fragments 0.75). Post-processing step after Vectorize; returns both `score` and `weightedScore`. Tunable via the constant in `src/index.ts`.
+- **Weighted daily/random selection** — Daily and random entries are selected using weighted reservoir sampling (`src/weighted-random.ts`). Three-layer weighting stack: `final_weight = marked_boost × source_weight × rating_multiplier`. Layer 1 (marked boost, 1.3x) and Layer 2 (source weight) are active. Layer 3 (user ratings) is a 1.0x placeholder for VRE-271. Tunable via `REFLECTION_WEIGHTS` constant.
 - **System-only dark mode** — No manual toggle. Pure CSS via `prefers-color-scheme` media query. Zero JS, zero localStorage. KISS.
