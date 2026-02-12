@@ -53,7 +53,7 @@ CORS is enabled on all `/api/*` routes via Hono's `cors()` middleware.
 | GET | `/api/entry/:book/:id?source=` | Get a specific entry by source, book/chapter, and entry ID | Live |
 | GET | `/api/random` | Random entry from any source | Live |
 | GET | `/api/daily` | Daily entry (date-seeded, consistent within a day) | Live |
-| GET | `/api/search?q=...&topK=5` | Semantic search across all sources (embed query → Vectorize → D1) | Live |
+| GET | `/api/search?q=...&topK=5` | Semantic search across all sources, weighted by source priority | Live |
 | POST | `/api/explain` | AI explanation of entries (streamed SSE) | Live |
 
 ### Response format
@@ -64,7 +64,9 @@ All API routes return JSON. Entry responses have the shape:
 { "source": "meditations", "book": 6, "entry": "26", "text": "..." }
 ```
 
-Search responses: `{ "results": [{ "source": "meditations", "book": 6, "entry": "26", "text": "...", "score": 0.76 }] }`
+Search responses: `{ "results": [{ "source": "meditations", "book": 6, "entry": "26", "text": "...", "score": 0.76, "weightedScore": 0.76 }] }`
+
+Search results are sorted by `weightedScore` (raw cosine similarity × source weight). The `score` field preserves the original unweighted similarity for debugging. Source weights: Meditations 1.0, Discourses 0.85, Enchiridion 0.85, Fragments 0.75. The explain endpoint receives these weighted-sorted entries from the frontend as LLM context.
 
 Explain request: `POST { "query": "...", "entries": [{ "source": "meditations", "book": 6, "entry": "26", "text": "..." }] }`
 Explain response: Server-Sent Events stream (text/event-stream) from `@cf/meta/llama-3.3-70b-instruct-fp8-fast`.
@@ -209,4 +211,5 @@ Single-page HTML served inline from Hono's `GET /` route. Features:
 - **Not using AutoRAG** — Need control over chunk boundaries.
 - **Date-seeded daily entry** — Hash of `YYYY-MM-DD` string for deterministic, timezone-agnostic daily selection.
 - **Source column** — `source` field in D1 and vector metadata enables multi-text support without schema changes.
+- **Source priority weighting** — Search results weighted by `SOURCE_WEIGHTS` (Meditations 1.0, Discourses/Enchiridion 0.85, Fragments 0.75). Post-processing step after Vectorize; returns both `score` and `weightedScore`. Tunable via the constant in `src/index.ts`.
 - **System-only dark mode** — No manual toggle. Pure CSS via `prefers-color-scheme` media query. Zero JS, zero localStorage. KISS.

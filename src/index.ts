@@ -291,7 +291,11 @@ const html = `<!DOCTYPE html>
     }
 
     function renderEntry(entry) {
-      return '<div class="entry">'
+      var attrs = '';
+      if (entry.score != null) attrs += ' data-score="' + entry.score + '"';
+      if (entry.weightedScore != null) attrs += ' data-weighted-score="' + entry.weightedScore + '"';
+      if (entry.source) attrs += ' data-source="' + escapeHtml(entry.source) + '"';
+      return '<div class="entry"' + attrs + '>'
         + '<div class="entry-text">' + escapeHtml(entry.text) + '</div>'
         + '<div class="entry-citation">' + formatCitation(entry) + '</div>'
         + '</div>';
@@ -435,6 +439,13 @@ app.get("/", (c) => {
 
 const VALID_SOURCES = ["meditations", "discourses", "enchiridion", "fragments"];
 
+const SOURCE_WEIGHTS: Record<string, number> = {
+  meditations: 1.0,
+  discourses: 0.85,
+  enchiridion: 0.85,
+  fragments: 0.75,
+};
+
 app.get("/api/entry/:book/:id", async (c) => {
   const bookParam = c.req.param("book");
   const entryId = c.req.param("id");
@@ -506,15 +517,24 @@ app.get("/api/search", async (c) => {
 
   // Deduplicate by source+book+entry (old vectors without source prefix may duplicate new ones)
   const seen = new Set<string>();
-  const deduped = results.filter((r) => {
-    if (!r) return false;
-    const key = `${r.source}-${r.book}-${r.entry}`;
-    if (seen.has(key)) return false;
-    seen.add(key);
-    return true;
-  });
+  const deduped = results.filter(
+    (r): r is NonNullable<typeof r> => {
+      if (!r) return false;
+      const key = `${r.source}-${r.book}-${r.entry}`;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    },
+  );
 
-  return c.json({ results: deduped });
+  const weighted = deduped.map((r) => ({
+    ...r,
+    weightedScore: Math.round(r.score * (SOURCE_WEIGHTS[r.source as string] || 1.0) * 1e8) / 1e8,
+  }));
+
+  weighted.sort((a, b) => b.weightedScore - a.weightedScore);
+
+  return c.json({ results: weighted });
 });
 
 app.post("/api/explain", async (c) => {
