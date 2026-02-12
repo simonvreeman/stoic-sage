@@ -32,6 +32,7 @@ migrations/
   0001_create_entries.sql  — D1 schema
   0002_add_source_column.sql — Add source column for multi-text support
   0003_rebuild_unique_constraint.sql — UNIQUE(source, book, entry)
+  0004_add_marked_heading.sql — Add marked and heading columns
 ```
 
 ## Commands
@@ -162,6 +163,8 @@ entries (D1):
   book     INTEGER NOT NULL                     -- book (1-12 / 1-4), chapter (1-53), or fragment number (1-28)
   entry    TEXT NOT NULL                         -- string to support "49a" suffixes
   text     TEXT NOT NULL
+  marked   INTEGER NOT NULL DEFAULT 0           -- 1 if entry contains <mark> highlights in source HTML
+  heading  TEXT                                 -- Book 1 Meditations only: person/topic name (e.g., "Rusticus")
   UNIQUE(source, book, entry)
 ```
 

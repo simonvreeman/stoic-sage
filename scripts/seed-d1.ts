@@ -2,7 +2,7 @@
  * Seed the D1 database with parsed entries.
  *
  * Supports multiple source texts. Pass a JSON file path as the first argument.
- * Each entry must have { source, book, entry, text }.
+ * Each entry must have { source, book, entry, text }. Optional: { marked, heading }.
  *
  * Usage:
  *   npx tsx scripts/seed-d1.ts data/meditations.json [--local]
@@ -22,6 +22,8 @@ interface Entry {
   book: number;
   entry: string;
   text: string;
+  marked?: boolean;
+  heading?: string;
 }
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -62,6 +64,8 @@ async function main() {
     book: e.book,
     entry: e.entry,
     text: e.text,
+    marked: e.marked ?? false,
+    heading: e.heading ?? undefined,
   }));
 
   const source = entries[0]?.source;
@@ -83,11 +87,11 @@ async function main() {
     const values = batch
       .map(
         (e) =>
-          `('${escapeSQL(e.source)}', ${e.book}, '${escapeSQL(e.entry)}', '${escapeSQL(e.text)}')`,
+          `('${escapeSQL(e.source)}', ${e.book}, '${escapeSQL(e.entry)}', '${escapeSQL(e.text)}', ${e.marked ? 1 : 0}, ${e.heading ? `'${escapeSQL(e.heading)}'` : "NULL"})`,
       )
       .join(",\n");
 
-    runSQL(`INSERT INTO entries (source, book, entry, text) VALUES\n${values};`);
+    runSQL(`INSERT INTO entries (source, book, entry, text, marked, heading) VALUES\n${values};`);
     console.log(`  Inserted ${Math.min(i + BATCH_SIZE, entries.length)}/${entries.length}`);
   }
 
