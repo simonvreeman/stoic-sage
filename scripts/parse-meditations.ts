@@ -5,7 +5,7 @@
  * See docs/html-structure.md for the full HTML structure analysis.
  *
  * Output: data/meditations.json
- * Format: Array of { book: number, entry: string, text: string }
+ * Format: Array of { book: number, entry: string, heading?: string, marked?: boolean, text: string }
  *
  * Note: entry is a string because some entries have letter suffixes (e.g., "49a").
  *
@@ -20,6 +20,8 @@ import { fileURLToPath } from "node:url";
 interface Entry {
   book: number;
   entry: string;
+  heading?: string;
+  marked?: boolean;
   text: string;
 }
 
@@ -46,6 +48,33 @@ function extractText($: cheerio.CheerioAPI, el: cheerio.Cheerio<cheerio.Element>
   });
 
   return clone.text().trim();
+}
+
+/**
+ * Extract clean person/topic name from a Book 1 heading.
+ * Strips anchors, entry numbers, and footnote references.
+ * e.g., "<h3>1.7 Rusticus <sup>...</sup></h3>" → "Rusticus"
+ */
+function extractHeading(
+  $: cheerio.CheerioAPI,
+  h3: cheerio.Cheerio<cheerio.Element>,
+): string {
+  const clone = h3.clone();
+  clone.find("a").remove();
+  clone.find("sup").remove();
+  let text = clone.text().trim();
+  // Strip entry number prefix (e.g., "1.7 ")
+  text = text.replace(/^\d+\.\d+\s*/, "");
+  return text;
+}
+
+/**
+ * Check if any <mark> tags exist within one or more cheerio elements.
+ */
+function hasMarkTag(
+  elements: cheerio.Cheerio<cheerio.Element>[],
+): boolean {
+  return elements.some((el) => el.find("mark").length > 0);
 }
 
 /**
@@ -91,6 +120,7 @@ function parseBook1($: cheerio.CheerioAPI, section: cheerio.Cheerio<cheerio.Elem
     if (!match) return;
 
     const entryId = match[1];
+    const heading = extractHeading($, h3);
 
     // Collect all sibling elements until the next h3
     const contentElements: cheerio.Cheerio<cheerio.Element>[] = [];
@@ -100,9 +130,10 @@ function parseBook1($: cheerio.CheerioAPI, section: cheerio.Cheerio<cheerio.Elem
       next = next.next();
     }
 
+    const marked = hasMarkTag(contentElements);
     const text = extractMultiElementText($, contentElements);
     if (text) {
-      entries.push({ book: 1, entry: entryId, text });
+      entries.push({ book: 1, entry: entryId, heading, marked, text });
     }
   });
 
@@ -117,13 +148,13 @@ function parseBook($: cheerio.CheerioAPI, section: cheerio.Cheerio<cheerio.Eleme
   const entries: Entry[] = [];
   const children = section.children();
 
-  let currentEntry: { entryId: string; elements: cheerio.Cheerio<cheerio.Element>[] } | null = null;
+  let currentEntry: { entryId: string; elements: cheerio.Cheerio<cheerio.Element>[]; marked: boolean } | null = null;
 
   function flushEntry() {
     if (!currentEntry) return;
     const text = extractMultiElementText($, currentEntry.elements);
     if (text) {
-      entries.push({ book: bookNum, entry: currentEntry.entryId, text });
+      entries.push({ book: bookNum, entry: currentEntry.entryId, marked: currentEntry.marked, text });
     }
     currentEntry = null;
   }
@@ -167,7 +198,7 @@ function parseBook($: cheerio.CheerioAPI, section: cheerio.Cheerio<cheerio.Eleme
         // Remove any leading dash that some "a" entries have (e.g., "—It's unfortunate")
         pText = pText.replace(/^—\s*/, "—");
 
-        currentEntry = { entryId, elements: [] };
+        currentEntry = { entryId, elements: [], marked: el.find("mark").length > 0 };
         if (pText) {
           currentEntry.elements.push(el);
         }
@@ -178,6 +209,9 @@ function parseBook($: cheerio.CheerioAPI, section: cheerio.Cheerio<cheerio.Eleme
     // Continuation element (p without strong, or ul, ol, blockquote)
     if (currentEntry) {
       currentEntry.elements.push(el);
+      if (el.find("mark").length > 0) {
+        currentEntry.marked = true;
+      }
     }
   });
 
@@ -254,6 +288,12 @@ async function main() {
       console.error(`  ${e.book}.${e.entry}`);
     }
   }
+
+  // Heading and mark statistics
+  const withHeading = allEntries.filter((e) => e.heading);
+  const withMark = allEntries.filter((e) => e.marked);
+  console.log(`\nHeadings: ${withHeading.length} entries (Book 1)`);
+  console.log(`Marked: ${withMark.length} entries across all books`);
 
   // Check for duplicates
   const seen = new Set<string>();

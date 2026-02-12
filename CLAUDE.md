@@ -24,7 +24,7 @@ scripts/
   seed-d1.ts              — Seeds D1 from any data JSON file
   embed-entries.ts        — Generates embeddings and upserts to Vectorize
 data/
-  meditations.json        — Parsed Meditations entries (499 records)
+  meditations.json        — Parsed Meditations entries (499 records, includes heading and marked fields)
   enchiridion.json        — Parsed Enchiridion entries (84 records)
   fragments.json          — Parsed Fragments entries (31 records)
   discourses.json         — Parsed Discourses entries (722 records)
@@ -94,6 +94,10 @@ Configured in `wrangler.jsonc`:
 
 Gregory Hays translation from vreeman.com/meditations. 12 books, 499 entries total. Entry-level chunking — each entry is one atomic thought, the natural retrieval unit. 11 entries have letter suffixes (e.g., 4.49a) — these are separate thoughts sharing a number in the original text.
 
+**Book 1 headings** — Each Book 1 entry is a lesson Marcus attributes to a specific person (e.g., "Rusticus", "My mother"). The parser captures these as a `heading` field in the JSON. 17 entries with headings.
+
+**Marked entries** — The source HTML contains `<mark>` tags highlighting notable/quotable passages. The parser captures this as a `marked: boolean` field. 134 entries are marked across all 12 books. This qualitative signal can be used for boosting in Daily Reflections and search.
+
 #### Meditations HTML Structure (see `docs/html-structure.md` for full details)
 
 - Each book is a `<section id="bookN">`
@@ -101,6 +105,8 @@ Gregory Hays translation from vreeman.com/meditations. 12 books, 499 entries tot
 - **Books 2-12** use `<p>` tags with `<strong id="bookN-M">N.M</strong>` as entry markers
 - Multi-paragraph entries: continuation `<p>` tags without the strong/anchor prefix
 - Special elements within entries: `<blockquote>`, `<ol>`, `<ul>`, `<mark>`, `<em>`, person links
+- `<mark>` tags highlight notable passages — parser detects these and sets `marked: true`
+- Book 1 `<h3>` headings contain person/topic names — parser extracts these into `heading` field
 - Parser must use a DOM library (cheerio/linkedom) to handle nested HTML correctly
 
 ### Enchiridion — Epictetus
