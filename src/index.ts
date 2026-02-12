@@ -48,45 +48,53 @@ const html = `<!DOCTYPE html>
       --serif: ui-serif, -apple-system-ui-serif, Palatino, Georgia, Cambria, "Times New Roman", Times, serif;
       --monospace: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, "Roboto Mono", "Liberation Mono", "Courier New", monospace;
 
+      /* Palette */
+      --eigengrau: #16161d;
+      --blue-dark: #06c;
+      --blue-light: #2997ff;
+      --blue-lighter: #6bf;
+
       /* Light theme colors */
-      --bg: #faf9f6;
-      --text: #2c2c2c;
-      --text-muted: #6b6b6b;
-      --text-faint: #aaa;
-      --accent: #8b7355;
-      --border: #ccc;
-      --border-light: #e8e4de;
-      --surface: #fff;
-      --surface-alt: #f5f1eb;
-      --surface-alt-border: #e0d9ce;
-      --btn-hover: #f0ede8;
-      --error: #b44;
-      --input-placeholder: #aaa;
+      --bg: #f5f5f7;
+      --text: #16161d;
+      --text-muted: #6e6e73;
+      --text-faint: #86868b;
+      --accent: #06c;
+      --border: #d2d2d7;
+      --border-light: #e5e5ea;
+      --surface: #ffffff;
+      --surface-alt: #f0f0f5;
+      --surface-alt-border: #d2d2d7;
+      --btn-hover: #e8e8ed;
+      --error: #ff3b30;
+      --input-placeholder: #aeaeb2;
+      --focus-ring: rgba(0, 102, 204, 0.15);
     }
 
     /* Dark theme — follows system preference */
     @media (prefers-color-scheme: dark) {
       :root {
-        --bg: #1a1a1a;
-        --text: #e0ddd5;
-        --text-muted: #9a968e;
-        --text-faint: #6b6760;
-        --accent: #c4a67a;
-        --border: #3a3835;
-        --border-light: #2e2c28;
-        --surface: #242220;
-        --surface-alt: #2a2826;
-        --surface-alt-border: #3a3835;
-        --btn-hover: #333028;
-        --error: #d66;
-        --input-placeholder: #6b6760;
+        --bg: #16161d;
+        --text: #f0f0f5;
+        --text-muted: #98989d;
+        --text-faint: #636366;
+        --accent: #2997ff;
+        --border: #38383d;
+        --border-light: #2c2c31;
+        --surface: #1c1c21;
+        --surface-alt: #222228;
+        --surface-alt-border: #38383d;
+        --btn-hover: #2c2c31;
+        --error: #ff453a;
+        --input-placeholder: #636366;
+        --focus-ring: rgba(41, 151, 255, 0.2);
       }
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: var(--serif);
+      font-family: var(--sans-serif);
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
@@ -103,7 +111,7 @@ const html = `<!DOCTYPE html>
 
     h1 {
       font-size: 1.75rem;
-      font-weight: 400;
+      font-weight: 600;
       text-align: center;
       margin-bottom: 0.25rem;
       letter-spacing: 0.02em;
@@ -136,6 +144,7 @@ const html = `<!DOCTYPE html>
     .search-input:focus {
       outline: none;
       border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--focus-ring);
     }
 
     .search-input::placeholder { color: var(--input-placeholder); }
@@ -153,6 +162,7 @@ const html = `<!DOCTYPE html>
     }
 
     .btn:hover { background: var(--btn-hover); }
+    .btn:focus-visible { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--focus-ring); }
 
     .entry {
       margin-bottom: 2rem;
@@ -160,9 +170,11 @@ const html = `<!DOCTYPE html>
       background: var(--surface);
       border: 1px solid var(--border-light);
       border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
     }
 
     .entry-text {
+      font-family: var(--serif);
       font-size: 1.1rem;
       line-height: 1.7;
       white-space: pre-wrap;
@@ -221,6 +233,7 @@ const html = `<!DOCTYPE html>
     }
 
     .explain-text {
+      font-family: var(--serif);
       font-size: 1rem;
       line-height: 1.7;
       white-space: pre-wrap;
@@ -258,7 +271,7 @@ const html = `<!DOCTYPE html>
       color: var(--text-faint);
     }
 
-    footer a { color: var(--accent); text-decoration: none; }
+    footer a { color: var(--accent); text-decoration: none; transition: color 0.15s ease; }
     footer a:hover { text-decoration: underline; }
   </style>
 </head>
