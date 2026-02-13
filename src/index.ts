@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
-import { selectDailyEntry, selectRandomEntry } from "./weighted-random";
+import { selectDailyEntry, selectRandomEntry, REFLECTION_WEIGHTS } from "./weighted-random";
+import { notesApp } from "./notes";
 
 type Bindings = {
   DB: D1Database;
@@ -273,6 +274,24 @@ const html = `<!DOCTYPE html>
 
     footer a { color: var(--accent); text-decoration: none; transition: color 0.15s ease; }
     footer a:hover { text-decoration: underline; }
+
+    .rating-bar { display: flex; justify-content: center; gap: 0.5rem; margin-top: 1rem; }
+    .rating-btn {
+      padding: 0.35rem 0.75rem;
+      font-size: 0.8rem;
+      font-family: var(--sans-serif);
+      border: 1px solid var(--border-light);
+      border-radius: 4px;
+      background: transparent;
+      color: var(--text-faint);
+      cursor: pointer;
+      transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    }
+    .rating-btn:hover { color: var(--text-muted); border-color: var(--border); }
+    .rating-btn.active { color: var(--accent); border-color: var(--accent); background: var(--focus-ring); }
+    .rating-btn:disabled { cursor: default; opacity: 0.6; }
+    .rating-btn:disabled:hover { color: var(--text-faint); border-color: var(--border-light); }
+    .rating-btn.active:disabled { color: var(--accent); border-color: var(--accent); }
   </style>
 </head>
 <body>
@@ -298,6 +317,7 @@ const html = `<!DOCTYPE html>
     <div id="results"></div>
 
     <footer>
+      <a href="/notes">Notes</a> \u00B7
       <a href="https://vreeman.com/meditations">Meditations</a> (Gregory Hays) \u00B7 <a href="https://vreeman.com/discourses/">Discourses</a> \u00B7 <a href="https://vreeman.com/discourses/enchiridion">Enchiridion</a> \u00B7 <a href="https://vreeman.com/discourses/fragments">Fragments</a> (Robert Dobbin)
     </footer>
   </div>
@@ -329,6 +349,19 @@ const html = `<!DOCTYPE html>
         + '</div>';
     }
 
+    function renderRatingBar(viewId, existingRating) {
+      var labels = { 1: "Didn\\u2019t resonate", 2: "Interesting", 3: "Deeply resonated" };
+      var html = '<div class="rating-bar" data-view-id="' + viewId + '">';
+      for (var r = 1; r <= 3; r++) {
+        var cls = "rating-btn";
+        var disabled = "";
+        if (existingRating === r) { cls += " active"; disabled = " disabled"; }
+        else if (existingRating != null) { disabled = " disabled"; }
+        html += '<button class="' + cls + '" data-rating="' + r + '"' + disabled + '>' + labels[r] + '</button>';
+      }
+      return html + '</div>';
+    }
+
     function escapeHtml(str) {
       return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
     }
@@ -348,7 +381,8 @@ const html = `<!DOCTYPE html>
         var res = await fetch("/api/daily");
         if (!res.ok) throw new Error("Failed to load entry");
         var entry = await res.json();
-        resultsEl.innerHTML = '<p class="daily-label">Today\\u2019s reflection</p>' + renderEntry(entry);
+        var ratingBar = entry.viewId ? renderRatingBar(entry.viewId, entry.rating) : "";
+        resultsEl.innerHTML = '<p class="daily-label">Today\\u2019s reflection</p>' + renderEntry(entry) + ratingBar;
         resultsEl.classList.add("fade-in");
       } catch (err) {
         showError(err.message);
@@ -363,7 +397,8 @@ const html = `<!DOCTYPE html>
         var res = await fetch("/api/random");
         if (!res.ok) throw new Error("Failed to load entry");
         var entry = await res.json();
-        resultsEl.innerHTML = renderEntry(entry);
+        var ratingBar = entry.viewId ? renderRatingBar(entry.viewId, null) : "";
+        resultsEl.innerHTML = renderEntry(entry) + ratingBar;
         resultsEl.classList.add("fade-in");
       } catch (err) {
         showError(err.message);
@@ -444,6 +479,24 @@ const html = `<!DOCTYPE html>
     resultsEl.addEventListener("click", function(e) {
       if (e.target && e.target.id === "explain-btn") {
         doExplain();
+        return;
+      }
+      var btn = e.target && e.target.closest ? e.target.closest(".rating-btn") : null;
+      if (btn && !btn.disabled) {
+        var bar = btn.closest(".rating-bar");
+        var viewId = bar.dataset.viewId;
+        var rating = parseInt(btn.dataset.rating);
+        var allBtns = bar.querySelectorAll(".rating-btn");
+        allBtns.forEach(function(b) { b.disabled = true; });
+        btn.classList.add("active");
+        fetch("/api/views/" + viewId + "/rating", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ rating: rating })
+        }).catch(function() {
+          allBtns.forEach(function(b) { b.disabled = false; });
+          btn.classList.remove("active");
+        });
       }
     });
 
@@ -467,12 +520,8 @@ app.get("/", (c) => {
 
 const VALID_SOURCES = ["meditations", "discourses", "enchiridion", "fragments"];
 
-const SOURCE_WEIGHTS: Record<string, number> = {
-  meditations: 1.0,
-  discourses: 0.85,
-  enchiridion: 0.85,
-  fragments: 0.75,
-};
+// Source weights imported from weighted-random.ts (single source of truth)
+const SOURCE_WEIGHTS = REFLECTION_WEIGHTS.SOURCE_WEIGHTS;
 
 app.get("/api/entry/:book/:id", async (c) => {
   const bookParam = c.req.param("book");
@@ -502,16 +551,19 @@ app.get("/api/entry/:book/:id", async (c) => {
 });
 
 app.get("/api/search", async (c) => {
-  const query = c.req.query("q");
-  if (!query || !query.trim()) {
+  const rawQuery = c.req.query("q");
+  if (!rawQuery || !rawQuery.trim()) {
     return c.json({ error: "Query parameter 'q' is required." }, 400);
   }
+
+  // Cap query length to avoid oversized embedding requests
+  const query = rawQuery.trim().slice(0, 500);
 
   const topK = Math.min(Math.max(parseInt(c.req.query("topK") || "5", 10) || 5, 1), 20);
 
   // Embed the query
   const embeddingResult = await c.env.AI.run("@cf/baai/bge-base-en-v1.5", {
-    text: [query.trim()],
+    text: [query],
   });
 
   const queryVector = embeddingResult.data[0];
@@ -578,6 +630,10 @@ app.post("/api/explain", async (c) => {
     );
   }
 
+  // Input limits to prevent abuse of LLM context
+  const query = body.query.slice(0, 500);
+  const entries = body.entries.slice(0, 10);
+
   const sourceLabels: Record<string, string> = {
     meditations: "Meditations",
     discourses: "Discourses",
@@ -585,17 +641,17 @@ app.post("/api/explain", async (c) => {
     fragments: "Fragments",
   };
 
-  const entriesContext = body.entries
+  const entriesContext = entries
     .map((e) => {
       const label = sourceLabels[e.source || "meditations"] || "Meditations";
       return `[${label} ${e.book}.${e.entry}] ${e.text}`;
     })
     .join("\n\n");
 
-  const hasMeditations = body.entries.some((e) => !e.source || e.source === "meditations");
-  const hasDiscourses = body.entries.some((e) => e.source === "discourses");
-  const hasEnchiridion = body.entries.some((e) => e.source === "enchiridion");
-  const hasFragments = body.entries.some((e) => e.source === "fragments");
+  const hasMeditations = entries.some((e) => !e.source || e.source === "meditations");
+  const hasDiscourses = entries.some((e) => e.source === "discourses");
+  const hasEnchiridion = entries.some((e) => e.source === "enchiridion");
+  const hasFragments = entries.some((e) => e.source === "fragments");
   const authors = [
     hasMeditations ? "Marcus Aurelius (Meditations)" : "",
     hasDiscourses ? "Epictetus (Discourses)" : "",
@@ -623,7 +679,7 @@ ${entriesContext}`;
         { role: "system", content: systemPrompt },
         {
           role: "user",
-          content: `Explain what the Stoic philosophers say about: ${body.query}`,
+          content: `Explain what the Stoic philosophers say about: ${query}`,
         },
       ],
       stream: true,
@@ -647,10 +703,31 @@ app.get("/api/daily", async (c) => {
     hash = (hash * 31 + today.charCodeAt(i)) | 0;
   }
 
-  // Lightweight query for weighted selection (only reflectable entries)
+  // Query with view stats for spaced repetition weighting
+  // Exclude today's views so the seeded selection stays stable all day
   const allEntries = await c.env.DB.prepare(
-    "SELECT id, source, marked FROM entries WHERE reflectable = 1",
-  ).all<{ id: number; source: string; marked: number }>();
+    `SELECT e.id, e.source, e.marked,
+            COUNT(ev.id) as view_count,
+            MAX(ev.viewed_at) as last_seen,
+            (SELECT AVG(rating) FROM (
+              SELECT rating FROM entry_views
+              WHERE entry_id = e.id AND rating IS NOT NULL
+              ORDER BY viewed_at DESC LIMIT 3
+            )) as avg_rating
+     FROM entries e
+     LEFT JOIN entry_views ev ON e.id = ev.entry_id AND ev.viewed_at < ?
+     WHERE e.reflectable = 1
+     GROUP BY e.id`,
+  )
+    .bind(today)
+    .all<{
+      id: number;
+      source: string;
+      marked: number;
+      view_count: number;
+      last_seen: string | null;
+      avg_rating: number | null;
+    }>();
 
   if (!allEntries.results || allEntries.results.length === 0) {
     return c.json({ error: "No entries found." }, 500);
@@ -669,15 +746,55 @@ app.get("/api/daily", async (c) => {
     return c.json({ error: "Entry not found." }, 500);
   }
 
-  c.header("Cache-Control", "public, max-age=3600");
-  return c.json(row);
+  // Record view (at most once per day per entry)
+  const existingView = await c.env.DB.prepare(
+    "SELECT id, rating FROM entry_views WHERE entry_id = ? AND view_type = 'daily' AND viewed_at >= ?",
+  )
+    .bind(selectedId, today)
+    .first<{ id: number; rating: number | null }>();
+
+  let viewId: number;
+  let existingRating: number | null = null;
+
+  if (existingView) {
+    viewId = existingView.id;
+    existingRating = existingView.rating;
+  } else {
+    const viewResult = await c.env.DB.prepare(
+      "INSERT INTO entry_views (entry_id, view_type) VALUES (?, 'daily')",
+    )
+      .bind(selectedId)
+      .run();
+    viewId = viewResult.meta.last_row_id as number;
+  }
+
+  c.header("Cache-Control", "no-store");
+  return c.json({ ...row, viewId, rating: existingRating });
 });
 
 app.get("/api/random", async (c) => {
-  // Lightweight query for weighted selection (only reflectable entries)
+  // Query with view stats for spaced repetition weighting
   const allEntries = await c.env.DB.prepare(
-    "SELECT id, source, marked FROM entries WHERE reflectable = 1",
-  ).all<{ id: number; source: string; marked: number }>();
+    `SELECT e.id, e.source, e.marked,
+            COUNT(ev.id) as view_count,
+            MAX(ev.viewed_at) as last_seen,
+            (SELECT AVG(rating) FROM (
+              SELECT rating FROM entry_views
+              WHERE entry_id = e.id AND rating IS NOT NULL
+              ORDER BY viewed_at DESC LIMIT 3
+            )) as avg_rating
+     FROM entries e
+     LEFT JOIN entry_views ev ON e.id = ev.entry_id
+     WHERE e.reflectable = 1
+     GROUP BY e.id`,
+  ).all<{
+    id: number;
+    source: string;
+    marked: number;
+    view_count: number;
+    last_seen: string | null;
+    avg_rating: number | null;
+  }>();
 
   if (!allEntries.results || allEntries.results.length === 0) {
     return c.json({ error: "No entries found." }, 500);
@@ -696,8 +813,44 @@ app.get("/api/random", async (c) => {
     return c.json({ error: "Entry not found." }, 500);
   }
 
+  // Record view
+  const viewResult = await c.env.DB.prepare(
+    "INSERT INTO entry_views (entry_id, view_type) VALUES (?, 'random')",
+  )
+    .bind(selectedId)
+    .run();
+  const viewId = viewResult.meta.last_row_id as number;
+
   c.header("Cache-Control", "no-store");
-  return c.json(row);
+  return c.json({ ...row, viewId });
+});
+
+// ---------------------------------------------------------------------------
+// Rating route (no auth — personal tool)
+// ---------------------------------------------------------------------------
+
+app.put("/api/views/:viewId/rating", async (c) => {
+  const viewId = parseInt(c.req.param("viewId"), 10);
+  if (isNaN(viewId) || viewId < 1) {
+    return c.json({ error: "Invalid view ID." }, 400);
+  }
+
+  const body = await c.req.json<{ rating: number }>();
+  if (![1, 2, 3].includes(body.rating)) {
+    return c.json({ error: "Rating must be 1, 2, or 3." }, 400);
+  }
+
+  const result = await c.env.DB.prepare(
+    "UPDATE entry_views SET rating = ? WHERE id = ?",
+  )
+    .bind(body.rating, viewId)
+    .run();
+
+  if (result.meta.changes === 0) {
+    return c.json({ error: "View not found." }, 404);
+  }
+
+  return c.json({ viewId, rating: body.rating });
 });
 
 // ---------------------------------------------------------------------------
@@ -759,5 +912,93 @@ app.get("/api/admin/entries", async (c) => {
   const rows = await c.env.DB.prepare(query).all();
   return c.json({ entries: rows.results, count: rows.results?.length || 0 });
 });
+
+app.get("/api/admin/stats/views", async (c) => {
+  const [overview, ratingDist, bySource, topRated, lowRated] =
+    await Promise.all([
+      c.env.DB.prepare(
+        `SELECT
+           COUNT(*) as totalViews,
+           COUNT(DISTINCT entry_id) as uniqueEntriesSeen,
+           (SELECT COUNT(*) FROM entries WHERE reflectable = 1) -
+             COUNT(DISTINCT entry_id) as entriesNeverSeen
+         FROM entry_views`,
+      ).first<{
+        totalViews: number;
+        uniqueEntriesSeen: number;
+        entriesNeverSeen: number;
+      }>(),
+
+      c.env.DB.prepare(
+        "SELECT rating, COUNT(*) as count FROM entry_views WHERE rating IS NOT NULL GROUP BY rating",
+      ).all<{ rating: number; count: number }>(),
+
+      c.env.DB.prepare(
+        `SELECT e.source, ROUND(AVG(ev.rating), 2) as avgRating, COUNT(ev.rating) as ratingCount
+         FROM entry_views ev
+         JOIN entries e ON e.id = ev.entry_id
+         WHERE ev.rating IS NOT NULL
+         GROUP BY e.source`,
+      ).all<{ source: string; avgRating: number; ratingCount: number }>(),
+
+      c.env.DB.prepare(
+        `SELECT e.source, e.book, e.entry, ROUND(AVG(ev.rating), 2) as avgRating, COUNT(ev.rating) as ratingCount
+         FROM entry_views ev
+         JOIN entries e ON e.id = ev.entry_id
+         WHERE ev.rating IS NOT NULL
+         GROUP BY ev.entry_id
+         HAVING ratingCount >= 1
+         ORDER BY avgRating DESC, ratingCount DESC
+         LIMIT 10`,
+      ).all<{
+        source: string;
+        book: number;
+        entry: string;
+        avgRating: number;
+        ratingCount: number;
+      }>(),
+
+      c.env.DB.prepare(
+        `SELECT e.source, e.book, e.entry, ROUND(AVG(ev.rating), 2) as avgRating, COUNT(ev.rating) as ratingCount
+         FROM entry_views ev
+         JOIN entries e ON e.id = ev.entry_id
+         WHERE ev.rating IS NOT NULL
+         GROUP BY ev.entry_id
+         HAVING avgRating <= 1.5 AND ratingCount >= 1
+         ORDER BY avgRating ASC
+         LIMIT 10`,
+      ).all<{
+        source: string;
+        book: number;
+        entry: string;
+        avgRating: number;
+        ratingCount: number;
+      }>(),
+    ]);
+
+  const ratingDistribution: Record<string, number> = {};
+  for (const row of ratingDist.results || []) {
+    ratingDistribution[String(row.rating)] = row.count;
+  }
+
+  const avgRatingBySource: Record<string, number> = {};
+  for (const row of bySource.results || []) {
+    avgRatingBySource[row.source] = row.avgRating;
+  }
+
+  return c.json({
+    ...overview,
+    ratingDistribution,
+    avgRatingBySource,
+    topRated: topRated.results || [],
+    lowRated: lowRated.results || [],
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Notes — thematic pages at /notes/:slug
+// ---------------------------------------------------------------------------
+
+app.route("/notes", notesApp);
 
 export default app;

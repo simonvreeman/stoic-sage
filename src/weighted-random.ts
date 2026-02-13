@@ -1,12 +1,13 @@
 /**
  * Weighted random selection utility for Daily Reflections.
  *
- * Applies a three-layer weighting stack to bias entry selection:
- *   final_weight = marked_boost × source_weight × rating_multiplier
+ * Applies a four-layer weighting stack to bias entry selection:
+ *   final_weight = base_weight × marked_boost × source_weight × rating_multiplier
  *
+ * Layer 0: Base weight — spaced repetition (never-seen 10x, recharges over 30 days)
  * Layer 1: Marked boost — curated <mark> passages get 1.3x (VRE-284)
  * Layer 2: Source weight — Meditations 1.0, Discourses/Enchiridion 0.85, Fragments 0.75
- * Layer 3: Rating multiplier — 1.0x placeholder (VRE-271 future)
+ * Layer 3: Rating multiplier — 0.7x to 1.3x based on avg of last 3 ratings (VRE-271)
  *
  * Used by /api/daily (seeded PRNG for deterministic daily entry)
  * and /api/random (Math.random for true randomness).
@@ -20,6 +21,9 @@ export interface EntryStub {
   id: number;
   source: string;
   marked: number; // 0 or 1
+  view_count?: number; // from LEFT JOIN COUNT
+  last_seen?: string | null; // ISO datetime from MAX(viewed_at)
+  avg_rating?: number | null; // avg of last 3 ratings
 }
 
 interface WeightedEntry extends EntryStub {
@@ -41,6 +45,15 @@ export const REFLECTION_WEIGHTS = {
     enchiridion: 0.85,
     fragments: 0.75,
   } as Record<string, number>,
+
+  /** Base weight for entries never seen before. */
+  NEVER_SEEN_WEIGHT: 10.0,
+
+  /** Days until a seen entry fully "recharges" to base weight 5.0. */
+  RECHARGE_DAYS: 30,
+
+  /** Rating-to-multiplier mapping (avg of last 3 ratings). */
+  RATING_MULTIPLIERS: { 1: 0.7, 2: 1.0, 3: 1.3 } as Record<number, number>,
 };
 
 // ---------------------------------------------------------------------------
@@ -69,23 +82,45 @@ export function mulberry32(seed: number): () => number {
 /**
  * Calculate the selection weight for a single entry.
  *
- * Currently applies two active layers:
+ * Four-layer multiplicative stack:
+ *   0. Base weight (spaced repetition — never-seen vs. time-since-last-seen)
  *   1. Marked boost (1.3x for marked entries)
  *   2. Source weight (Meditations > Discourses/Enchiridion > Fragments)
- *
- * Future layers (VRE-270 spaced repetition, VRE-271 ratings) will add
- * additional multiplicative factors here.
+ *   3. Rating multiplier (0.7x–1.3x based on avg of last 3 ratings)
  */
 export function calculateEntryWeight(entry: EntryStub): number {
+  // Layer 0: Spaced repetition base weight
+  let baseWeight: number;
+  if (!entry.view_count || entry.view_count === 0) {
+    baseWeight = REFLECTION_WEIGHTS.NEVER_SEEN_WEIGHT;
+  } else {
+    const daysSince = entry.last_seen
+      ? (Date.now() - new Date(entry.last_seen).getTime()) / 86_400_000
+      : REFLECTION_WEIGHTS.RECHARGE_DAYS;
+    const recharged = Math.min(
+      daysSince / REFLECTION_WEIGHTS.RECHARGE_DAYS,
+      5.0,
+    );
+    baseWeight = recharged / Math.log2(entry.view_count + 1);
+  }
+
+  // Layer 1: Marked boost
   const markedBoost =
     entry.marked === 1 ? REFLECTION_WEIGHTS.MARKED_BOOST : 1.0;
+
+  // Layer 2: Source weight
   const sourceWeight =
     REFLECTION_WEIGHTS.SOURCE_WEIGHTS[entry.source] || 1.0;
 
-  // Layer 3 placeholder — VRE-271 will replace with actual rating multiplier
-  const ratingMultiplier = 1.0;
+  // Layer 3: Rating multiplier (avg of last 3 ratings → nearest integer → lookup)
+  let ratingMultiplier = 1.0;
+  if (entry.avg_rating != null) {
+    const rounded = Math.round(entry.avg_rating) as 1 | 2 | 3;
+    ratingMultiplier =
+      REFLECTION_WEIGHTS.RATING_MULTIPLIERS[rounded] || 1.0;
+  }
 
-  return markedBoost * sourceWeight * ratingMultiplier;
+  return baseWeight * markedBoost * sourceWeight * ratingMultiplier;
 }
 
 // ---------------------------------------------------------------------------
