@@ -1,0 +1,1015 @@
+{
+  "id": "JBjebdg3nWyGPoEZjyVLoQ0rEqDv2RxM",
+  "language": "en",
+  "region": "us",
+  "latitude": null,
+  "longitude": null,
+  "status": "success",
+  "deleted": false,
+  "depth": 2,
+  "cached": true,
+  "created_at": "2026-02-12T23:27:56+00:00",
+  "updated_at": "2026-02-12T23:28:30+00:00",
+  "cached_at": "2026-02-12T23:28:30+00:00",
+  "queries": [
+    {
+      "term": "stoicism vs Christianity",
+      "language_fallback": false,
+      "region_fallback": false,
+      "results": [
+        {
+          "question": "What does Jesus say about Stoicism?",
+          "answer_excerpt": "",
+          "answer_href": "",
+          "answer_page_title": "",
+          "ai_overview": false,
+          "ai_overview_hrefs": null,
+          "ai_overview_page_titles": null,
+          "results": [
+            {
+              "question": "Is David Goggins religious?",
+              "answer_excerpt": "David Goggins has publicly declared that he believes in the Lord Jesus Christ. 🙌✝️ It's powerful to see people known for strength, endurance, and discipline also point to the greatest source of strength: faith in Jesus. Philippians 4:13 says: “I can do all things through Christ who strengthens me.” 💪",
+              "answer_href": "https://www.instagram.com/p/DOL46DRgIuK/#:~:text=David%20Goggins%20has%20publicly%20declared,Christ%20who%20strengthens%20me.%E2%80%9D%20%F0%9F%92%AA",
+              "answer_page_title": "During a live on-stage appearance, David Goggins—a former Navy ...",
+              "ai_overview": false,
+              "ai_overview_hrefs": null,
+              "ai_overview_page_titles": null,
+              "results": []
+            },
+            {
+              "question": "Who do Stoics pray to?",
+              "answer_excerpt": "Personal prayers to the Gods/God/Godhead would seemingly be focused on, for the Stoic, for the will to live, act, and think as Nature/Gods/God intend which is to say in accordance with Reason and Virtue. So whatever your tradition, or lack thereof. Make your prayers from that mindset.",
+              "answer_href": "https://www.facebook.com/groups/TraditionalStoicism/posts/3570849373158521/#:~:text=Personal%20prayers%20to%20the%20Gods,your%20prayers%20from%20that%20mindset.",
+              "answer_page_title": "Stoic prayers and spiritual nature of Stoicism - Facebook",
+              "ai_overview": false,
+              "ai_overview_hrefs": null,
+              "ai_overview_page_titles": null,
+              "results": []
+            },
+            {
+              "question": "What did Marcus Aurelius think of Christians?",
+              "answer_excerpt": "Marcus felt Christians had eagerness to meet death without real justification and without due dignity, and looked upon the Christians as misguided enthusiasts, who had to be punished as the law then stood, but whom he no more than Hadrian and Antoninus Pius wished to punish.",
+              "answer_href": "https://www.reddit.com/r/Stoicism/comments/1bjnwcf/what_did_ancient_stoics_such_as_emperor_marcus/#:~:text=Marcus%20felt%20Christians%20had%20eagerness,Antoninus%20Pius%20wished%20to%20punish.",
+              "answer_page_title": "What did ancient stoics such as Emperor Marcus Aurelius think of ...",
+              "ai_overview": false,
+              "ai_overview_hrefs": null,
+              "ai_overview_page_titles": null,
+              "results": []
+            },
+            {
+              "question": "Does Stoicism reject religion?",
+              "answer_excerpt": "There is no faith. The Stoics didn't go out there and pray to Zeus or anything like that. It's all about reason because it is a philosophy, first.” “For instance, Stoicism assumes that metaphysically the world is a living organism, which they call God, which is endowed with the logos.",
+              "answer_href": "https://bigthink.com/thinking/is-stoicism-a-religion-3-key-clues/#:~:text=There%20is%20no%20faith.,is%20endowed%20with%20the%20logos.",
+              "answer_page_title": "3 clues that Stoicism is a religion in disguise - Big Think",
+              "ai_overview": false,
+              "ai_overview_hrefs": null,
+              "ai_overview_page_titles": null,
+              "results": []
+            },
+            {
+              "question": "Did Christianity or Stoicism come first?",
+              "answer_excerpt": "Stoics predated Christians by hundreds of years as is evidenced by the dates for the founders of the Stoic School: Zeno 334-262 BCE, Cleanthes 330-230 BCE, and Chrysippus 279-206 BCE.",
+              "answer_href": "https://www.facebook.com/groups/1690278417775179/posts/3047162078753466/#:~:text=Stoics%20predated%20Christians%20by%20hundreds,and%20Chrysippus%20279%2D206%20BCE.",
+              "answer_page_title": "Stoicism philosophy and its comparison to Christianity - Facebook",
+              "ai_overview": false,
+              "ai_overview_hrefs": null,
+              "ai_overview_page_titles": null,
+              "results": []
+            },
+            {
+              "question": "What religion did Stoics believe in?",
+              "answer_excerpt": "Stoicism is an ancient Greek and then Roman philosophy of the Hellenistic and Roman Imperial periods. The Stoics believed that the universe operated according to reason, or logos, providing a unified account of the world, constructed from ideals of rational discourse, monistic physics, and naturalistic ethics.",
+              "answer_href": "https://en.wikipedia.org/wiki/Stoicism#:~:text=Stoicism%20is%20an%20ancient%20Greek,monistic%20physics%2C%20and%20naturalistic%20ethics.",
+              "answer_page_title": "Stoicism - Wikipedia",
+              "ai_overview": false,
+              "ai_overview_hrefs": null,
+              "ai_overview_page_titles": null,
+              "results": []
+            },
+            {
+              "question": "What is the Stoic approach to Christianity?",
+              "answer_excerpt": "Stoicism is a philosophy of understanding the world around you with the center axis being control: what you control, what you don't. Christian Stoicism follows that same train of thought except it focuses more on our relationship in the faith: what is in God's hands and what is in mine.",
+              "answer_href": "https://www.amazon.com/Stoic-Approach-Christianity-Other-Essays/dp/B0DPR8LZH3#:~:text=Stoicism%20is%20a%20philosophy%20of,and%20what%20is%20in%20mine.",
+              "answer_page_title": "A Stoic Approach to Christianity And Other Essays - Amazon.com",
+              "ai_overview": false,
+              "ai_overview_hrefs": null,
+              "ai_overview_page_titles": null,
+              "results": []
+            },
+            {
+              "question": "Are Stoics judgemental?",
+              "answer_excerpt": "Remember that Stoicism isn't about judging other people. It's not a moral philosophy you're supposed to project and enforce onto the world.",
+              "answer_href": "https://www.instagram.com/p/Cu9l1VVg21R/#:~:text=dailystoic-,Remember%20that%20Stoicism%20isn't%20about%20judging%20other%20people.,and%20enforce%20onto%20the%20world.",
+              "answer_page_title": "Remember that Stoicism isn't about judging other people ... - Instagram",
+              "ai_overview": false,
+              "ai_overview_hrefs": null,
+              "ai_overview_page_titles": null,
+              "results": []
+            }
+          ]
+        },
+        {
+          "question": "Did Stoics believe in Jesus?",
+          "answer_excerpt": "",
+          "answer_href": "",
+          "answer_page_title": "",
+          "ai_overview": false,
+          "ai_overview_hrefs": null,
+          "ai_overview_page_titles": null,
+          "results": [
+            {
+              "question": "Is Bill Gates Stoic?",
+              "answer_excerpt": "While Bill Gates doesn't explicitly call himself a Stoic, his leadership, resilience, focus on continuous learning, and emphasis on accepting reality and controlling reactions align strongly with key Stoic principles, making him an embodiment of the philosophy, especially alongside figures like Warren Buffett and Jeff Bezos. He practices aspects like deep reflection (his \"Think Weeks\"), managing challenges with a mix of pessimism and optimism, and a commitment to long-term vision, which are all Stoic-adjacent traits.\n\nHow Gates embodies Stoic principles:\n• Resilience & Adaptability: He maintains a long-term perspective, weathering tech industry volatility by planning for worst-case scenarios (like keeping cash reserves) while working towards big goals, a core Stoic concept of preparing for adversity.\n• Continuous Learning: His massive reading habit serves as a form of lifelong education, a way to understand the world and stay humble about what he doesn't know, aligning with the Stoic pursuit of wisdom.\n• Focus on What's in Your Control: Gates emphasizes long-term vision and impact, focusing energy on what can be achieved rather than being paralyzed by external uncertainty, a hallmark of Stoicism.\n• Reflection & Self-Discipline: His famous \"Think Weeks,\" where he isolates himself to read and think, are akin to Stoic practices of introspection and self-examination to gain clarity.\n• Simplicity (in lifestyle): Despite immense wealth, his personal life often reflects a simple, focused approach, a practice some attribute to Stoicism, focusing on substance over luxury.\nWhere interpretations differ:\n• Some argue his vast business empire and competitive nature seem contrary to Stoic ideals of detachment from material success, but others see his disciplined approach to work and philanthropy as applying Stoicism in a modern context.\nIn essence, while he might not have read Marcus Aurelius on day one, Bill Gates' actions, particularly his methodical, resilient, and reflective approach to building Microsoft and leading his philanthropic foundation, resonate deeply with the core tenets of Stoicism, making him a modern example of its application.\n• Never underestimate the power of being alone with your thoughtsNov 17, 2020 — Bill Gates uses this yearly when he goes on a camping trip alone for weeks. He uses this as reflection time and often ...RReddit · r/Stoicism\n• $toicism, Broicism, and stoicisM - MediumNov 29, 2019 — What are these 7 ways of the billionaires? N. 1 on the list is Bill Gates, who allegedly embodies Stoicism because he ...FMedium · Figs in Winter\n• Memo 42: Stoic Leadership in Action—Bill Gates' Blueprint for Visionary ...Nov 13, 2024 — In Memo 41, we explored the Stoic concept of Sympatheia, the idea that “all things are mutually woven together and the...LinkedIn · Alejandro Entredicho Jr. CPSL, P.npn®\n• Better Results With Less Effort: 7 Ways Business Titans Use Stoicism To ...You also see it in Microsoft cofounder and philanthropist Bill Gates, a voracious reader who tries to understand the world a bit b...Daily Stoic\n• Jeff Bezos, Elon Musk, Bill Gates, and Warren Buffett All Use This Ancient ...Aug 25, 2017 — From Jeff Bezos to Elon Musk and Bill Gates, it is difficult to find one hugely successful businessperson today who do...Inc. Magazine\n• Wise Quotes From 5 Greek Philosophers When You Need ...Feb 6, 2019 — One school of philosophy, called stoicism, is especially popular among luminaries like Bill Gates, Warren Buffet, and C...Amy Vetter\n• Stoicism For Leaders and Entrepreneurs to Succeed in ...Nov 10, 2025 — Stoicism in business is more popular than you might think. What do Warren Buffet, Jeff Bezos, and Bill Gates have in c...Tommy Benz\n• The No. 1 'hidden' skill behind billionaire Bill Gates' success—it ...Nov 7, 2023 — Successful people find a balance between pessimism and optimism. Bill Gates is a great example of how effective this hi...CNBC\nRelated Links",
+              "answer_href": "https://www.reddit.com/r/Stoicism/comments/jw1kxn/never_underestimate_the_power_of_being_alone_with/#:~:text=Bill%20Gates%20uses%20this%20yearly,Bill%20Gates%20has%20no%20morals.",
+              "answer_page_title": "Never underestimate the power of being alone with your thoughts",
+              "ai_overview": true,
+              "ai_overview_hrefs": [
+                "https://www.reddit.com/r/Stoicism/comments/jw1kxn/never_underestimate_the_power_of_being_alone_with/#:~:text=Bill%20Gates%20uses%20this%20yearly,Bill%20Gates%20has%20no%20morals.",
+                "https://medium.com/stoicism-philosophy-as-a-way-of-life/toicism-broicism-and-stoicism-part-i-its-not-about-money-or-success-53acda57dbf9#:~:text=What%20are%20these%207%20ways,avoidance%2C%20and%20questionable%20labor%20practices.",
+                "https://www.linkedin.com/pulse/memo-42-stoic-leadership-actionbill-gates-blueprint-alejandro-z6ovc#:~:text=In%20Memo%2041%2C%20we%20explored,shape%20his%20impactful%20philanthropic%20initiatives.",
+                "https://dailystoic.com/better-results-less-effort-7-ways-business-titans-use-stoicism-succeed/#:~:text=You%20also%20see%20it%20in,successful%20business%20moguls%20in%20history.",
+                "https://www.inc.com/peter-economy/bezos-musk-gates-and-buffett-use-this-ancient-phil.html#:~:text=From%20Jeff%20Bezos%20to%20Elon,a%20great%20place%20to%20start.",
+                "https://www.amyvetter.com/blog/wise-quotes-from-greek-philosophers-jxc9m#:~:text=One%20school%20of%20philosophy%2C%20called,what%20he%20can't%20control.",
+                "https://www.tommybenz.com/thought-leadership/stoicism#:~:text=Stoicism%20in%20business%20is%20more,who%20help%20you%20do%20it.",
+                "https://www.cnbc.com/2023/11/07/the-no-1-hidden-skill-behind-bill-gates-wealth-and-success-says-expert-its-the-trick-in-any-field.html#:~:text=Successful%20people%20find%20a%20balance,said%20%E2%80%94%20%22including%20Microsoft's.%22&text=In%202007%2C%20he%20reflected:%20%22,to%20survive%20the%20short%20run."
+              ],
+              "ai_overview_page_titles": [
+                "Never underestimate the power of being alone with your thoughts",
+                "$toicism, Broicism, and stoicisM - Medium",
+                "Memo 42: Stoic Leadership in Action—Bill Gates' Blueprint for Visionary ...",
+                "Better Results With Less Effort: 7 Ways Business Titans Use Stoicism To ...",
+                "Jeff Bezos, Elon Musk, Bill Gates, and Warren Buffett All Use This Ancient ...",
+                "Wise Quotes From 5 Greek Philosophers When You Need ...",
+                "Stoicism For Leaders and Entrepreneurs to Succeed in ...",
+                "The No. 1 'hidden' skill behind billionaire Bill Gates' success—it ..."
+              ],
+              "results": []
+            },
+            {
+              "question": "What are the 7 rules of Stoicism?",
+              "answer_excerpt": "While there isn't one definitive list, the core of Stoic rules centers on mastering your mind, focusing on what you control (your response), accepting what you can't, practicing virtue, living in the present, preparing for adversity, and understanding your own mortality to live a meaningful life. Key rules often cited include Control your mind, not external events; Accept fate; Practice virtue; Memento Mori (remember death); Amor Fati (love your fate); Focus on what you control; and Prepare for hardship.\nHere are common themes presented as rules:\n1. Control Your Mind, Not Outside Events: You can't control what happens, only your reaction to it. Focus your energy on your judgments and actions.\n2. Practice Virtue: Act with wisdom, justice, courage, and temperance. Virtue is the sole good.\n3. Accept What You Can't Control (Amor Fati): Embrace fate and love everything that happens, good or bad, as part of the natural order.\n4. Prepare for Hardship (Premeditatio Malorum): Regularly contemplate worst-case scenarios to build resilience and appreciate the present.\n5. Memento Mori (Remember You Are Mortal): Acknowledge your mortality to live more fully and make the most of each day.\n6. Simplify and Focus: Remove what isn't necessary; focus energy on what truly matters and what is within your control.\n7. Live in the Present: Don't dwell on the past or fear the future; be present and act with intention now.\nOther common Stoic advice includes taking bold action, being disciplined, asking if something is necessary, learning from everyone, and treating challenges as opportunities for growth.\n• 7 Ancient Stoic Tenets To Keep In Mind Today And Every DayMarcus would say that the Stoic finds a way to turn every negative into a positive. In this famous line, what he's suggesting is t...Daily Stoic\n• 7 Principles Of Stoicism For Limitless Mental Strength - MediumAug 16, 2018 —  Here are 7 principles of stoicism: * You have power over your mind, not outside events. This is a quote you have prob...Medium\n• 7 Stoic Rules For A Better Life - YouTubeNov 21, 2024 — seven stoic rules for a better life. focus on what you control you got to design your day set a routine set a schedule...YouTube · Ryan Holiday\n• 7 Stoic Lessons from Marcus Aurelius | by Aditi AgrawalMar 27, 2025 —  7 Stoic Lessons from Marcus Aurelius * Self-Trust and Confidence. * Change and Acceptence. * Mindfulness and Presence...Medium\n• 12 (Stoic) Rules For Life: An Ancient Guide to the Good Life * Rule 1: Own the morning. * Rule 2: Only focus on what's in your control. * Rule 3: Don't suffer imagined troubles. * Rule 4: Tr...Daily Stoic\n• 7 Stoic Principles that Simplified My Life. - InstagramJan 7, 2026 — 7 STOIC PRINCIPLES THAT SIMPLIFIED My LIFE In world of noise, less is power. 1 Less Is More \"If you seek tranquility do...Instagram · booksforaspirants\n• 50 (Short) Rules For Life From The Stoics - RyanHoliday.netMay 12, 2021 — Here are some rules from the Stoics, which are guides to what they called \"the good life\": * **Focus on what you can c...RyanHoliday.net\n• Stoicism: A Philosophy That Makes Life More Calm and WiseAug 5, 2022 — Stoicism teaches people to: * Control negative emotions * Be grateful for everything they have * Accept circumstances t...BFI Finance\nRelated Links",
+              "answer_href": "https://dailystoic.com/7-stoic-tenets-to-keep-in-mind-today/#:~:text=Marcus%20would%20say%20that%20the,make%20us%20who%20we%20are.",
+              "answer_page_title": "7 Ancient Stoic Tenets To Keep In Mind Today And Every Day",
+              "ai_overview": true,
+              "ai_overview_hrefs": [
+                "https://dailystoic.com/7-stoic-tenets-to-keep-in-mind-today/#:~:text=Marcus%20would%20say%20that%20the,make%20us%20who%20we%20are.",
+                "https://medium.com/@improvingnation/7-principles-of-stoicism-for-limitless-mental-strength-ddbb9e322c6d",
+                "https://www.youtube.com/shorts/_GU7K8r5B3A",
+                "https://aditiagrawal.medium.com/life-changing-quotes-by-marcus-aurelius-ceb3bd306690",
+                "https://dailystoic.com/12-rules-for-life/",
+                "https://www.instagram.com/reel/DTMxI97EqOm/#:~:text=Marcus%20.-,7%20STOIC%20PRINCIPLES%20THAT%20SIMPLIFIED%20My%20LIFE%20In%20world%20of,reading_beings",
+                "https://ryanholiday.net/50-short-rules-for-life-from-the-stoics/#:~:text=Here%20are%20some%20rules%20from%20the%20Stoics%2C,happens%20(Amor%20fati)**%20*%20**Seek%20out%20challenges**",
+                "https://www.bfi.co.id/en/blog/stoikisme-aliran-filsafat-yang-membuat-hidup-lebih-tenang-dan-bijak#:~:text=Stoicism%20teaches%20people%20to:%20*%20Control%20negative,permanent%20*%20Appreciate%20what%20is%20around%20you"
+              ],
+              "ai_overview_page_titles": [
+                "7 Ancient Stoic Tenets To Keep In Mind Today And Every Day",
+                "7 Principles Of Stoicism For Limitless Mental Strength - Medium",
+                "7 Stoic Rules For A Better Life - YouTube",
+                "7 Stoic Lessons from Marcus Aurelius | by Aditi Agrawal",
+                "12 (Stoic) Rules For Life: An Ancient Guide to the Good Life",
+                "7 Stoic Principles that Simplified My Life. - Instagram",
+                "50 (Short) Rules For Life From The Stoics - RyanHoliday.net",
+                "Stoicism: A Philosophy That Makes Life More Calm and Wise"
+              ],
+              "results": []
+            },
+            {
+              "question": "Who do Stoics pray to?",
+              "answer_excerpt": "Personal prayers to the Gods/God/Godhead would seemingly be focused on, for the Stoic, for the will to live, act, and think as Nature/Gods/God intend which is to say in accordance with Reason and Virtue. So whatever your tradition, or lack thereof. Make your prayers from that mindset.",
+              "answer_href": "https://www.facebook.com/groups/TraditionalStoicism/posts/3570849373158521/#:~:text=Personal%20prayers%20to%20the%20Gods,your%20prayers%20from%20that%20mindset.",
+              "answer_page_title": "Stoic prayers and spiritual nature of Stoicism - Facebook",
+              "ai_overview": false,
+              "ai_overview_hrefs": null,
+              "ai_overview_page_titles": null,
+              "results": []
+            },
+            {
+              "question": "Does Stoicism reject religion?",
+              "answer_excerpt": "There is no faith. The Stoics didn't go out there and pray to Zeus or anything like that. It's all about reason because it is a philosophy, first.” “For instance, Stoicism assumes that metaphysically the world is a living organism, which they call God, which is endowed with the logos.",
+              "answer_href": "https://bigthink.com/thinking/is-stoicism-a-religion-3-key-clues/#:~:text=There%20is%20no%20faith.,is%20endowed%20with%20the%20logos.",
+              "answer_page_title": "3 clues that Stoicism is a religion in disguise - Big Think",
+              "ai_overview": false,
+              "ai_overview_hrefs": null,
+              "ai_overview_page_titles": null,
+              "results": []
+            },
+            {
+              "question": "What did Marcus Aurelius think of Christians?",
+              "answer_excerpt": "Marcus felt Christians had eagerness to meet death without real justification and without due dignity, and looked upon the Christians as misguided enthusiasts, who had to be punished as the law then stood, but whom he no more than Hadrian and Antoninus Pius wished to punish.",
+              "answer_href": "https://www.reddit.com/r/Stoicism/comments/1bjnwcf/what_did_ancient_stoics_such_as_emperor_marcus/#:~:text=Marcus%20felt%20Christians%20had%20eagerness,Antoninus%20Pius%20wished%20to%20punish.",
+              "answer_page_title": "What did ancient stoics such as Emperor Marcus Aurelius think of ...",
+              "ai_overview": false,
+              "ai_overview_hrefs": null,
+              "ai_overview_page_titles": null,
+              "results": []
+            },
+            {
+              "question": "What religion are Stoics?",
+              "answer_excerpt": "The academic community considers Stoicism to be a philosophical school that reached its peak in Rome during the first few centuries of the Common Era. Often overlooked are Stoicism's religious over tones. Beyond its philosophical dimension, Roman Stoicism should be categorized as a religion.",
+              "answer_href": "https://scholars.csus.edu/esploro/outputs/graduate/Is-stoicism-a-religion/99257830864301671#:~:text=The%20academic%20community%20considers%20Stoicism,be%20categorized%20as%20a%20religion.",
+              "answer_page_title": "Is stoicism a religion? - California State University, Sacramento",
+              "ai_overview": false,
+              "ai_overview_hrefs": null,
+              "ai_overview_page_titles": null,
+              "results": []
+            },
+            {
+              "question": "Does God exist in Stoicism?",
+              "answer_excerpt": "The Stoics were materialists (or corporealists) for whom God could not exist as a metaphysical or supernatural entity apart from physical Nature. They were therefore renowned for interpreting Greek myths about the gods allegorically, as metaphors for natural forces and processes.",
+              "answer_href": "https://donaldrobertson.name/2012/10/07/stoicism-god-or-atoms/#:~:text=The%20Stoics%20were%20materialists%20(or,for%20natural%20forces%20and%20processes.",
+              "answer_page_title": "Stoicism: God or Atoms? - Donald J. Robertson",
+              "ai_overview": false,
+              "ai_overview_hrefs": null,
+              "ai_overview_page_titles": null,
+              "results": []
+            },
+            {
+              "question": "What is the Stoic approach to Christianity?",
+              "answer_excerpt": "Stoicism is a philosophy of understanding the world around you with the center axis being control: what you control, what you don't. Christian Stoicism follows that same train of thought except it focuses more on our relationship in the faith: what is in God's hands and what is in mine.",
+              "answer_href": "https://www.amazon.com/Stoic-Approach-Christianity-Other-Essays/dp/B0DPR8LZH3#:~:text=Stoicism%20is%20a%20philosophy%20of,and%20what%20is%20in%20mine.",
+              "answer_page_title": "A Stoic Approach to Christianity And Other Essays - Amazon.com",
+              "ai_overview": false,
+              "ai_overview_hrefs": null,
+              "ai_overview_page_titles": null,
+              "results": []
+            }
+          ]
+        },
+        {
+          "question": "Can you be a Stoic and believe in God?",
+          "answer_excerpt": "",
+          "answer_href": "",
+          "answer_page_title": "",
+          "ai_overview": false,
+          "ai_overview_hrefs": null,
+          "ai_overview_page_titles": null,
+          "results": [
+            {
+              "question": "Does Stoicism reject religion?",
+              "answer_excerpt": "There is no faith. The Stoics didn't go out there and pray to Zeus or anything like that. It's all about reason because it is a philosophy, first.” “For instance, Stoicism assumes that metaphysically the world is a living organism, which they call God, which is endowed with the logos.",
+              "answer_href": "https://bigthink.com/thinking/is-stoicism-a-religion-3-key-clues/#:~:text=There%20is%20no%20faith.,is%20endowed%20with%20the%20logos.",
+              "answer_page_title": "3 clues that Stoicism is a religion in disguise - Big Think",
+              "ai_overview": false,
+              "ai_overview_hrefs": null,
+              "ai_overview_page_titles": null,
+              "results": []
+            },
+            {
+              "question": "Is Bill Gates Stoic?",
+              "answer_excerpt": "While Bill Gates doesn't explicitly call himself a Stoic, his leadership, resilience, focus on continuous learning, and emphasis on accepting reality and controlling reactions align strongly with key Stoic principles, making him an embodiment of the philosophy, especially alongside figures like Warren Buffett and Jeff Bezos. He practices aspects like deep reflection (his \"Think Weeks\"), managing challenges with a mix of pessimism and optimism, and a commitment to long-term vision, which are all Stoic-adjacent traits.\n\nHow Gates embodies Stoic principles:\n• Resilience & Adaptability: He maintains a long-term perspective, weathering tech industry volatility by planning for worst-case scenarios (like keeping cash reserves) while working towards big goals, a core Stoic concept of preparing for adversity.\n• Continuous Learning: His massive reading habit serves as a form of lifelong education, a way to understand the world and stay humble about what he doesn't know, aligning with the Stoic pursuit of wisdom.\n• Focus on What's in Your Control: Gates emphasizes long-term vision and impact, focusing energy on what can be achieved rather than being paralyzed by external uncertainty, a hallmark of Stoicism.\n• Reflection & Self-Discipline: His famous \"Think Weeks,\" where he isolates himself to read and think, are akin to Stoic practices of introspection and self-examination to gain clarity.\n• Simplicity (in lifestyle): Despite immense wealth, his personal life often reflects a simple, focused approach, a practice some attribute to Stoicism, focusing on substance over luxury.\nWhere interpretations differ:\n• Some argue his vast business empire and competitive nature seem contrary to Stoic ideals of detachment from material success, but others see his disciplined approach to work and philanthropy as applying Stoicism in a modern context.\nIn essence, while he might not have read Marcus Aurelius on day one, Bill Gates' actions, particularly his methodical, resilient, and reflective approach to building Microsoft and leading his philanthropic foundation, resonate deeply with the core tenets of Stoicism, making him a modern example of its application.\n• Never underestimate the power of being alone with your thoughtsNov 17, 2020 — Bill Gates uses this yearly when he goes on a camping trip alone for weeks. He uses this as reflection time and often ...RReddit · r/Stoicism\n• $toicism, Broicism, and stoicisM - MediumNov 29, 2019 — What are these 7 ways of the billionaires? N. 1 on the list is Bill Gates, who allegedly embodies Stoicism because he ...FMedium · Figs in Winter\n• Memo 42: Stoic Leadership in Action—Bill Gates' Blueprint for Visionary ...Nov 13, 2024 — In Memo 41, we explored the Stoic concept of Sympatheia, the idea that “all things are mutually woven together and the...LinkedIn · Alejandro Entredicho Jr. CPSL, P.npn®\n• Better Results With Less Effort: 7 Ways Business Titans Use Stoicism To ...You also see it in Microsoft cofounder and philanthropist Bill Gates, a voracious reader who tries to understand the world a bit b...Daily Stoic\n• Jeff Bezos, Elon Musk, Bill Gates, and Warren Buffett All Use This Ancient ...Aug 25, 2017 — From Jeff Bezos to Elon Musk and Bill Gates, it is difficult to find one hugely successful businessperson today who do...Inc. Magazine\n• Wise Quotes From 5 Greek Philosophers When You Need ...Feb 6, 2019 — One school of philosophy, called stoicism, is especially popular among luminaries like Bill Gates, Warren Buffet, and C...Amy Vetter\n• Stoicism For Leaders and Entrepreneurs to Succeed in ...Nov 10, 2025 — Stoicism in business is more popular than you might think. What do Warren Buffet, Jeff Bezos, and Bill Gates have in c...Tommy Benz\n• The No. 1 'hidden' skill behind billionaire Bill Gates' success—it ...Nov 7, 2023 — Successful people find a balance between pessimism and optimism. Bill Gates is a great example of how effective this hi...CNBC\nRelated Links",
+              "answer_href": "https://www.reddit.com/r/Stoicism/comments/jw1kxn/never_underestimate_the_power_of_being_alone_with/#:~:text=Bill%20Gates%20uses%20this%20yearly,Bill%20Gates%20has%20no%20morals.",
+              "answer_page_title": "Never underestimate the power of being alone with your thoughts",
+              "ai_overview": true,
+              "ai_overview_hrefs": [
+                "https://www.reddit.com/r/Stoicism/comments/jw1kxn/never_underestimate_the_power_of_being_alone_with/#:~:text=Bill%20Gates%20uses%20this%20yearly,Bill%20Gates%20has%20no%20morals.",
+                "https://medium.com/stoicism-philosophy-as-a-way-of-life/toicism-broicism-and-stoicism-part-i-its-not-about-money-or-success-53acda57dbf9#:~:text=What%20are%20these%207%20ways,avoidance%2C%20and%20questionable%20labor%20practices.",
+                "https://www.linkedin.com/pulse/memo-42-stoic-leadership-actionbill-gates-blueprint-alejandro-z6ovc#:~:text=In%20Memo%2041%2C%20we%20explored,shape%20his%20impactful%20philanthropic%20initiatives.",
+                "https://dailystoic.com/better-results-less-effort-7-ways-business-titans-use-stoicism-succeed/#:~:text=You%20also%20see%20it%20in,successful%20business%20moguls%20in%20history.",
+                "https://www.inc.com/peter-economy/bezos-musk-gates-and-buffett-use-this-ancient-phil.html#:~:text=From%20Jeff%20Bezos%20to%20Elon,a%20great%20place%20to%20start.",
+                "https://www.amyvetter.com/blog/wise-quotes-from-greek-philosophers-jxc9m#:~:text=One%20school%20of%20philosophy%2C%20called,what%20he%20can't%20control.",
+                "https://www.tommybenz.com/thought-leadership/stoicism#:~:text=Stoicism%20in%20business%20is%20more,who%20help%20you%20do%20it.",
+                "https://www.cnbc.com/2023/11/07/the-no-1-hidden-skill-behind-bill-gates-wealth-and-success-says-expert-its-the-trick-in-any-field.html#:~:text=Successful%20people%20find%20a%20balance,said%20%E2%80%94%20%22including%20Microsoft's.%22&text=In%202007%2C%20he%20reflected:%20%22,to%20survive%20the%20short%20run."
+              ],
+              "ai_overview_page_titles": [
+                "Never underestimate the power of being alone with your thoughts",
+                "$toicism, Broicism, and stoicisM - Medium",
+                "Memo 42: Stoic Leadership in Action—Bill Gates' Blueprint for Visionary ...",
+                "Better Results With Less Effort: 7 Ways Business Titans Use Stoicism To ...",
+                "Jeff Bezos, Elon Musk, Bill Gates, and Warren Buffett All Use This Ancient ...",
+                "Wise Quotes From 5 Greek Philosophers When You Need ...",
+                "Stoicism For Leaders and Entrepreneurs to Succeed in ...",
+                "The No. 1 'hidden' skill behind billionaire Bill Gates' success—it ..."
+              ],
+              "results": []
+            },
+            {
+              "question": "Is it unhealthy to be Stoic?",
+              "answer_excerpt": "Stoicism isn't inherently unhealthy, but modern interpretations, often called \"naive Stoicism,\" can be harmful by promoting extreme emotion suppression, isolation, and avoidance of necessary help, leading to increased stress or depression; genuine Stoicism aims for virtue and resilience, not apathy, by focusing on what's controllable, but misapplication can become rigid, damaging well-being. The key danger lies in mistaking self-control for emotional numbness, potentially ignoring genuine needs and leading to isolation or preventing therapeutic intervention.\n\nPotential downsides of misapplied Stoicism\n• Emotional Suppression: Believing all strong emotions are bad can lead to hiding feelings, increasing stress, anxiety, or depression over time, notes a futurefocustherapist.com article.\n• Social Isolation: The focus on self-sufficiency can discourage seeking social support, which is crucial for mental health, according to futurefocustherapist.com.\n• Avoidance of Help: Thinking you should handle everything alone can prevent seeking professional therapy or other interventions, says the futurefocustherapist.com blog.\n• Misinterpretation: Viewing Stoicism as being tough and unfeeling, rather than accepting circumstances and focusing on internal virtues (wisdom, justice, courage, temperance), can be damaging, points out a thespellbinder.net article.\nHealthy Stoicism involves\n• Understanding Emotions: Not eliminating emotions, but managing reactions to them and using them as guides, like anger signaling boundaries crossed, notes a YouTube video from The Everyday Stoic author.\n• Accepting Externals: Recognizing things outside your control (like the actions of others or death) to reduce stress, as described by Marcus Aurelius and Epictetus.\n• Focusing on Virtue: Striving for inner peace through virtuous action and self-control, not by becoming emotionless or detached.\nConclusion Stoicism becomes unhealthy when misinterpreted as a rigid, emotion-suppressing ideology (naive Stoicism) rather than a flexible philosophy for building resilience and virtue. It's crucial to balance Stoic principles with human needs for connection and emotional processing, avoiding the pitfalls of emotional numbness or isolation, notes an article from Psychology Today.\n• The Problem with Stoicism : r/philosophyMar 21, 2023 — hope need want desire movement life all of these are the result of value systems of connecting us to the world around ...Reddit · r/philosophy\n• Do you think stoicism is flawed? - QuoraMay 17, 2022 —  * Stoicism is a school that focuses on personal ethics. It advocates that people should accept their circumstances an...Quora\n• Naive Stoicism: Why pop philosophy is bad for your mental healthJul 22, 2023 — According to the paper, naive Stoic ideology is defined by four assumptions: Stoic taciturnity, in which emotions shou...Big Think\n• Author of 'The Everyday Stoic' explains what's wrong with StoicismJan 15, 2025 — and you need that guidance just cutting it into two is very helpful. it's very useful tool it's one of the most useful...YouTube · Everyday Stoic\n• Why Stoicism Might Be Dangerous for Mental HealthSep 13, 2023 — Here are six reasons why Stoicism can be harmful to mental health. Suppression of Emotions: One of the main tenets of ...Future Focus Counselling Center\n• A Critique of Stoicism - Psychology TodayFeb 10, 2023 — Stoicism can be a powerful tool for individuals seeking to improve their mental health and well-being. By accepting wh...Psychology Today\n• Teens are misinterpreting stoicism for toxic positivity – The SpellbinderOct 31, 2023 — It has four main virtues: wisdom, courage, temperance, and justice. Stoics believed that following these virtues would...thespellbinder.net\nRelated Links",
+              "answer_href": "https://www.reddit.com/r/philosophy/comments/11xjow0/the_problem_with_stoicism/",
+              "answer_page_title": "The Problem with Stoicism : r/philosophy",
+              "ai_overview": true,
+              "ai_overview_hrefs": [
+                "https://www.reddit.com/r/philosophy/comments/11xjow0/the_problem_with_stoicism/",
+                "https://www.quora.com/Do-you-think-stoicism-is-flawed",
+                "https://bigthink.com/thinking/naive-stoicism-why-pop-philosophy-is-bad-for-your-mental-health/#:~:text=According%20to%20the%20paper%2C%20naive,and%20finding%20meaning%20in%20life.",
+                "https://www.youtube.com/watch?v=VwIsn05rqLI&t=247",
+                "https://futurefocustherapist.com/blog/why-stoicism-might-be-dangerous-for-mental-health-a-therapists-perspective/#:~:text=Here%20are%20six%20reasons%20why,aspect%20often%20overlooked%20in%20stoicism.",
+                "https://www.psychologytoday.com/us/blog/the-three-minute-therapist/202301/a-critique-of-stoicism#:~:text=Stoicism%20can%20be%20a%20powerful,sense%20of%20gratitude%20and%20contentment.",
+                "https://thespellbinder.net/9134/opinion/teens-are-misinterpreting-stoicism-for-toxic-positivity/"
+              ],
+              "ai_overview_page_titles": [
+                "The Problem with Stoicism : r/philosophy",
+                "Do you think stoicism is flawed? - Quora",
+                "Naive Stoicism: Why pop philosophy is bad for your mental health",
+                "Author of 'The Everyday Stoic' explains what's wrong with Stoicism",
+                "Why Stoicism Might Be Dangerous for Mental Health",
+                "A Critique of Stoicism - Psychology Today",
+                "Teens are misinterpreting stoicism for toxic positivity – The Spellbinder"
+              ],
+              "results": []
+            },
+            {
+              "question": "What is the most openly mocked religion?",
+              "answer_excerpt": "Parodies of particular beliefsReligionDescriptionPastafarianism, or the Church of the Flying Spaghetti MonsterThe most famous example of mock religion. A parody of intelligent design, creationism, and religion in general, as a modern version of Russell's teapot.7 more rows",
+              "answer_href": "https://en.wikipedia.org/wiki/Parody_religion",
+              "answer_page_title": "Parody religion - Wikipedia",
+              "ai_overview": false,
+              "ai_overview_hrefs": null,
+              "ai_overview_page_titles": null,
+              "results": []
+            },
+            {
+              "question": "What is the Stoic approach to Christianity?",
+              "answer_excerpt": "Stoicism is a philosophy of understanding the world around you with the center axis being control: what you control, what you don't. Christian Stoicism follows that same train of thought except it focuses more on our relationship in the faith: what is in God's hands and what is in mine.",
+              "answer_href": "https://www.amazon.com/Stoic-Approach-Christianity-Other-Essays/dp/B0DPR8LZH3#:~:text=Stoicism%20is%20a%20philosophy%20of,and%20what%20is%20in%20mine.",
+              "answer_page_title": "A Stoic Approach to Christianity And Other Essays - Amazon.com",
+              "ai_overview": false,
+              "ai_overview_hrefs": null,
+              "ai_overview_page_titles": null,
+              "results": []
+            },
+            {
+              "question": "What are the 7 rules of Stoicism?",
+              "answer_excerpt": "While there isn't one definitive list, the core of Stoic rules centers on mastering your mind, focusing on what you control (your response), accepting what you can't, practicing virtue, living in the present, preparing for adversity, and understanding your own mortality to live a meaningful life. Key rules often cited include Control your mind, not external events; Accept fate; Practice virtue; Memento Mori (remember death); Amor Fati (love your fate); Focus on what you control; and Prepare for hardship.\nHere are common themes presented as rules:\n1. Control Your Mind, Not Outside Events: You can't control what happens, only your reaction to it. Focus your energy on your judgments and actions.\n2. Practice Virtue: Act with wisdom, justice, courage, and temperance. Virtue is the sole good.\n3. Accept What You Can't Control (Amor Fati): Embrace fate and love everything that happens, good or bad, as part of the natural order.\n4. Prepare for Hardship (Premeditatio Malorum): Regularly contemplate worst-case scenarios to build resilience and appreciate the present.\n5. Memento Mori (Remember You Are Mortal): Acknowledge your mortality to live more fully and make the most of each day.\n6. Simplify and Focus: Remove what isn't necessary; focus energy on what truly matters and what is within your control.\n7. Live in the Present: Don't dwell on the past or fear the future; be present and act with intention now.\nOther common Stoic advice includes taking bold action, being disciplined, asking if something is necessary, learning from everyone, and treating challenges as opportunities for growth.\n• 7 Ancient Stoic Tenets To Keep In Mind Today And Every DayMarcus would say that the Stoic finds a way to turn every negative into a positive. In this famous line, what he's suggesting is t...Daily Stoic\n• 7 Principles Of Stoicism For Limitless Mental Strength - MediumAug 16, 2018 —  Here are 7 principles of stoicism: * You have power over your mind, not outside events. This is a quote you have prob...Medium\n• 7 Stoic Rules For A Better Life - YouTubeNov 21, 2024 — seven stoic rules for a better life. focus on what you control you got to design your day set a routine set a schedule...YouTube · Ryan Holiday\n• 7 Stoic Lessons from Marcus Aurelius | by Aditi AgrawalMar 27, 2025 —  7 Stoic Lessons from Marcus Aurelius * Self-Trust and Confidence. * Change and Acceptence. * Mindfulness and Presence...Medium\n• 12 (Stoic) Rules For Life: An Ancient Guide to the Good Life * Rule 1: Own the morning. * Rule 2: Only focus on what's in your control. * Rule 3: Don't suffer imagined troubles. * Rule 4: Tr...Daily Stoic\n• 7 Stoic Principles that Simplified My Life. - InstagramJan 7, 2026 — 7 STOIC PRINCIPLES THAT SIMPLIFIED My LIFE In world of noise, less is power. 1 Less Is More \"If you seek tranquility do...Instagram · booksforaspirants\n• 50 (Short) Rules For Life From The Stoics - RyanHoliday.netMay 12, 2021 — Here are some rules from the Stoics, which are guides to what they called \"the good life\": * **Focus on what you can c...RyanHoliday.net\n• Stoicism: A Philosophy That Makes Life More Calm and WiseAug 5, 2022 — Stoicism teaches people to: * Control negative emotions * Be grateful for everything they have * Accept circumstances t...BFI Finance\nRelated Links",
+              "answer_href": "https://dailystoic.com/7-stoic-tenets-to-keep-in-mind-today/#:~:text=Marcus%20would%20say%20that%20the,make%20us%20who%20we%20are.",
+              "answer_page_title": "7 Ancient Stoic Tenets To Keep In Mind Today And Every Day",
+              "ai_overview": true,
+              "ai_overview_hrefs": [
+                "https://dailystoic.com/7-stoic-tenets-to-keep-in-mind-today/#:~:text=Marcus%20would%20say%20that%20the,make%20us%20who%20we%20are.",
+                "https://medium.com/@improvingnation/7-principles-of-stoicism-for-limitless-mental-strength-ddbb9e322c6d",
+                "https://www.youtube.com/shorts/_GU7K8r5B3A",
+                "https://aditiagrawal.medium.com/life-changing-quotes-by-marcus-aurelius-ceb3bd306690",
+                "https://dailystoic.com/12-rules-for-life/",
+                "https://www.instagram.com/reel/DTMxI97EqOm/#:~:text=Marcus%20.-,7%20STOIC%20PRINCIPLES%20THAT%20SIMPLIFIED%20My%20LIFE%20In%20world%20of,reading_beings",
+                "https://ryanholiday.net/50-short-rules-for-life-from-the-stoics/#:~:text=Here%20are%20some%20rules%20from%20the%20Stoics%2C,happens%20(Amor%20fati)**%20*%20**Seek%20out%20challenges**",
+                "https://www.bfi.co.id/en/blog/stoikisme-aliran-filsafat-yang-membuat-hidup-lebih-tenang-dan-bijak#:~:text=Stoicism%20teaches%20people%20to:%20*%20Control%20negative,permanent%20*%20Appreciate%20what%20is%20around%20you"
+              ],
+              "ai_overview_page_titles": [
+                "7 Ancient Stoic Tenets To Keep In Mind Today And Every Day",
+                "7 Principles Of Stoicism For Limitless Mental Strength - Medium",
+                "7 Stoic Rules For A Better Life - YouTube",
+                "7 Stoic Lessons from Marcus Aurelius | by Aditi Agrawal",
+                "12 (Stoic) Rules For Life: An Ancient Guide to the Good Life",
+                "7 Stoic Principles that Simplified My Life. - Instagram",
+                "50 (Short) Rules For Life From The Stoics - RyanHoliday.net",
+                "Stoicism: A Philosophy That Makes Life More Calm and Wise"
+              ],
+              "results": []
+            },
+            {
+              "question": "What religion are Stoics?",
+              "answer_excerpt": "The academic community considers Stoicism to be a philosophical school that reached its peak in Rome during the first few centuries of the Common Era. Often overlooked are Stoicism's religious over tones. Beyond its philosophical dimension, Roman Stoicism should be categorized as a religion.",
+              "answer_href": "https://scholars.csus.edu/esploro/outputs/graduate/Is-stoicism-a-religion/99257830864301671#:~:text=The%20academic%20community%20considers%20Stoicism,be%20categorized%20as%20a%20religion.",
+              "answer_page_title": "Is stoicism a religion? - California State University, Sacramento",
+              "ai_overview": false,
+              "ai_overview_hrefs": null,
+              "ai_overview_page_titles": null,
+              "results": []
+            },
+            {
+              "question": "Is David Goggins religious?",
+              "answer_excerpt": "David Goggins has publicly declared that he believes in the Lord Jesus Christ. 🙌✝️ It's powerful to see people known for strength, endurance, and discipline also point to the greatest source of strength: faith in Jesus. Philippians 4:13 says: “I can do all things through Christ who strengthens me.” 💪",
+              "answer_href": "https://www.instagram.com/p/DOL46DRgIuK/#:~:text=David%20Goggins%20has%20publicly%20declared,Christ%20who%20strengthens%20me.%E2%80%9D%20%F0%9F%92%AA",
+              "answer_page_title": "During a live on-stage appearance, David Goggins—a former Navy ...",
+              "ai_overview": false,
+              "ai_overview_hrefs": null,
+              "ai_overview_page_titles": null,
+              "results": []
+            }
+          ]
+        },
+        {
+          "question": "What religion is closest to Stoicism?",
+          "answer_excerpt": "",
+          "answer_href": "",
+          "answer_page_title": "",
+          "ai_overview": false,
+          "ai_overview_hrefs": null,
+          "ai_overview_page_titles": null,
+          "results": [
+            {
+              "question": "Which religion does Trump belong to?",
+              "answer_excerpt": "Donald Trump identifies as a Christian, having been raised Presbyterian but later describing himself as a nondenominational Christian, influenced by the \"positive thinking\" of ministers like Norman Vincent Peale, and maintains strong ties with evangelical Christians. While he publicly stated in 2020 he's nondenominational, he's consistently spoken of the Bible and Christian faith as important to him.\nKey Aspects of His Religious Affiliation:\n• Upbringing: Raised Presbyterian, attending churches like First Presbyterian in Jamaica, Queens, and Marble Collegiate Church.\n• Self-Identification: Stated in 2020 he's nondenominational but Christian, and previously identified as Protestant and Presbyterian.\n• Influences: Mentored by ministers from the \"positive thinking\" movement, like Norman Vincent Peale, which emphasized positive mental attitude.\n• Public Stance: Often emphasizes his belief in God, the importance of the Bible, and his support for religious freedom, aligning closely with evangelical voters.\n• Relationship with Evangelicals: Cultivated strong relationships with evangelical leaders and has been seen as a champion for their causes.\n• Donald Trump and religion - WikipediaThe religious views of Donald Trump, the 45th and 47th president of the United States, have been a matter for discussion among obs...Wikipedia\n• The Faith of Donald J. Trump: A Spiritual Biography - Amazon.comBased on extensive inside sources, including exclusive interviews with the President and Vice President, The Faith of Donald J. Tr...Amazon.com\n• Trump’s use of religion follows playbook of authoritarian-leaning leaders the world overJun 5, 2020 — Donald Trump has used religion in a number of ways: * **Presenting himself as a Christian nationalist** Trump has made ...The Conversation\n• White Evangelicals See Trump as Fighting for Their Beliefs, Though Many Have Mixed Feelings About His Personal ConductMar 12, 2020Pew Research Center\n• Trump talks about religion - POLITICOApr 11, 2011 — In an interview with the Christian Broadcast Network (CBN), Donald Trump said: * \"I am Christian\" * \"I believe in God\"Politico\n• 5 faith facts about Donald Trump: a Presbyterian who collects Bibles - The Washington PostJun 16, 2015 — Trump is a Presbyterian. He has attended church at: * **First Presbyterian Church in Jamaica, Queens** * **Marble Coll...The Washington Post\nRelated Links",
+              "answer_href": "https://en.wikipedia.org/wiki/Donald_Trump_and_religion#:~:text=The%20religious%20views%20of%20Donald,positive%20mental%20attitude%20shaped%20Trump.",
+              "answer_page_title": "Donald Trump and religion - Wikipedia",
+              "ai_overview": true,
+              "ai_overview_hrefs": [
+                "https://en.wikipedia.org/wiki/Donald_Trump_and_religion#:~:text=The%20religious%20views%20of%20Donald,positive%20mental%20attitude%20shaped%20Trump.",
+                "https://www.amazon.com/Faith-Donald-Trump-Spiritual-Biography/dp/0062749587#:~:text=Based%20on%20extensive%20inside%20sources,to%20be%20something%20he's%20not.",
+                "https://theconversation.com/trumps-use-of-religion-follows-playbook-of-authoritarian-leaning-leaders-the-world-over-140050#:~:text=Donald%20Trump%20has%20used%20religion%20in%20a,extension%20of%20his%20military%20and%20authoritarian%20position%22.",
+                "https://www.pewresearch.org/religion/2020/03/12/white-evangelicals-see-trump-as-fighting-for-their-beliefs-though-many-have-mixed-feelings-about-his-personal-conduct/",
+                "https://www.politico.com/story/2011/04/trump-talks-about-religion-052942#:~:text=In%20an%20interview%20with%20the%20Christian%20Broadcast,sent%20Bibles%20by%20a%20lot%20of%20people&text=we%20keep%20them%20at%20a%20certain%20place%22,to%20do%20anything%20negative%20to%20a%20Bible%22",
+                "https://www.washingtonpost.com/national/religion/5-faith-facts-about-donald-trump-a-presbyterian-who-collects-bibles/2015/06/16/a18c00de-1466-11e5-8457-4b431bf7ed4c_story.html#:~:text=Trump%20is%20a%20Presbyterian.%20He%20has%20attended,nice%20place%20*%20Sometimes%20gives%20Bibles%20away"
+              ],
+              "ai_overview_page_titles": [
+                "Donald Trump and religion - Wikipedia",
+                "The Faith of Donald J. Trump: A Spiritual Biography - Amazon.com",
+                "Trump’s use of religion follows playbook of authoritarian-leaning leaders the world over",
+                "White Evangelicals See Trump as Fighting for Their Beliefs, Though Many Have Mixed Feelings About His Personal Conduct",
+                "Trump talks about religion - POLITICO",
+                "5 faith facts about Donald Trump: a Presbyterian who collects Bibles - The Washington Post"
+              ],
+              "results": []
+            },
+            {
+              "question": "Is Bill Gates Stoic?",
+              "answer_excerpt": "While Bill Gates doesn't explicitly call himself a Stoic, his leadership, resilience, focus on continuous learning, and emphasis on accepting reality and controlling reactions align strongly with key Stoic principles, making him an embodiment of the philosophy, especially alongside figures like Warren Buffett and Jeff Bezos. He practices aspects like deep reflection (his \"Think Weeks\"), managing challenges with a mix of pessimism and optimism, and a commitment to long-term vision, which are all Stoic-adjacent traits.\n\nHow Gates embodies Stoic principles:\n• Resilience & Adaptability: He maintains a long-term perspective, weathering tech industry volatility by planning for worst-case scenarios (like keeping cash reserves) while working towards big goals, a core Stoic concept of preparing for adversity.\n• Continuous Learning: His massive reading habit serves as a form of lifelong education, a way to understand the world and stay humble about what he doesn't know, aligning with the Stoic pursuit of wisdom.\n• Focus on What's in Your Control: Gates emphasizes long-term vision and impact, focusing energy on what can be achieved rather than being paralyzed by external uncertainty, a hallmark of Stoicism.\n• Reflection & Self-Discipline: His famous \"Think Weeks,\" where he isolates himself to read and think, are akin to Stoic practices of introspection and self-examination to gain clarity.\n• Simplicity (in lifestyle): Despite immense wealth, his personal life often reflects a simple, focused approach, a practice some attribute to Stoicism, focusing on substance over luxury.\nWhere interpretations differ:\n• Some argue his vast business empire and competitive nature seem contrary to Stoic ideals of detachment from material success, but others see his disciplined approach to work and philanthropy as applying Stoicism in a modern context.\nIn essence, while he might not have read Marcus Aurelius on day one, Bill Gates' actions, particularly his methodical, resilient, and reflective approach to building Microsoft and leading his philanthropic foundation, resonate deeply with the core tenets of Stoicism, making him a modern example of its application.\n• Never underestimate the power of being alone with your thoughtsNov 17, 2020 — Bill Gates uses this yearly when he goes on a camping trip alone for weeks. He uses this as reflection time and often ...RReddit · r/Stoicism\n• $toicism, Broicism, and stoicisM - MediumNov 29, 2019 — What are these 7 ways of the billionaires? N. 1 on the list is Bill Gates, who allegedly embodies Stoicism because he ...FMedium · Figs in Winter\n• Memo 42: Stoic Leadership in Action—Bill Gates' Blueprint for Visionary ...Nov 13, 2024 — In Memo 41, we explored the Stoic concept of Sympatheia, the idea that “all things are mutually woven together and the...LinkedIn · Alejandro Entredicho Jr. CPSL, P.npn®\n• Better Results With Less Effort: 7 Ways Business Titans Use Stoicism To ...You also see it in Microsoft cofounder and philanthropist Bill Gates, a voracious reader who tries to understand the world a bit b...Daily Stoic\n• Jeff Bezos, Elon Musk, Bill Gates, and Warren Buffett All Use This Ancient ...Aug 25, 2017 — From Jeff Bezos to Elon Musk and Bill Gates, it is difficult to find one hugely successful businessperson today who do...Inc. Magazine\n• Wise Quotes From 5 Greek Philosophers When You Need ...Feb 6, 2019 — One school of philosophy, called stoicism, is especially popular among luminaries like Bill Gates, Warren Buffet, and C...Amy Vetter\n• Stoicism For Leaders and Entrepreneurs to Succeed in ...Nov 10, 2025 — Stoicism in business is more popular than you might think. What do Warren Buffet, Jeff Bezos, and Bill Gates have in c...Tommy Benz\n• The No. 1 'hidden' skill behind billionaire Bill Gates' success—it ...Nov 7, 2023 — Successful people find a balance between pessimism and optimism. Bill Gates is a great example of how effective this hi...CNBC\nRelated Links",
+              "answer_href": "https://www.reddit.com/r/Stoicism/comments/jw1kxn/never_underestimate_the_power_of_being_alone_with/#:~:text=Bill%20Gates%20uses%20this%20yearly,Bill%20Gates%20has%20no%20morals.",
+              "answer_page_title": "Never underestimate the power of being alone with your thoughts",
+              "ai_overview": true,
+              "ai_overview_hrefs": [
+                "https://www.reddit.com/r/Stoicism/comments/jw1kxn/never_underestimate_the_power_of_being_alone_with/#:~:text=Bill%20Gates%20uses%20this%20yearly,Bill%20Gates%20has%20no%20morals.",
+                "https://medium.com/stoicism-philosophy-as-a-way-of-life/toicism-broicism-and-stoicism-part-i-its-not-about-money-or-success-53acda57dbf9#:~:text=What%20are%20these%207%20ways,avoidance%2C%20and%20questionable%20labor%20practices.",
+                "https://www.linkedin.com/pulse/memo-42-stoic-leadership-actionbill-gates-blueprint-alejandro-z6ovc#:~:text=In%20Memo%2041%2C%20we%20explored,shape%20his%20impactful%20philanthropic%20initiatives.",
+                "https://dailystoic.com/better-results-less-effort-7-ways-business-titans-use-stoicism-succeed/#:~:text=You%20also%20see%20it%20in,successful%20business%20moguls%20in%20history.",
+                "https://www.inc.com/peter-economy/bezos-musk-gates-and-buffett-use-this-ancient-phil.html#:~:text=From%20Jeff%20Bezos%20to%20Elon,a%20great%20place%20to%20start.",
+                "https://www.amyvetter.com/blog/wise-quotes-from-greek-philosophers-jxc9m#:~:text=One%20school%20of%20philosophy%2C%20called,what%20he%20can't%20control.",
+                "https://www.tommybenz.com/thought-leadership/stoicism#:~:text=Stoicism%20in%20business%20is%20more,who%20help%20you%20do%20it.",
+                "https://www.cnbc.com/2023/11/07/the-no-1-hidden-skill-behind-bill-gates-wealth-and-success-says-expert-its-the-trick-in-any-field.html#:~:text=Successful%20people%20find%20a%20balance,said%20%E2%80%94%20%22including%20Microsoft's.%22&text=In%202007%2C%20he%20reflected:%20%22,to%20survive%20the%20short%20run."
+              ],
+              "ai_overview_page_titles": [
+                "Never underestimate the power of being alone with your thoughts",
+                "$toicism, Broicism, and stoicisM - Medium",
+                "Memo 42: Stoic Leadership in Action—Bill Gates' Blueprint for Visionary ...",
+                "Better Results With Less Effort: 7 Ways Business Titans Use Stoicism To ...",
+                "Jeff Bezos, Elon Musk, Bill Gates, and Warren Buffett All Use This Ancient ...",
+                "Wise Quotes From 5 Greek Philosophers When You Need ...",
+                "Stoicism For Leaders and Entrepreneurs to Succeed in ...",
+                "The No. 1 'hidden' skill behind billionaire Bill Gates' success—it ..."
+              ],
+              "results": []
+            },
+            {
+              "question": "What is the most openly mocked religion?",
+              "answer_excerpt": "Parodies of particular beliefsReligionDescriptionPastafarianism, or the Church of the Flying Spaghetti MonsterThe most famous example of mock religion. A parody of intelligent design, creationism, and religion in general, as a modern version of Russell's teapot.7 more rows",
+              "answer_href": "https://en.wikipedia.org/wiki/Parody_religion",
+              "answer_page_title": "Parody religion - Wikipedia",
+              "ai_overview": false,
+              "ai_overview_hrefs": null,
+              "ai_overview_page_titles": null,
+              "results": []
+            },
+            {
+              "question": "What are the 7 rules of Stoicism?",
+              "answer_excerpt": "While there isn't one definitive list, the core of Stoic rules centers on mastering your mind, focusing on what you control (your response), accepting what you can't, practicing virtue, living in the present, preparing for adversity, and understanding your own mortality to live a meaningful life. Key rules often cited include Control your mind, not external events; Accept fate; Practice virtue; Memento Mori (remember death); Amor Fati (love your fate); Focus on what you control; and Prepare for hardship.\nHere are common themes presented as rules:\n1. Control Your Mind, Not Outside Events: You can't control what happens, only your reaction to it. Focus your energy on your judgments and actions.\n2. Practice Virtue: Act with wisdom, justice, courage, and temperance. Virtue is the sole good.\n3. Accept What You Can't Control (Amor Fati): Embrace fate and love everything that happens, good or bad, as part of the natural order.\n4. Prepare for Hardship (Premeditatio Malorum): Regularly contemplate worst-case scenarios to build resilience and appreciate the present.\n5. Memento Mori (Remember You Are Mortal): Acknowledge your mortality to live more fully and make the most of each day.\n6. Simplify and Focus: Remove what isn't necessary; focus energy on what truly matters and what is within your control.\n7. Live in the Present: Don't dwell on the past or fear the future; be present and act with intention now.\nOther common Stoic advice includes taking bold action, being disciplined, asking if something is necessary, learning from everyone, and treating challenges as opportunities for growth.\n• 7 Ancient Stoic Tenets To Keep In Mind Today And Every DayMarcus would say that the Stoic finds a way to turn every negative into a positive. In this famous line, what he's suggesting is t...Daily Stoic\n• 7 Principles Of Stoicism For Limitless Mental Strength - MediumAug 16, 2018 —  Here are 7 principles of stoicism: * You have power over your mind, not outside events. This is a quote you have prob...Medium\n• 7 Stoic Rules For A Better Life - YouTubeNov 21, 2024 — seven stoic rules for a better life. focus on what you control you got to design your day set a routine set a schedule...YouTube · Ryan Holiday\n• 7 Stoic Lessons from Marcus Aurelius | by Aditi AgrawalMar 27, 2025 —  7 Stoic Lessons from Marcus Aurelius * Self-Trust and Confidence. * Change and Acceptence. * Mindfulness and Presence...Medium\n• 12 (Stoic) Rules For Life: An Ancient Guide to the Good Life * Rule 1: Own the morning. * Rule 2: Only focus on what's in your control. * Rule 3: Don't suffer imagined troubles. * Rule 4: Tr...Daily Stoic\n• 7 Stoic Principles that Simplified My Life. - InstagramJan 7, 2026 — 7 STOIC PRINCIPLES THAT SIMPLIFIED My LIFE In world of noise, less is power. 1 Less Is More \"If you seek tranquility do...Instagram · booksforaspirants\n• 50 (Short) Rules For Life From The Stoics - RyanHoliday.netMay 12, 2021 — Here are some rules from the Stoics, which are guides to what they called \"the good life\": * **Focus on what you can c...RyanHoliday.net\n• Stoicism: A Philosophy That Makes Life More Calm and WiseAug 5, 2022 — Stoicism teaches people to: * Control negative emotions * Be grateful for everything they have * Accept circumstances t...BFI Finance\nRelated Links",
+              "answer_href": "https://dailystoic.com/7-stoic-tenets-to-keep-in-mind-today/#:~:text=Marcus%20would%20say%20that%20the,make%20us%20who%20we%20are.",
+              "answer_page_title": "7 Ancient Stoic Tenets To Keep In Mind Today And Every Day",
+              "ai_overview": true,
+              "ai_overview_hrefs": [
+                "https://dailystoic.com/7-stoic-tenets-to-keep-in-mind-today/#:~:text=Marcus%20would%20say%20that%20the,make%20us%20who%20we%20are.",
+                "https://medium.com/@improvingnation/7-principles-of-stoicism-for-limitless-mental-strength-ddbb9e322c6d",
+                "https://www.youtube.com/shorts/_GU7K8r5B3A",
+                "https://aditiagrawal.medium.com/life-changing-quotes-by-marcus-aurelius-ceb3bd306690",
+                "https://dailystoic.com/12-rules-for-life/",
+                "https://www.instagram.com/reel/DTMxI97EqOm/#:~:text=Marcus%20.-,7%20STOIC%20PRINCIPLES%20THAT%20SIMPLIFIED%20My%20LIFE%20In%20world%20of,reading_beings",
+                "https://ryanholiday.net/50-short-rules-for-life-from-the-stoics/#:~:text=Here%20are%20some%20rules%20from%20the%20Stoics%2C,happens%20(Amor%20fati)**%20*%20**Seek%20out%20challenges**",
+                "https://www.bfi.co.id/en/blog/stoikisme-aliran-filsafat-yang-membuat-hidup-lebih-tenang-dan-bijak#:~:text=Stoicism%20teaches%20people%20to:%20*%20Control%20negative,permanent%20*%20Appreciate%20what%20is%20around%20you"
+              ],
+              "ai_overview_page_titles": [
+                "7 Ancient Stoic Tenets To Keep In Mind Today And Every Day",
+                "7 Principles Of Stoicism For Limitless Mental Strength - Medium",
+                "7 Stoic Rules For A Better Life - YouTube",
+                "7 Stoic Lessons from Marcus Aurelius | by Aditi Agrawal",
+                "12 (Stoic) Rules For Life: An Ancient Guide to the Good Life",
+                "7 Stoic Principles that Simplified My Life. - Instagram",
+                "50 (Short) Rules For Life From The Stoics - RyanHoliday.net",
+                "Stoicism: A Philosophy That Makes Life More Calm and Wise"
+              ],
+              "results": []
+            },
+            {
+              "question": "What are the 4 rules of Stoicism?",
+              "answer_excerpt": "The four pillars (or cardinal virtues) of Stoicism are Wisdom, Courage, Justice, and Temperance, serving as a practical guide for living a virtuous, resilient, and fulfilling life by focusing on inner character over external circumstances, helping individuals understand good vs. evil, act rightly despite fear, treat others fairly, and practice self-discipline and moderation.\nThe Four Stoic Virtues\n• Wisdom (Prudence): Understanding the world, knowing what is good, bad, and indifferent, and using reason to make sound judgments.\n• Courage (Fortitude): Acting rightly and with integrity in the face of fear, adversity, or difficulty, choosing principle over comfort.\n• Justice (Morality): Treating others fairly, contributing to the common good, and acting with fairness and a sense of duty to humanity.\n• Temperance (Self-Control): Practicing moderation, self-discipline, and restraint over desires and impulses, focusing on what is essential.\nHow They Work Together\n• These virtues are interconnected, with Justice often seen as the foundation from which the others spring.\n• Living by these virtues helps Stoics achieve inner peace and resilience, allowing them to navigate life's challenges without being disturbed by external events, as they focus on what is within their control (their responses and character).\n• Always Remember The Four Stoic Virtues : r/StoicismJan 27, 2020RReddit · r/Stoicism\n• The Highest Good: An Introduction To The 4 Stoic VirtuesDaily Stoic\n• 4 (Stoic) Secrets To The Good LifeAug 5, 2022 — thoracia challenging Nero marcus Aurelius. having empire foisted upon him senica bravely facing his death ko resisting ...YouTube · Daily Stoic\n• The Four Virtues Of Stoicism | Ryan HolidayNov 1, 2024 — stoicism is this idea we don't control what happens we control how we respond to what happens which is what human being...YouTube · Daily Stoic\n• The Four Stoic Virtues: Principles for a Meaningful LifeNov 1, 2024 — The 4 Stoic Virtues: A Guide to Living a Fulfilling Life. Discover the 4 Stoic virtues—Wisdom, Courage, Temperance, and...proclamationjewelry.com\n• The Four Stoic Virtues Simplified | by Adekunle Jr | Stoicism - MediumNov 8, 2021 — Courage. Doing the right thing with clarity and integrity. Each day is a challenge that requires resistance in defaulti...Medium\n• Stoicism: A Philosophy for Life - The Works Counseling CenterDec 26, 2022 — Stoic philosophy is built upon the foundational values of Courage, Temperance, Justice, and Wisdom. These core values ...The Works Counseling Center\nRelated Links",
+              "answer_href": "https://www.reddit.com/r/Stoicism/comments/euit1c/always_remember_the_four_stoic_virtues/",
+              "answer_page_title": "Always Remember The Four Stoic Virtues : r/Stoicism",
+              "ai_overview": true,
+              "ai_overview_hrefs": [
+                "https://www.reddit.com/r/Stoicism/comments/euit1c/always_remember_the_four_stoic_virtues/",
+                "https://dailystoic.com/4-stoic-virtues/",
+                "https://www.youtube.com/watch?v=t16ewWL4AKM",
+                "https://www.youtube.com/shorts/0_75LE4mb4I",
+                "https://www.proclamationjewelry.com/blogs/news/the-4-stoic-virtues#:~:text=The%204%20Stoic%20Virtues:%20A,and%20act%20justly%20toward%20others.&text=Share:,be%20applied%20to%20modern%20life.",
+                "https://medium.com/stoicism-philosophy-as-a-way-of-life/the-four-stoic-virtues-simplified-c8a60bbcd959#:~:text=Courage,courageous%20in%20all%20your%20endeavours.",
+                "https://workscounselingcenter.com/stoicism/#:~:text=Stoic%20philosophy%20is%20built%20upon,be%20happy%20every%20single%20day."
+              ],
+              "ai_overview_page_titles": [
+                "Always Remember The Four Stoic Virtues : r/Stoicism",
+                "The Highest Good: An Introduction To The 4 Stoic Virtues",
+                "4 (Stoic) Secrets To The Good Life",
+                "The Four Virtues Of Stoicism | Ryan Holiday",
+                "The Four Stoic Virtues: Principles for a Meaningful Life",
+                "The Four Stoic Virtues Simplified | by Adekunle Jr | Stoicism - Medium",
+                "Stoicism: A Philosophy for Life - The Works Counseling Center"
+              ],
+              "results": []
+            },
+            {
+              "question": "Does Stoicism reject religion?",
+              "answer_excerpt": "There is no faith. The Stoics didn't go out there and pray to Zeus or anything like that. It's all about reason because it is a philosophy, first.” “For instance, Stoicism assumes that metaphysically the world is a living organism, which they call God, which is endowed with the logos.",
+              "answer_href": "https://bigthink.com/thinking/is-stoicism-a-religion-3-key-clues/#:~:text=There%20is%20no%20faith.,is%20endowed%20with%20the%20logos.",
+              "answer_page_title": "3 clues that Stoicism is a religion in disguise - Big Think",
+              "ai_overview": false,
+              "ai_overview_hrefs": null,
+              "ai_overview_page_titles": null,
+              "results": []
+            },
+            {
+              "question": "What did Marcus Aurelius think of Christians?",
+              "answer_excerpt": "Marcus felt Christians had eagerness to meet death without real justification and without due dignity, and looked upon the Christians as misguided enthusiasts, who had to be punished as the law then stood, but whom he no more than Hadrian and Antoninus Pius wished to punish.",
+              "answer_href": "https://www.reddit.com/r/Stoicism/comments/1bjnwcf/what_did_ancient_stoics_such_as_emperor_marcus/#:~:text=Marcus%20felt%20Christians%20had%20eagerness,Antoninus%20Pius%20wished%20to%20punish.",
+              "answer_page_title": "What did ancient stoics such as Emperor Marcus Aurelius think of ...",
+              "ai_overview": false,
+              "ai_overview_hrefs": null,
+              "ai_overview_page_titles": null,
+              "results": []
+            },
+            {
+              "question": "Did Christianity or Stoicism come first?",
+              "answer_excerpt": "Stoics predated Christians by hundreds of years as is evidenced by the dates for the founders of the Stoic School: Zeno 334-262 BCE, Cleanthes 330-230 BCE, and Chrysippus 279-206 BCE.",
+              "answer_href": "https://www.facebook.com/groups/1690278417775179/posts/3047162078753466/#:~:text=Stoics%20predated%20Christians%20by%20hundreds,and%20Chrysippus%20279%2D206%20BCE.",
+              "answer_page_title": "Stoicism philosophy and its comparison to Christianity - Facebook",
+              "ai_overview": false,
+              "ai_overview_hrefs": null,
+              "ai_overview_page_titles": null,
+              "results": []
+            }
+          ]
+        },
+        {
+          "question": "Is David Goggins religious?",
+          "answer_excerpt": "David Goggins has publicly declared that he believes in the Lord Jesus Christ. 🙌✝️ It's powerful to see people known for strength, endurance, and discipline also point to the greatest source of strength: faith in Jesus. Philippians 4:13 says: “I can do all things through Christ who strengthens me.” 💪",
+          "answer_href": "https://www.instagram.com/p/DOL46DRgIuK/#:~:text=David%20Goggins%20has%20publicly%20declared,Christ%20who%20strengthens%20me.%E2%80%9D%20%F0%9F%92%AA",
+          "answer_page_title": "During a live on-stage appearance, David Goggins—a former Navy ...",
+          "ai_overview": false,
+          "ai_overview_hrefs": null,
+          "ai_overview_page_titles": null,
+          "results": []
+        },
+        {
+          "question": "Who do Stoics pray to?",
+          "answer_excerpt": "Personal prayers to the Gods/God/Godhead would seemingly be focused on, for the Stoic, for the will to live, act, and think as Nature/Gods/God intend which is to say in accordance with Reason and Virtue. So whatever your tradition, or lack thereof. Make your prayers from that mindset.",
+          "answer_href": "https://www.facebook.com/groups/TraditionalStoicism/posts/3570849373158521/#:~:text=Personal%20prayers%20to%20the%20Gods,your%20prayers%20from%20that%20mindset.",
+          "answer_page_title": "Stoic prayers and spiritual nature of Stoicism - Facebook",
+          "ai_overview": false,
+          "ai_overview_hrefs": null,
+          "ai_overview_page_titles": null,
+          "results": []
+        },
+        {
+          "question": "What did Marcus Aurelius think of Christians?",
+          "answer_excerpt": "Marcus felt Christians had eagerness to meet death without real justification and without due dignity, and looked upon the Christians as misguided enthusiasts, who had to be punished as the law then stood, but whom he no more than Hadrian and Antoninus Pius wished to punish.",
+          "answer_href": "https://www.reddit.com/r/Stoicism/comments/1bjnwcf/what_did_ancient_stoics_such_as_emperor_marcus/#:~:text=Marcus%20felt%20Christians%20had%20eagerness,Antoninus%20Pius%20wished%20to%20punish.",
+          "answer_page_title": "What did ancient stoics such as Emperor Marcus Aurelius think of ...",
+          "ai_overview": false,
+          "ai_overview_hrefs": null,
+          "ai_overview_page_titles": null,
+          "results": []
+        },
+        {
+          "question": "Does Stoicism reject religion?",
+          "answer_excerpt": "There is no faith. The Stoics didn't go out there and pray to Zeus or anything like that. It's all about reason because it is a philosophy, first.” “For instance, Stoicism assumes that metaphysically the world is a living organism, which they call God, which is endowed with the logos.",
+          "answer_href": "https://bigthink.com/thinking/is-stoicism-a-religion-3-key-clues/#:~:text=There%20is%20no%20faith.,is%20endowed%20with%20the%20logos.",
+          "answer_page_title": "3 clues that Stoicism is a religion in disguise - Big Think",
+          "ai_overview": false,
+          "ai_overview_hrefs": null,
+          "ai_overview_page_titles": null,
+          "results": []
+        },
+        {
+          "question": "Did Christianity or Stoicism come first?",
+          "answer_excerpt": "Stoics predated Christians by hundreds of years as is evidenced by the dates for the founders of the Stoic School: Zeno 334-262 BCE, Cleanthes 330-230 BCE, and Chrysippus 279-206 BCE.",
+          "answer_href": "https://www.facebook.com/groups/1690278417775179/posts/3047162078753466/#:~:text=Stoics%20predated%20Christians%20by%20hundreds,and%20Chrysippus%20279%2D206%20BCE.",
+          "answer_page_title": "Stoicism philosophy and its comparison to Christianity - Facebook",
+          "ai_overview": false,
+          "ai_overview_hrefs": null,
+          "ai_overview_page_titles": null,
+          "results": []
+        },
+        {
+          "question": "What religion did Stoics believe in?",
+          "answer_excerpt": "Stoicism is an ancient Greek and then Roman philosophy of the Hellenistic and Roman Imperial periods. The Stoics believed that the universe operated according to reason, or logos, providing a unified account of the world, constructed from ideals of rational discourse, monistic physics, and naturalistic ethics.",
+          "answer_href": "https://en.wikipedia.org/wiki/Stoicism#:~:text=Stoicism%20is%20an%20ancient%20Greek,monistic%20physics%2C%20and%20naturalistic%20ethics.",
+          "answer_page_title": "Stoicism - Wikipedia",
+          "ai_overview": false,
+          "ai_overview_hrefs": null,
+          "ai_overview_page_titles": null,
+          "results": []
+        },
+        {
+          "question": "What is the Stoic approach to Christianity?",
+          "answer_excerpt": "Stoicism is a philosophy of understanding the world around you with the center axis being control: what you control, what you don't. Christian Stoicism follows that same train of thought except it focuses more on our relationship in the faith: what is in God's hands and what is in mine.",
+          "answer_href": "https://www.amazon.com/Stoic-Approach-Christianity-Other-Essays/dp/B0DPR8LZH3#:~:text=Stoicism%20is%20a%20philosophy%20of,and%20what%20is%20in%20mine.",
+          "answer_page_title": "A Stoic Approach to Christianity And Other Essays - Amazon.com",
+          "ai_overview": false,
+          "ai_overview_hrefs": null,
+          "ai_overview_page_titles": null,
+          "results": []
+        },
+        {
+          "question": "Are Stoics judgemental?",
+          "answer_excerpt": "Remember that Stoicism isn't about judging other people. It's not a moral philosophy you're supposed to project and enforce onto the world.",
+          "answer_href": "https://www.instagram.com/p/Cu9l1VVg21R/#:~:text=dailystoic-,Remember%20that%20Stoicism%20isn't%20about%20judging%20other%20people.,and%20enforce%20onto%20the%20world.",
+          "answer_page_title": "Remember that Stoicism isn't about judging other people ... - Instagram",
+          "ai_overview": false,
+          "ai_overview_hrefs": null,
+          "ai_overview_page_titles": null,
+          "results": []
+        },
+        {
+          "question": "Does Stoicism reject religion?",
+          "answer_excerpt": "There is no faith. The Stoics didn't go out there and pray to Zeus or anything like that. It's all about reason because it is a philosophy, first.” “For instance, Stoicism assumes that metaphysically the world is a living organism, which they call God, which is endowed with the logos.",
+          "answer_href": "https://bigthink.com/thinking/is-stoicism-a-religion-3-key-clues/#:~:text=There%20is%20no%20faith.,is%20endowed%20with%20the%20logos.",
+          "answer_page_title": "3 clues that Stoicism is a religion in disguise - Big Think",
+          "ai_overview": false,
+          "ai_overview_hrefs": null,
+          "ai_overview_page_titles": null,
+          "results": []
+        },
+        {
+          "question": "Is Bill Gates Stoic?",
+          "answer_excerpt": "While Bill Gates doesn't explicitly call himself a Stoic, his leadership, resilience, focus on continuous learning, and emphasis on accepting reality and controlling reactions align strongly with key Stoic principles, making him an embodiment of the philosophy, especially alongside figures like Warren Buffett and Jeff Bezos. He practices aspects like deep reflection (his \"Think Weeks\"), managing challenges with a mix of pessimism and optimism, and a commitment to long-term vision, which are all Stoic-adjacent traits.\n\nHow Gates embodies Stoic principles:\n• Resilience & Adaptability: He maintains a long-term perspective, weathering tech industry volatility by planning for worst-case scenarios (like keeping cash reserves) while working towards big goals, a core Stoic concept of preparing for adversity.\n• Continuous Learning: His massive reading habit serves as a form of lifelong education, a way to understand the world and stay humble about what he doesn't know, aligning with the Stoic pursuit of wisdom.\n• Focus on What's in Your Control: Gates emphasizes long-term vision and impact, focusing energy on what can be achieved rather than being paralyzed by external uncertainty, a hallmark of Stoicism.\n• Reflection & Self-Discipline: His famous \"Think Weeks,\" where he isolates himself to read and think, are akin to Stoic practices of introspection and self-examination to gain clarity.\n• Simplicity (in lifestyle): Despite immense wealth, his personal life often reflects a simple, focused approach, a practice some attribute to Stoicism, focusing on substance over luxury.\nWhere interpretations differ:\n• Some argue his vast business empire and competitive nature seem contrary to Stoic ideals of detachment from material success, but others see his disciplined approach to work and philanthropy as applying Stoicism in a modern context.\nIn essence, while he might not have read Marcus Aurelius on day one, Bill Gates' actions, particularly his methodical, resilient, and reflective approach to building Microsoft and leading his philanthropic foundation, resonate deeply with the core tenets of Stoicism, making him a modern example of its application.\n• Never underestimate the power of being alone with your thoughtsNov 17, 2020 — Bill Gates uses this yearly when he goes on a camping trip alone for weeks. He uses this as reflection time and often ...RReddit · r/Stoicism\n• $toicism, Broicism, and stoicisM - MediumNov 29, 2019 — What are these 7 ways of the billionaires? N. 1 on the list is Bill Gates, who allegedly embodies Stoicism because he ...FMedium · Figs in Winter\n• Memo 42: Stoic Leadership in Action—Bill Gates' Blueprint for Visionary ...Nov 13, 2024 — In Memo 41, we explored the Stoic concept of Sympatheia, the idea that “all things are mutually woven together and the...LinkedIn · Alejandro Entredicho Jr. CPSL, P.npn®\n• Better Results With Less Effort: 7 Ways Business Titans Use Stoicism To ...You also see it in Microsoft cofounder and philanthropist Bill Gates, a voracious reader who tries to understand the world a bit b...Daily Stoic\n• Jeff Bezos, Elon Musk, Bill Gates, and Warren Buffett All Use This Ancient ...Aug 25, 2017 — From Jeff Bezos to Elon Musk and Bill Gates, it is difficult to find one hugely successful businessperson today who do...Inc. Magazine\n• Wise Quotes From 5 Greek Philosophers When You Need ...Feb 6, 2019 — One school of philosophy, called stoicism, is especially popular among luminaries like Bill Gates, Warren Buffet, and C...Amy Vetter\n• Stoicism For Leaders and Entrepreneurs to Succeed in ...Nov 10, 2025 — Stoicism in business is more popular than you might think. What do Warren Buffet, Jeff Bezos, and Bill Gates have in c...Tommy Benz\n• The No. 1 'hidden' skill behind billionaire Bill Gates' success—it ...Nov 7, 2023 — Successful people find a balance between pessimism and optimism. Bill Gates is a great example of how effective this hi...CNBC\nRelated Links",
+          "answer_href": "https://www.reddit.com/r/Stoicism/comments/jw1kxn/never_underestimate_the_power_of_being_alone_with/#:~:text=Bill%20Gates%20uses%20this%20yearly,Bill%20Gates%20has%20no%20morals.",
+          "answer_page_title": "Never underestimate the power of being alone with your thoughts",
+          "ai_overview": true,
+          "ai_overview_hrefs": [
+            "https://www.reddit.com/r/Stoicism/comments/jw1kxn/never_underestimate_the_power_of_being_alone_with/#:~:text=Bill%20Gates%20uses%20this%20yearly,Bill%20Gates%20has%20no%20morals.",
+            "https://medium.com/stoicism-philosophy-as-a-way-of-life/toicism-broicism-and-stoicism-part-i-its-not-about-money-or-success-53acda57dbf9#:~:text=What%20are%20these%207%20ways,avoidance%2C%20and%20questionable%20labor%20practices.",
+            "https://www.linkedin.com/pulse/memo-42-stoic-leadership-actionbill-gates-blueprint-alejandro-z6ovc#:~:text=In%20Memo%2041%2C%20we%20explored,shape%20his%20impactful%20philanthropic%20initiatives.",
+            "https://dailystoic.com/better-results-less-effort-7-ways-business-titans-use-stoicism-succeed/#:~:text=You%20also%20see%20it%20in,successful%20business%20moguls%20in%20history.",
+            "https://www.inc.com/peter-economy/bezos-musk-gates-and-buffett-use-this-ancient-phil.html#:~:text=From%20Jeff%20Bezos%20to%20Elon,a%20great%20place%20to%20start.",
+            "https://www.amyvetter.com/blog/wise-quotes-from-greek-philosophers-jxc9m#:~:text=One%20school%20of%20philosophy%2C%20called,what%20he%20can't%20control.",
+            "https://www.tommybenz.com/thought-leadership/stoicism#:~:text=Stoicism%20in%20business%20is%20more,who%20help%20you%20do%20it.",
+            "https://www.cnbc.com/2023/11/07/the-no-1-hidden-skill-behind-bill-gates-wealth-and-success-says-expert-its-the-trick-in-any-field.html#:~:text=Successful%20people%20find%20a%20balance,said%20%E2%80%94%20%22including%20Microsoft's.%22&text=In%202007%2C%20he%20reflected:%20%22,to%20survive%20the%20short%20run."
+          ],
+          "ai_overview_page_titles": [
+            "Never underestimate the power of being alone with your thoughts",
+            "$toicism, Broicism, and stoicisM - Medium",
+            "Memo 42: Stoic Leadership in Action—Bill Gates' Blueprint for Visionary ...",
+            "Better Results With Less Effort: 7 Ways Business Titans Use Stoicism To ...",
+            "Jeff Bezos, Elon Musk, Bill Gates, and Warren Buffett All Use This Ancient ...",
+            "Wise Quotes From 5 Greek Philosophers When You Need ...",
+            "Stoicism For Leaders and Entrepreneurs to Succeed in ...",
+            "The No. 1 'hidden' skill behind billionaire Bill Gates' success—it ..."
+          ],
+          "results": []
+        },
+        {
+          "question": "Is it unhealthy to be Stoic?",
+          "answer_excerpt": "Stoicism isn't inherently unhealthy, but modern interpretations, often called \"naive Stoicism,\" can be harmful by promoting extreme emotion suppression, isolation, and avoidance of necessary help, leading to increased stress or depression; genuine Stoicism aims for virtue and resilience, not apathy, by focusing on what's controllable, but misapplication can become rigid, damaging well-being. The key danger lies in mistaking self-control for emotional numbness, potentially ignoring genuine needs and leading to isolation or preventing therapeutic intervention.\n\nPotential downsides of misapplied Stoicism\n• Emotional Suppression: Believing all strong emotions are bad can lead to hiding feelings, increasing stress, anxiety, or depression over time, notes a futurefocustherapist.com article.\n• Social Isolation: The focus on self-sufficiency can discourage seeking social support, which is crucial for mental health, according to futurefocustherapist.com.\n• Avoidance of Help: Thinking you should handle everything alone can prevent seeking professional therapy or other interventions, says the futurefocustherapist.com blog.\n• Misinterpretation: Viewing Stoicism as being tough and unfeeling, rather than accepting circumstances and focusing on internal virtues (wisdom, justice, courage, temperance), can be damaging, points out a thespellbinder.net article.\nHealthy Stoicism involves\n• Understanding Emotions: Not eliminating emotions, but managing reactions to them and using them as guides, like anger signaling boundaries crossed, notes a YouTube video from The Everyday Stoic author.\n• Accepting Externals: Recognizing things outside your control (like the actions of others or death) to reduce stress, as described by Marcus Aurelius and Epictetus.\n• Focusing on Virtue: Striving for inner peace through virtuous action and self-control, not by becoming emotionless or detached.\nConclusion Stoicism becomes unhealthy when misinterpreted as a rigid, emotion-suppressing ideology (naive Stoicism) rather than a flexible philosophy for building resilience and virtue. It's crucial to balance Stoic principles with human needs for connection and emotional processing, avoiding the pitfalls of emotional numbness or isolation, notes an article from Psychology Today.\n• The Problem with Stoicism : r/philosophyMar 21, 2023 — hope need want desire movement life all of these are the result of value systems of connecting us to the world around ...Reddit · r/philosophy\n• Do you think stoicism is flawed? - QuoraMay 17, 2022 —  * Stoicism is a school that focuses on personal ethics. It advocates that people should accept their circumstances an...Quora\n• Naive Stoicism: Why pop philosophy is bad for your mental healthJul 22, 2023 — According to the paper, naive Stoic ideology is defined by four assumptions: Stoic taciturnity, in which emotions shou...Big Think\n• Author of 'The Everyday Stoic' explains what's wrong with StoicismJan 15, 2025 — and you need that guidance just cutting it into two is very helpful. it's very useful tool it's one of the most useful...YouTube · Everyday Stoic\n• Why Stoicism Might Be Dangerous for Mental HealthSep 13, 2023 — Here are six reasons why Stoicism can be harmful to mental health. Suppression of Emotions: One of the main tenets of ...Future Focus Counselling Center\n• A Critique of Stoicism - Psychology TodayFeb 10, 2023 — Stoicism can be a powerful tool for individuals seeking to improve their mental health and well-being. By accepting wh...Psychology Today\n• Teens are misinterpreting stoicism for toxic positivity – The SpellbinderOct 31, 2023 — It has four main virtues: wisdom, courage, temperance, and justice. Stoics believed that following these virtues would...thespellbinder.net\nRelated Links",
+          "answer_href": "https://www.reddit.com/r/philosophy/comments/11xjow0/the_problem_with_stoicism/",
+          "answer_page_title": "The Problem with Stoicism : r/philosophy",
+          "ai_overview": true,
+          "ai_overview_hrefs": [
+            "https://www.reddit.com/r/philosophy/comments/11xjow0/the_problem_with_stoicism/",
+            "https://www.quora.com/Do-you-think-stoicism-is-flawed",
+            "https://bigthink.com/thinking/naive-stoicism-why-pop-philosophy-is-bad-for-your-mental-health/#:~:text=According%20to%20the%20paper%2C%20naive,and%20finding%20meaning%20in%20life.",
+            "https://www.youtube.com/watch?v=VwIsn05rqLI&t=247",
+            "https://futurefocustherapist.com/blog/why-stoicism-might-be-dangerous-for-mental-health-a-therapists-perspective/#:~:text=Here%20are%20six%20reasons%20why,aspect%20often%20overlooked%20in%20stoicism.",
+            "https://www.psychologytoday.com/us/blog/the-three-minute-therapist/202301/a-critique-of-stoicism#:~:text=Stoicism%20can%20be%20a%20powerful,sense%20of%20gratitude%20and%20contentment.",
+            "https://thespellbinder.net/9134/opinion/teens-are-misinterpreting-stoicism-for-toxic-positivity/"
+          ],
+          "ai_overview_page_titles": [
+            "The Problem with Stoicism : r/philosophy",
+            "Do you think stoicism is flawed? - Quora",
+            "Naive Stoicism: Why pop philosophy is bad for your mental health",
+            "Author of 'The Everyday Stoic' explains what's wrong with Stoicism",
+            "Why Stoicism Might Be Dangerous for Mental Health",
+            "A Critique of Stoicism - Psychology Today",
+            "Teens are misinterpreting stoicism for toxic positivity – The Spellbinder"
+          ],
+          "results": []
+        },
+        {
+          "question": "What is the most openly mocked religion?",
+          "answer_excerpt": "Parodies of particular beliefsReligionDescriptionPastafarianism, or the Church of the Flying Spaghetti MonsterThe most famous example of mock religion. A parody of intelligent design, creationism, and religion in general, as a modern version of Russell's teapot.7 more rows",
+          "answer_href": "https://en.wikipedia.org/wiki/Parody_religion",
+          "answer_page_title": "Parody religion - Wikipedia",
+          "ai_overview": false,
+          "ai_overview_hrefs": null,
+          "ai_overview_page_titles": null,
+          "results": []
+        },
+        {
+          "question": "What is the Stoic approach to Christianity?",
+          "answer_excerpt": "Stoicism is a philosophy of understanding the world around you with the center axis being control: what you control, what you don't. Christian Stoicism follows that same train of thought except it focuses more on our relationship in the faith: what is in God's hands and what is in mine.",
+          "answer_href": "https://www.amazon.com/Stoic-Approach-Christianity-Other-Essays/dp/B0DPR8LZH3#:~:text=Stoicism%20is%20a%20philosophy%20of,and%20what%20is%20in%20mine.",
+          "answer_page_title": "A Stoic Approach to Christianity And Other Essays - Amazon.com",
+          "ai_overview": false,
+          "ai_overview_hrefs": null,
+          "ai_overview_page_titles": null,
+          "results": []
+        },
+        {
+          "question": "What are the 7 rules of Stoicism?",
+          "answer_excerpt": "While there isn't one definitive list, the core of Stoic rules centers on mastering your mind, focusing on what you control (your response), accepting what you can't, practicing virtue, living in the present, preparing for adversity, and understanding your own mortality to live a meaningful life. Key rules often cited include Control your mind, not external events; Accept fate; Practice virtue; Memento Mori (remember death); Amor Fati (love your fate); Focus on what you control; and Prepare for hardship.\nHere are common themes presented as rules:\n1. Control Your Mind, Not Outside Events: You can't control what happens, only your reaction to it. Focus your energy on your judgments and actions.\n2. Practice Virtue: Act with wisdom, justice, courage, and temperance. Virtue is the sole good.\n3. Accept What You Can't Control (Amor Fati): Embrace fate and love everything that happens, good or bad, as part of the natural order.\n4. Prepare for Hardship (Premeditatio Malorum): Regularly contemplate worst-case scenarios to build resilience and appreciate the present.\n5. Memento Mori (Remember You Are Mortal): Acknowledge your mortality to live more fully and make the most of each day.\n6. Simplify and Focus: Remove what isn't necessary; focus energy on what truly matters and what is within your control.\n7. Live in the Present: Don't dwell on the past or fear the future; be present and act with intention now.\nOther common Stoic advice includes taking bold action, being disciplined, asking if something is necessary, learning from everyone, and treating challenges as opportunities for growth.\n• 7 Ancient Stoic Tenets To Keep In Mind Today And Every DayMarcus would say that the Stoic finds a way to turn every negative into a positive. In this famous line, what he's suggesting is t...Daily Stoic\n• 7 Principles Of Stoicism For Limitless Mental Strength - MediumAug 16, 2018 —  Here are 7 principles of stoicism: * You have power over your mind, not outside events. This is a quote you have prob...Medium\n• 7 Stoic Rules For A Better Life - YouTubeNov 21, 2024 — seven stoic rules for a better life. focus on what you control you got to design your day set a routine set a schedule...YouTube · Ryan Holiday\n• 7 Stoic Lessons from Marcus Aurelius | by Aditi AgrawalMar 27, 2025 —  7 Stoic Lessons from Marcus Aurelius * Self-Trust and Confidence. * Change and Acceptence. * Mindfulness and Presence...Medium\n• 12 (Stoic) Rules For Life: An Ancient Guide to the Good Life * Rule 1: Own the morning. * Rule 2: Only focus on what's in your control. * Rule 3: Don't suffer imagined troubles. * Rule 4: Tr...Daily Stoic\n• 7 Stoic Principles that Simplified My Life. - InstagramJan 7, 2026 — 7 STOIC PRINCIPLES THAT SIMPLIFIED My LIFE In world of noise, less is power. 1 Less Is More \"If you seek tranquility do...Instagram · booksforaspirants\n• 50 (Short) Rules For Life From The Stoics - RyanHoliday.netMay 12, 2021 — Here are some rules from the Stoics, which are guides to what they called \"the good life\": * **Focus on what you can c...RyanHoliday.net\n• Stoicism: A Philosophy That Makes Life More Calm and WiseAug 5, 2022 — Stoicism teaches people to: * Control negative emotions * Be grateful for everything they have * Accept circumstances t...BFI Finance\nRelated Links",
+          "answer_href": "https://dailystoic.com/7-stoic-tenets-to-keep-in-mind-today/#:~:text=Marcus%20would%20say%20that%20the,make%20us%20who%20we%20are.",
+          "answer_page_title": "7 Ancient Stoic Tenets To Keep In Mind Today And Every Day",
+          "ai_overview": true,
+          "ai_overview_hrefs": [
+            "https://dailystoic.com/7-stoic-tenets-to-keep-in-mind-today/#:~:text=Marcus%20would%20say%20that%20the,make%20us%20who%20we%20are.",
+            "https://medium.com/@improvingnation/7-principles-of-stoicism-for-limitless-mental-strength-ddbb9e322c6d",
+            "https://www.youtube.com/shorts/_GU7K8r5B3A",
+            "https://aditiagrawal.medium.com/life-changing-quotes-by-marcus-aurelius-ceb3bd306690",
+            "https://dailystoic.com/12-rules-for-life/",
+            "https://www.instagram.com/reel/DTMxI97EqOm/#:~:text=Marcus%20.-,7%20STOIC%20PRINCIPLES%20THAT%20SIMPLIFIED%20My%20LIFE%20In%20world%20of,reading_beings",
+            "https://ryanholiday.net/50-short-rules-for-life-from-the-stoics/#:~:text=Here%20are%20some%20rules%20from%20the%20Stoics%2C,happens%20(Amor%20fati)**%20*%20**Seek%20out%20challenges**",
+            "https://www.bfi.co.id/en/blog/stoikisme-aliran-filsafat-yang-membuat-hidup-lebih-tenang-dan-bijak#:~:text=Stoicism%20teaches%20people%20to:%20*%20Control%20negative,permanent%20*%20Appreciate%20what%20is%20around%20you"
+          ],
+          "ai_overview_page_titles": [
+            "7 Ancient Stoic Tenets To Keep In Mind Today And Every Day",
+            "7 Principles Of Stoicism For Limitless Mental Strength - Medium",
+            "7 Stoic Rules For A Better Life - YouTube",
+            "7 Stoic Lessons from Marcus Aurelius | by Aditi Agrawal",
+            "12 (Stoic) Rules For Life: An Ancient Guide to the Good Life",
+            "7 Stoic Principles that Simplified My Life. - Instagram",
+            "50 (Short) Rules For Life From The Stoics - RyanHoliday.net",
+            "Stoicism: A Philosophy That Makes Life More Calm and Wise"
+          ],
+          "results": []
+        },
+        {
+          "question": "What religion are Stoics?",
+          "answer_excerpt": "The academic community considers Stoicism to be a philosophical school that reached its peak in Rome during the first few centuries of the Common Era. Often overlooked are Stoicism's religious over tones. Beyond its philosophical dimension, Roman Stoicism should be categorized as a religion.",
+          "answer_href": "https://scholars.csus.edu/esploro/outputs/graduate/Is-stoicism-a-religion/99257830864301671#:~:text=The%20academic%20community%20considers%20Stoicism,be%20categorized%20as%20a%20religion.",
+          "answer_page_title": "Is stoicism a religion? - California State University, Sacramento",
+          "ai_overview": false,
+          "ai_overview_hrefs": null,
+          "ai_overview_page_titles": null,
+          "results": []
+        },
+        {
+          "question": "Is David Goggins religious?",
+          "answer_excerpt": "David Goggins has publicly declared that he believes in the Lord Jesus Christ. 🙌✝️ It's powerful to see people known for strength, endurance, and discipline also point to the greatest source of strength: faith in Jesus. Philippians 4:13 says: “I can do all things through Christ who strengthens me.” 💪",
+          "answer_href": "https://www.instagram.com/p/DOL46DRgIuK/#:~:text=David%20Goggins%20has%20publicly%20declared,Christ%20who%20strengthens%20me.%E2%80%9D%20%F0%9F%92%AA",
+          "answer_page_title": "During a live on-stage appearance, David Goggins—a former Navy ...",
+          "ai_overview": false,
+          "ai_overview_hrefs": null,
+          "ai_overview_page_titles": null,
+          "results": []
+        },
+        {
+          "question": "Which religion does Trump belong to?",
+          "answer_excerpt": "Donald Trump identifies as a Christian, having been raised Presbyterian but later describing himself as a nondenominational Christian, influenced by the \"positive thinking\" of ministers like Norman Vincent Peale, and maintains strong ties with evangelical Christians. While he publicly stated in 2020 he's nondenominational, he's consistently spoken of the Bible and Christian faith as important to him.\nKey Aspects of His Religious Affiliation:\n• Upbringing: Raised Presbyterian, attending churches like First Presbyterian in Jamaica, Queens, and Marble Collegiate Church.\n• Self-Identification: Stated in 2020 he's nondenominational but Christian, and previously identified as Protestant and Presbyterian.\n• Influences: Mentored by ministers from the \"positive thinking\" movement, like Norman Vincent Peale, which emphasized positive mental attitude.\n• Public Stance: Often emphasizes his belief in God, the importance of the Bible, and his support for religious freedom, aligning closely with evangelical voters.\n• Relationship with Evangelicals: Cultivated strong relationships with evangelical leaders and has been seen as a champion for their causes.\n• Donald Trump and religion - WikipediaThe religious views of Donald Trump, the 45th and 47th president of the United States, have been a matter for discussion among obs...Wikipedia\n• The Faith of Donald J. Trump: A Spiritual Biography - Amazon.comBased on extensive inside sources, including exclusive interviews with the President and Vice President, The Faith of Donald J. Tr...Amazon.com\n• Trump’s use of religion follows playbook of authoritarian-leaning leaders the world overJun 5, 2020 — Donald Trump has used religion in a number of ways: * **Presenting himself as a Christian nationalist** Trump has made ...The Conversation\n• White Evangelicals See Trump as Fighting for Their Beliefs, Though Many Have Mixed Feelings About His Personal ConductMar 12, 2020Pew Research Center\n• Trump talks about religion - POLITICOApr 11, 2011 — In an interview with the Christian Broadcast Network (CBN), Donald Trump said: * \"I am Christian\" * \"I believe in God\"Politico\n• 5 faith facts about Donald Trump: a Presbyterian who collects Bibles - The Washington PostJun 16, 2015 — Trump is a Presbyterian. He has attended church at: * **First Presbyterian Church in Jamaica, Queens** * **Marble Coll...The Washington Post\nRelated Links",
+          "answer_href": "https://en.wikipedia.org/wiki/Donald_Trump_and_religion#:~:text=The%20religious%20views%20of%20Donald,positive%20mental%20attitude%20shaped%20Trump.",
+          "answer_page_title": "Donald Trump and religion - Wikipedia",
+          "ai_overview": true,
+          "ai_overview_hrefs": [
+            "https://en.wikipedia.org/wiki/Donald_Trump_and_religion#:~:text=The%20religious%20views%20of%20Donald,positive%20mental%20attitude%20shaped%20Trump.",
+            "https://www.amazon.com/Faith-Donald-Trump-Spiritual-Biography/dp/0062749587#:~:text=Based%20on%20extensive%20inside%20sources,to%20be%20something%20he's%20not.",
+            "https://theconversation.com/trumps-use-of-religion-follows-playbook-of-authoritarian-leaning-leaders-the-world-over-140050#:~:text=Donald%20Trump%20has%20used%20religion%20in%20a,extension%20of%20his%20military%20and%20authoritarian%20position%22.",
+            "https://www.pewresearch.org/religion/2020/03/12/white-evangelicals-see-trump-as-fighting-for-their-beliefs-though-many-have-mixed-feelings-about-his-personal-conduct/",
+            "https://www.politico.com/story/2011/04/trump-talks-about-religion-052942#:~:text=In%20an%20interview%20with%20the%20Christian%20Broadcast,sent%20Bibles%20by%20a%20lot%20of%20people&text=we%20keep%20them%20at%20a%20certain%20place%22,to%20do%20anything%20negative%20to%20a%20Bible%22",
+            "https://www.washingtonpost.com/national/religion/5-faith-facts-about-donald-trump-a-presbyterian-who-collects-bibles/2015/06/16/a18c00de-1466-11e5-8457-4b431bf7ed4c_story.html#:~:text=Trump%20is%20a%20Presbyterian.%20He%20has%20attended,nice%20place%20*%20Sometimes%20gives%20Bibles%20away"
+          ],
+          "ai_overview_page_titles": [
+            "Donald Trump and religion - Wikipedia",
+            "The Faith of Donald J. Trump: A Spiritual Biography - Amazon.com",
+            "Trump’s use of religion follows playbook of authoritarian-leaning leaders the world over",
+            "White Evangelicals See Trump as Fighting for Their Beliefs, Though Many Have Mixed Feelings About His Personal Conduct",
+            "Trump talks about religion - POLITICO",
+            "5 faith facts about Donald Trump: a Presbyterian who collects Bibles - The Washington Post"
+          ],
+          "results": []
+        },
+        {
+          "question": "Is Bill Gates Stoic?",
+          "answer_excerpt": "While Bill Gates doesn't explicitly call himself a Stoic, his leadership, resilience, focus on continuous learning, and emphasis on accepting reality and controlling reactions align strongly with key Stoic principles, making him an embodiment of the philosophy, especially alongside figures like Warren Buffett and Jeff Bezos. He practices aspects like deep reflection (his \"Think Weeks\"), managing challenges with a mix of pessimism and optimism, and a commitment to long-term vision, which are all Stoic-adjacent traits.\n\nHow Gates embodies Stoic principles:\n• Resilience & Adaptability: He maintains a long-term perspective, weathering tech industry volatility by planning for worst-case scenarios (like keeping cash reserves) while working towards big goals, a core Stoic concept of preparing for adversity.\n• Continuous Learning: His massive reading habit serves as a form of lifelong education, a way to understand the world and stay humble about what he doesn't know, aligning with the Stoic pursuit of wisdom.\n• Focus on What's in Your Control: Gates emphasizes long-term vision and impact, focusing energy on what can be achieved rather than being paralyzed by external uncertainty, a hallmark of Stoicism.\n• Reflection & Self-Discipline: His famous \"Think Weeks,\" where he isolates himself to read and think, are akin to Stoic practices of introspection and self-examination to gain clarity.\n• Simplicity (in lifestyle): Despite immense wealth, his personal life often reflects a simple, focused approach, a practice some attribute to Stoicism, focusing on substance over luxury.\nWhere interpretations differ:\n• Some argue his vast business empire and competitive nature seem contrary to Stoic ideals of detachment from material success, but others see his disciplined approach to work and philanthropy as applying Stoicism in a modern context.\nIn essence, while he might not have read Marcus Aurelius on day one, Bill Gates' actions, particularly his methodical, resilient, and reflective approach to building Microsoft and leading his philanthropic foundation, resonate deeply with the core tenets of Stoicism, making him a modern example of its application.\n• Never underestimate the power of being alone with your thoughtsNov 17, 2020 — Bill Gates uses this yearly when he goes on a camping trip alone for weeks. He uses this as reflection time and often ...RReddit · r/Stoicism\n• $toicism, Broicism, and stoicisM - MediumNov 29, 2019 — What are these 7 ways of the billionaires? N. 1 on the list is Bill Gates, who allegedly embodies Stoicism because he ...FMedium · Figs in Winter\n• Memo 42: Stoic Leadership in Action—Bill Gates' Blueprint for Visionary ...Nov 13, 2024 — In Memo 41, we explored the Stoic concept of Sympatheia, the idea that “all things are mutually woven together and the...LinkedIn · Alejandro Entredicho Jr. CPSL, P.npn®\n• Better Results With Less Effort: 7 Ways Business Titans Use Stoicism To ...You also see it in Microsoft cofounder and philanthropist Bill Gates, a voracious reader who tries to understand the world a bit b...Daily Stoic\n• Jeff Bezos, Elon Musk, Bill Gates, and Warren Buffett All Use This Ancient ...Aug 25, 2017 — From Jeff Bezos to Elon Musk and Bill Gates, it is difficult to find one hugely successful businessperson today who do...Inc. Magazine\n• Wise Quotes From 5 Greek Philosophers When You Need ...Feb 6, 2019 — One school of philosophy, called stoicism, is especially popular among luminaries like Bill Gates, Warren Buffet, and C...Amy Vetter\n• Stoicism For Leaders and Entrepreneurs to Succeed in ...Nov 10, 2025 — Stoicism in business is more popular than you might think. What do Warren Buffet, Jeff Bezos, and Bill Gates have in c...Tommy Benz\n• The No. 1 'hidden' skill behind billionaire Bill Gates' success—it ...Nov 7, 2023 — Successful people find a balance between pessimism and optimism. Bill Gates is a great example of how effective this hi...CNBC\nRelated Links",
+          "answer_href": "https://www.reddit.com/r/Stoicism/comments/jw1kxn/never_underestimate_the_power_of_being_alone_with/#:~:text=Bill%20Gates%20uses%20this%20yearly,Bill%20Gates%20has%20no%20morals.",
+          "answer_page_title": "Never underestimate the power of being alone with your thoughts",
+          "ai_overview": true,
+          "ai_overview_hrefs": [
+            "https://www.reddit.com/r/Stoicism/comments/jw1kxn/never_underestimate_the_power_of_being_alone_with/#:~:text=Bill%20Gates%20uses%20this%20yearly,Bill%20Gates%20has%20no%20morals.",
+            "https://medium.com/stoicism-philosophy-as-a-way-of-life/toicism-broicism-and-stoicism-part-i-its-not-about-money-or-success-53acda57dbf9#:~:text=What%20are%20these%207%20ways,avoidance%2C%20and%20questionable%20labor%20practices.",
+            "https://www.linkedin.com/pulse/memo-42-stoic-leadership-actionbill-gates-blueprint-alejandro-z6ovc#:~:text=In%20Memo%2041%2C%20we%20explored,shape%20his%20impactful%20philanthropic%20initiatives.",
+            "https://dailystoic.com/better-results-less-effort-7-ways-business-titans-use-stoicism-succeed/#:~:text=You%20also%20see%20it%20in,successful%20business%20moguls%20in%20history.",
+            "https://www.inc.com/peter-economy/bezos-musk-gates-and-buffett-use-this-ancient-phil.html#:~:text=From%20Jeff%20Bezos%20to%20Elon,a%20great%20place%20to%20start.",
+            "https://www.amyvetter.com/blog/wise-quotes-from-greek-philosophers-jxc9m#:~:text=One%20school%20of%20philosophy%2C%20called,what%20he%20can't%20control.",
+            "https://www.tommybenz.com/thought-leadership/stoicism#:~:text=Stoicism%20in%20business%20is%20more,who%20help%20you%20do%20it.",
+            "https://www.cnbc.com/2023/11/07/the-no-1-hidden-skill-behind-bill-gates-wealth-and-success-says-expert-its-the-trick-in-any-field.html#:~:text=Successful%20people%20find%20a%20balance,said%20%E2%80%94%20%22including%20Microsoft's.%22&text=In%202007%2C%20he%20reflected:%20%22,to%20survive%20the%20short%20run."
+          ],
+          "ai_overview_page_titles": [
+            "Never underestimate the power of being alone with your thoughts",
+            "$toicism, Broicism, and stoicisM - Medium",
+            "Memo 42: Stoic Leadership in Action—Bill Gates' Blueprint for Visionary ...",
+            "Better Results With Less Effort: 7 Ways Business Titans Use Stoicism To ...",
+            "Jeff Bezos, Elon Musk, Bill Gates, and Warren Buffett All Use This Ancient ...",
+            "Wise Quotes From 5 Greek Philosophers When You Need ...",
+            "Stoicism For Leaders and Entrepreneurs to Succeed in ...",
+            "The No. 1 'hidden' skill behind billionaire Bill Gates' success—it ..."
+          ],
+          "results": []
+        },
+        {
+          "question": "What is the most openly mocked religion?",
+          "answer_excerpt": "Parodies of particular beliefsReligionDescriptionPastafarianism, or the Church of the Flying Spaghetti MonsterThe most famous example of mock religion. A parody of intelligent design, creationism, and religion in general, as a modern version of Russell's teapot.7 more rows",
+          "answer_href": "https://en.wikipedia.org/wiki/Parody_religion",
+          "answer_page_title": "Parody religion - Wikipedia",
+          "ai_overview": false,
+          "ai_overview_hrefs": null,
+          "ai_overview_page_titles": null,
+          "results": []
+        },
+        {
+          "question": "What are the 7 rules of Stoicism?",
+          "answer_excerpt": "While there isn't one definitive list, the core of Stoic rules centers on mastering your mind, focusing on what you control (your response), accepting what you can't, practicing virtue, living in the present, preparing for adversity, and understanding your own mortality to live a meaningful life. Key rules often cited include Control your mind, not external events; Accept fate; Practice virtue; Memento Mori (remember death); Amor Fati (love your fate); Focus on what you control; and Prepare for hardship.\nHere are common themes presented as rules:\n1. Control Your Mind, Not Outside Events: You can't control what happens, only your reaction to it. Focus your energy on your judgments and actions.\n2. Practice Virtue: Act with wisdom, justice, courage, and temperance. Virtue is the sole good.\n3. Accept What You Can't Control (Amor Fati): Embrace fate and love everything that happens, good or bad, as part of the natural order.\n4. Prepare for Hardship (Premeditatio Malorum): Regularly contemplate worst-case scenarios to build resilience and appreciate the present.\n5. Memento Mori (Remember You Are Mortal): Acknowledge your mortality to live more fully and make the most of each day.\n6. Simplify and Focus: Remove what isn't necessary; focus energy on what truly matters and what is within your control.\n7. Live in the Present: Don't dwell on the past or fear the future; be present and act with intention now.\nOther common Stoic advice includes taking bold action, being disciplined, asking if something is necessary, learning from everyone, and treating challenges as opportunities for growth.\n• 7 Ancient Stoic Tenets To Keep In Mind Today And Every DayMarcus would say that the Stoic finds a way to turn every negative into a positive. In this famous line, what he's suggesting is t...Daily Stoic\n• 7 Principles Of Stoicism For Limitless Mental Strength - MediumAug 16, 2018 —  Here are 7 principles of stoicism: * You have power over your mind, not outside events. This is a quote you have prob...Medium\n• 7 Stoic Rules For A Better Life - YouTubeNov 21, 2024 — seven stoic rules for a better life. focus on what you control you got to design your day set a routine set a schedule...YouTube · Ryan Holiday\n• 7 Stoic Lessons from Marcus Aurelius | by Aditi AgrawalMar 27, 2025 —  7 Stoic Lessons from Marcus Aurelius * Self-Trust and Confidence. * Change and Acceptence. * Mindfulness and Presence...Medium\n• 12 (Stoic) Rules For Life: An Ancient Guide to the Good Life * Rule 1: Own the morning. * Rule 2: Only focus on what's in your control. * Rule 3: Don't suffer imagined troubles. * Rule 4: Tr...Daily Stoic\n• 7 Stoic Principles that Simplified My Life. - InstagramJan 7, 2026 — 7 STOIC PRINCIPLES THAT SIMPLIFIED My LIFE In world of noise, less is power. 1 Less Is More \"If you seek tranquility do...Instagram · booksforaspirants\n• 50 (Short) Rules For Life From The Stoics - RyanHoliday.netMay 12, 2021 — Here are some rules from the Stoics, which are guides to what they called \"the good life\": * **Focus on what you can c...RyanHoliday.net\n• Stoicism: A Philosophy That Makes Life More Calm and WiseAug 5, 2022 — Stoicism teaches people to: * Control negative emotions * Be grateful for everything they have * Accept circumstances t...BFI Finance\nRelated Links",
+          "answer_href": "https://dailystoic.com/7-stoic-tenets-to-keep-in-mind-today/#:~:text=Marcus%20would%20say%20that%20the,make%20us%20who%20we%20are.",
+          "answer_page_title": "7 Ancient Stoic Tenets To Keep In Mind Today And Every Day",
+          "ai_overview": true,
+          "ai_overview_hrefs": [
+            "https://dailystoic.com/7-stoic-tenets-to-keep-in-mind-today/#:~:text=Marcus%20would%20say%20that%20the,make%20us%20who%20we%20are.",
+            "https://medium.com/@improvingnation/7-principles-of-stoicism-for-limitless-mental-strength-ddbb9e322c6d",
+            "https://www.youtube.com/shorts/_GU7K8r5B3A",
+            "https://aditiagrawal.medium.com/life-changing-quotes-by-marcus-aurelius-ceb3bd306690",
+            "https://dailystoic.com/12-rules-for-life/",
+            "https://www.instagram.com/reel/DTMxI97EqOm/#:~:text=Marcus%20.-,7%20STOIC%20PRINCIPLES%20THAT%20SIMPLIFIED%20My%20LIFE%20In%20world%20of,reading_beings",
+            "https://ryanholiday.net/50-short-rules-for-life-from-the-stoics/#:~:text=Here%20are%20some%20rules%20from%20the%20Stoics%2C,happens%20(Amor%20fati)**%20*%20**Seek%20out%20challenges**",
+            "https://www.bfi.co.id/en/blog/stoikisme-aliran-filsafat-yang-membuat-hidup-lebih-tenang-dan-bijak#:~:text=Stoicism%20teaches%20people%20to:%20*%20Control%20negative,permanent%20*%20Appreciate%20what%20is%20around%20you"
+          ],
+          "ai_overview_page_titles": [
+            "7 Ancient Stoic Tenets To Keep In Mind Today And Every Day",
+            "7 Principles Of Stoicism For Limitless Mental Strength - Medium",
+            "7 Stoic Rules For A Better Life - YouTube",
+            "7 Stoic Lessons from Marcus Aurelius | by Aditi Agrawal",
+            "12 (Stoic) Rules For Life: An Ancient Guide to the Good Life",
+            "7 Stoic Principles that Simplified My Life. - Instagram",
+            "50 (Short) Rules For Life From The Stoics - RyanHoliday.net",
+            "Stoicism: A Philosophy That Makes Life More Calm and Wise"
+          ],
+          "results": []
+        },
+        {
+          "question": "What are the 4 rules of Stoicism?",
+          "answer_excerpt": "The four pillars (or cardinal virtues) of Stoicism are Wisdom, Courage, Justice, and Temperance, serving as a practical guide for living a virtuous, resilient, and fulfilling life by focusing on inner character over external circumstances, helping individuals understand good vs. evil, act rightly despite fear, treat others fairly, and practice self-discipline and moderation.\nThe Four Stoic Virtues\n• Wisdom (Prudence): Understanding the world, knowing what is good, bad, and indifferent, and using reason to make sound judgments.\n• Courage (Fortitude): Acting rightly and with integrity in the face of fear, adversity, or difficulty, choosing principle over comfort.\n• Justice (Morality): Treating others fairly, contributing to the common good, and acting with fairness and a sense of duty to humanity.\n• Temperance (Self-Control): Practicing moderation, self-discipline, and restraint over desires and impulses, focusing on what is essential.\nHow They Work Together\n• These virtues are interconnected, with Justice often seen as the foundation from which the others spring.\n• Living by these virtues helps Stoics achieve inner peace and resilience, allowing them to navigate life's challenges without being disturbed by external events, as they focus on what is within their control (their responses and character).\n• Always Remember The Four Stoic Virtues : r/StoicismJan 27, 2020RReddit · r/Stoicism\n• The Highest Good: An Introduction To The 4 Stoic VirtuesDaily Stoic\n• 4 (Stoic) Secrets To The Good LifeAug 5, 2022 — thoracia challenging Nero marcus Aurelius. having empire foisted upon him senica bravely facing his death ko resisting ...YouTube · Daily Stoic\n• The Four Virtues Of Stoicism | Ryan HolidayNov 1, 2024 — stoicism is this idea we don't control what happens we control how we respond to what happens which is what human being...YouTube · Daily Stoic\n• The Four Stoic Virtues: Principles for a Meaningful LifeNov 1, 2024 — The 4 Stoic Virtues: A Guide to Living a Fulfilling Life. Discover the 4 Stoic virtues—Wisdom, Courage, Temperance, and...proclamationjewelry.com\n• The Four Stoic Virtues Simplified | by Adekunle Jr | Stoicism - MediumNov 8, 2021 — Courage. Doing the right thing with clarity and integrity. Each day is a challenge that requires resistance in defaulti...Medium\n• Stoicism: A Philosophy for Life - The Works Counseling CenterDec 26, 2022 — Stoic philosophy is built upon the foundational values of Courage, Temperance, Justice, and Wisdom. These core values ...The Works Counseling Center\nRelated Links",
+          "answer_href": "https://www.reddit.com/r/Stoicism/comments/euit1c/always_remember_the_four_stoic_virtues/",
+          "answer_page_title": "Always Remember The Four Stoic Virtues : r/Stoicism",
+          "ai_overview": true,
+          "ai_overview_hrefs": [
+            "https://www.reddit.com/r/Stoicism/comments/euit1c/always_remember_the_four_stoic_virtues/",
+            "https://dailystoic.com/4-stoic-virtues/",
+            "https://www.youtube.com/watch?v=t16ewWL4AKM",
+            "https://www.youtube.com/shorts/0_75LE4mb4I",
+            "https://www.proclamationjewelry.com/blogs/news/the-4-stoic-virtues#:~:text=The%204%20Stoic%20Virtues:%20A,and%20act%20justly%20toward%20others.&text=Share:,be%20applied%20to%20modern%20life.",
+            "https://medium.com/stoicism-philosophy-as-a-way-of-life/the-four-stoic-virtues-simplified-c8a60bbcd959#:~:text=Courage,courageous%20in%20all%20your%20endeavours.",
+            "https://workscounselingcenter.com/stoicism/#:~:text=Stoic%20philosophy%20is%20built%20upon,be%20happy%20every%20single%20day."
+          ],
+          "ai_overview_page_titles": [
+            "Always Remember The Four Stoic Virtues : r/Stoicism",
+            "The Highest Good: An Introduction To The 4 Stoic Virtues",
+            "4 (Stoic) Secrets To The Good Life",
+            "The Four Virtues Of Stoicism | Ryan Holiday",
+            "The Four Stoic Virtues: Principles for a Meaningful Life",
+            "The Four Stoic Virtues Simplified | by Adekunle Jr | Stoicism - Medium",
+            "Stoicism: A Philosophy for Life - The Works Counseling Center"
+          ],
+          "results": []
+        },
+        {
+          "question": "Does Stoicism reject religion?",
+          "answer_excerpt": "There is no faith. The Stoics didn't go out there and pray to Zeus or anything like that. It's all about reason because it is a philosophy, first.” “For instance, Stoicism assumes that metaphysically the world is a living organism, which they call God, which is endowed with the logos.",
+          "answer_href": "https://bigthink.com/thinking/is-stoicism-a-religion-3-key-clues/#:~:text=There%20is%20no%20faith.,is%20endowed%20with%20the%20logos.",
+          "answer_page_title": "3 clues that Stoicism is a religion in disguise - Big Think",
+          "ai_overview": false,
+          "ai_overview_hrefs": null,
+          "ai_overview_page_titles": null,
+          "results": []
+        },
+        {
+          "question": "What did Marcus Aurelius think of Christians?",
+          "answer_excerpt": "Marcus felt Christians had eagerness to meet death without real justification and without due dignity, and looked upon the Christians as misguided enthusiasts, who had to be punished as the law then stood, but whom he no more than Hadrian and Antoninus Pius wished to punish.",
+          "answer_href": "https://www.reddit.com/r/Stoicism/comments/1bjnwcf/what_did_ancient_stoics_such_as_emperor_marcus/#:~:text=Marcus%20felt%20Christians%20had%20eagerness,Antoninus%20Pius%20wished%20to%20punish.",
+          "answer_page_title": "What did ancient stoics such as Emperor Marcus Aurelius think of ...",
+          "ai_overview": false,
+          "ai_overview_hrefs": null,
+          "ai_overview_page_titles": null,
+          "results": []
+        },
+        {
+          "question": "Did Christianity or Stoicism come first?",
+          "answer_excerpt": "Stoics predated Christians by hundreds of years as is evidenced by the dates for the founders of the Stoic School: Zeno 334-262 BCE, Cleanthes 330-230 BCE, and Chrysippus 279-206 BCE.",
+          "answer_href": "https://www.facebook.com/groups/1690278417775179/posts/3047162078753466/#:~:text=Stoics%20predated%20Christians%20by%20hundreds,and%20Chrysippus%20279%2D206%20BCE.",
+          "answer_page_title": "Stoicism philosophy and its comparison to Christianity - Facebook",
+          "ai_overview": false,
+          "ai_overview_hrefs": null,
+          "ai_overview_page_titles": null,
+          "results": []
+        },
+        {
+          "question": "Is Bill Gates Stoic?",
+          "answer_excerpt": "While Bill Gates doesn't explicitly call himself a Stoic, his leadership, resilience, focus on continuous learning, and emphasis on accepting reality and controlling reactions align strongly with key Stoic principles, making him an embodiment of the philosophy, especially alongside figures like Warren Buffett and Jeff Bezos. He practices aspects like deep reflection (his \"Think Weeks\"), managing challenges with a mix of pessimism and optimism, and a commitment to long-term vision, which are all Stoic-adjacent traits.\n\nHow Gates embodies Stoic principles:\n• Resilience & Adaptability: He maintains a long-term perspective, weathering tech industry volatility by planning for worst-case scenarios (like keeping cash reserves) while working towards big goals, a core Stoic concept of preparing for adversity.\n• Continuous Learning: His massive reading habit serves as a form of lifelong education, a way to understand the world and stay humble about what he doesn't know, aligning with the Stoic pursuit of wisdom.\n• Focus on What's in Your Control: Gates emphasizes long-term vision and impact, focusing energy on what can be achieved rather than being paralyzed by external uncertainty, a hallmark of Stoicism.\n• Reflection & Self-Discipline: His famous \"Think Weeks,\" where he isolates himself to read and think, are akin to Stoic practices of introspection and self-examination to gain clarity.\n• Simplicity (in lifestyle): Despite immense wealth, his personal life often reflects a simple, focused approach, a practice some attribute to Stoicism, focusing on substance over luxury.\nWhere interpretations differ:\n• Some argue his vast business empire and competitive nature seem contrary to Stoic ideals of detachment from material success, but others see his disciplined approach to work and philanthropy as applying Stoicism in a modern context.\nIn essence, while he might not have read Marcus Aurelius on day one, Bill Gates' actions, particularly his methodical, resilient, and reflective approach to building Microsoft and leading his philanthropic foundation, resonate deeply with the core tenets of Stoicism, making him a modern example of its application.\n• Never underestimate the power of being alone with your thoughtsNov 17, 2020 — Bill Gates uses this yearly when he goes on a camping trip alone for weeks. He uses this as reflection time and often ...RReddit · r/Stoicism\n• $toicism, Broicism, and stoicisM - MediumNov 29, 2019 — What are these 7 ways of the billionaires? N. 1 on the list is Bill Gates, who allegedly embodies Stoicism because he ...FMedium · Figs in Winter\n• Memo 42: Stoic Leadership in Action—Bill Gates' Blueprint for Visionary ...Nov 13, 2024 — In Memo 41, we explored the Stoic concept of Sympatheia, the idea that “all things are mutually woven together and the...LinkedIn · Alejandro Entredicho Jr. CPSL, P.npn®\n• Better Results With Less Effort: 7 Ways Business Titans Use Stoicism To ...You also see it in Microsoft cofounder and philanthropist Bill Gates, a voracious reader who tries to understand the world a bit b...Daily Stoic\n• Jeff Bezos, Elon Musk, Bill Gates, and Warren Buffett All Use This Ancient ...Aug 25, 2017 — From Jeff Bezos to Elon Musk and Bill Gates, it is difficult to find one hugely successful businessperson today who do...Inc. Magazine\n• Wise Quotes From 5 Greek Philosophers When You Need ...Feb 6, 2019 — One school of philosophy, called stoicism, is especially popular among luminaries like Bill Gates, Warren Buffet, and C...Amy Vetter\n• Stoicism For Leaders and Entrepreneurs to Succeed in ...Nov 10, 2025 — Stoicism in business is more popular than you might think. What do Warren Buffet, Jeff Bezos, and Bill Gates have in c...Tommy Benz\n• The No. 1 'hidden' skill behind billionaire Bill Gates' success—it ...Nov 7, 2023 — Successful people find a balance between pessimism and optimism. Bill Gates is a great example of how effective this hi...CNBC\nRelated Links",
+          "answer_href": "https://www.reddit.com/r/Stoicism/comments/jw1kxn/never_underestimate_the_power_of_being_alone_with/#:~:text=Bill%20Gates%20uses%20this%20yearly,Bill%20Gates%20has%20no%20morals.",
+          "answer_page_title": "Never underestimate the power of being alone with your thoughts",
+          "ai_overview": true,
+          "ai_overview_hrefs": [
+            "https://www.reddit.com/r/Stoicism/comments/jw1kxn/never_underestimate_the_power_of_being_alone_with/#:~:text=Bill%20Gates%20uses%20this%20yearly,Bill%20Gates%20has%20no%20morals.",
+            "https://medium.com/stoicism-philosophy-as-a-way-of-life/toicism-broicism-and-stoicism-part-i-its-not-about-money-or-success-53acda57dbf9#:~:text=What%20are%20these%207%20ways,avoidance%2C%20and%20questionable%20labor%20practices.",
+            "https://www.linkedin.com/pulse/memo-42-stoic-leadership-actionbill-gates-blueprint-alejandro-z6ovc#:~:text=In%20Memo%2041%2C%20we%20explored,shape%20his%20impactful%20philanthropic%20initiatives.",
+            "https://dailystoic.com/better-results-less-effort-7-ways-business-titans-use-stoicism-succeed/#:~:text=You%20also%20see%20it%20in,successful%20business%20moguls%20in%20history.",
+            "https://www.inc.com/peter-economy/bezos-musk-gates-and-buffett-use-this-ancient-phil.html#:~:text=From%20Jeff%20Bezos%20to%20Elon,a%20great%20place%20to%20start.",
+            "https://www.amyvetter.com/blog/wise-quotes-from-greek-philosophers-jxc9m#:~:text=One%20school%20of%20philosophy%2C%20called,what%20he%20can't%20control.",
+            "https://www.tommybenz.com/thought-leadership/stoicism#:~:text=Stoicism%20in%20business%20is%20more,who%20help%20you%20do%20it.",
+            "https://www.cnbc.com/2023/11/07/the-no-1-hidden-skill-behind-bill-gates-wealth-and-success-says-expert-its-the-trick-in-any-field.html#:~:text=Successful%20people%20find%20a%20balance,said%20%E2%80%94%20%22including%20Microsoft's.%22&text=In%202007%2C%20he%20reflected:%20%22,to%20survive%20the%20short%20run."
+          ],
+          "ai_overview_page_titles": [
+            "Never underestimate the power of being alone with your thoughts",
+            "$toicism, Broicism, and stoicisM - Medium",
+            "Memo 42: Stoic Leadership in Action—Bill Gates' Blueprint for Visionary ...",
+            "Better Results With Less Effort: 7 Ways Business Titans Use Stoicism To ...",
+            "Jeff Bezos, Elon Musk, Bill Gates, and Warren Buffett All Use This Ancient ...",
+            "Wise Quotes From 5 Greek Philosophers When You Need ...",
+            "Stoicism For Leaders and Entrepreneurs to Succeed in ...",
+            "The No. 1 'hidden' skill behind billionaire Bill Gates' success—it ..."
+          ],
+          "results": []
+        },
+        {
+          "question": "What are the 7 rules of Stoicism?",
+          "answer_excerpt": "While there isn't one definitive list, the core of Stoic rules centers on mastering your mind, focusing on what you control (your response), accepting what you can't, practicing virtue, living in the present, preparing for adversity, and understanding your own mortality to live a meaningful life. Key rules often cited include Control your mind, not external events; Accept fate; Practice virtue; Memento Mori (remember death); Amor Fati (love your fate); Focus on what you control; and Prepare for hardship.\nHere are common themes presented as rules:\n1. Control Your Mind, Not Outside Events: You can't control what happens, only your reaction to it. Focus your energy on your judgments and actions.\n2. Practice Virtue: Act with wisdom, justice, courage, and temperance. Virtue is the sole good.\n3. Accept What You Can't Control (Amor Fati): Embrace fate and love everything that happens, good or bad, as part of the natural order.\n4. Prepare for Hardship (Premeditatio Malorum): Regularly contemplate worst-case scenarios to build resilience and appreciate the present.\n5. Memento Mori (Remember You Are Mortal): Acknowledge your mortality to live more fully and make the most of each day.\n6. Simplify and Focus: Remove what isn't necessary; focus energy on what truly matters and what is within your control.\n7. Live in the Present: Don't dwell on the past or fear the future; be present and act with intention now.\nOther common Stoic advice includes taking bold action, being disciplined, asking if something is necessary, learning from everyone, and treating challenges as opportunities for growth.\n• 7 Ancient Stoic Tenets To Keep In Mind Today And Every DayMarcus would say that the Stoic finds a way to turn every negative into a positive. In this famous line, what he's suggesting is t...Daily Stoic\n• 7 Principles Of Stoicism For Limitless Mental Strength - MediumAug 16, 2018 —  Here are 7 principles of stoicism: * You have power over your mind, not outside events. This is a quote you have prob...Medium\n• 7 Stoic Rules For A Better Life - YouTubeNov 21, 2024 — seven stoic rules for a better life. focus on what you control you got to design your day set a routine set a schedule...YouTube · Ryan Holiday\n• 7 Stoic Lessons from Marcus Aurelius | by Aditi AgrawalMar 27, 2025 —  7 Stoic Lessons from Marcus Aurelius * Self-Trust and Confidence. * Change and Acceptence. * Mindfulness and Presence...Medium\n• 12 (Stoic) Rules For Life: An Ancient Guide to the Good Life * Rule 1: Own the morning. * Rule 2: Only focus on what's in your control. * Rule 3: Don't suffer imagined troubles. * Rule 4: Tr...Daily Stoic\n• 7 Stoic Principles that Simplified My Life. - InstagramJan 7, 2026 — 7 STOIC PRINCIPLES THAT SIMPLIFIED My LIFE In world of noise, less is power. 1 Less Is More \"If you seek tranquility do...Instagram · booksforaspirants\n• 50 (Short) Rules For Life From The Stoics - RyanHoliday.netMay 12, 2021 — Here are some rules from the Stoics, which are guides to what they called \"the good life\": * **Focus on what you can c...RyanHoliday.net\n• Stoicism: A Philosophy That Makes Life More Calm and WiseAug 5, 2022 — Stoicism teaches people to: * Control negative emotions * Be grateful for everything they have * Accept circumstances t...BFI Finance\nRelated Links",
+          "answer_href": "https://dailystoic.com/7-stoic-tenets-to-keep-in-mind-today/#:~:text=Marcus%20would%20say%20that%20the,make%20us%20who%20we%20are.",
+          "answer_page_title": "7 Ancient Stoic Tenets To Keep In Mind Today And Every Day",
+          "ai_overview": true,
+          "ai_overview_hrefs": [
+            "https://dailystoic.com/7-stoic-tenets-to-keep-in-mind-today/#:~:text=Marcus%20would%20say%20that%20the,make%20us%20who%20we%20are.",
+            "https://medium.com/@improvingnation/7-principles-of-stoicism-for-limitless-mental-strength-ddbb9e322c6d",
+            "https://www.youtube.com/shorts/_GU7K8r5B3A",
+            "https://aditiagrawal.medium.com/life-changing-quotes-by-marcus-aurelius-ceb3bd306690",
+            "https://dailystoic.com/12-rules-for-life/",
+            "https://www.instagram.com/reel/DTMxI97EqOm/#:~:text=Marcus%20.-,7%20STOIC%20PRINCIPLES%20THAT%20SIMPLIFIED%20My%20LIFE%20In%20world%20of,reading_beings",
+            "https://ryanholiday.net/50-short-rules-for-life-from-the-stoics/#:~:text=Here%20are%20some%20rules%20from%20the%20Stoics%2C,happens%20(Amor%20fati)**%20*%20**Seek%20out%20challenges**",
+            "https://www.bfi.co.id/en/blog/stoikisme-aliran-filsafat-yang-membuat-hidup-lebih-tenang-dan-bijak#:~:text=Stoicism%20teaches%20people%20to:%20*%20Control%20negative,permanent%20*%20Appreciate%20what%20is%20around%20you"
+          ],
+          "ai_overview_page_titles": [
+            "7 Ancient Stoic Tenets To Keep In Mind Today And Every Day",
+            "7 Principles Of Stoicism For Limitless Mental Strength - Medium",
+            "7 Stoic Rules For A Better Life - YouTube",
+            "7 Stoic Lessons from Marcus Aurelius | by Aditi Agrawal",
+            "12 (Stoic) Rules For Life: An Ancient Guide to the Good Life",
+            "7 Stoic Principles that Simplified My Life. - Instagram",
+            "50 (Short) Rules For Life From The Stoics - RyanHoliday.net",
+            "Stoicism: A Philosophy That Makes Life More Calm and Wise"
+          ],
+          "results": []
+        },
+        {
+          "question": "Who do Stoics pray to?",
+          "answer_excerpt": "Personal prayers to the Gods/God/Godhead would seemingly be focused on, for the Stoic, for the will to live, act, and think as Nature/Gods/God intend which is to say in accordance with Reason and Virtue. So whatever your tradition, or lack thereof. Make your prayers from that mindset.",
+          "answer_href": "https://www.facebook.com/groups/TraditionalStoicism/posts/3570849373158521/#:~:text=Personal%20prayers%20to%20the%20Gods,your%20prayers%20from%20that%20mindset.",
+          "answer_page_title": "Stoic prayers and spiritual nature of Stoicism - Facebook",
+          "ai_overview": false,
+          "ai_overview_hrefs": null,
+          "ai_overview_page_titles": null,
+          "results": []
+        },
+        {
+          "question": "Does Stoicism reject religion?",
+          "answer_excerpt": "There is no faith. The Stoics didn't go out there and pray to Zeus or anything like that. It's all about reason because it is a philosophy, first.” “For instance, Stoicism assumes that metaphysically the world is a living organism, which they call God, which is endowed with the logos.",
+          "answer_href": "https://bigthink.com/thinking/is-stoicism-a-religion-3-key-clues/#:~:text=There%20is%20no%20faith.,is%20endowed%20with%20the%20logos.",
+          "answer_page_title": "3 clues that Stoicism is a religion in disguise - Big Think",
+          "ai_overview": false,
+          "ai_overview_hrefs": null,
+          "ai_overview_page_titles": null,
+          "results": []
+        },
+        {
+          "question": "What did Marcus Aurelius think of Christians?",
+          "answer_excerpt": "Marcus felt Christians had eagerness to meet death without real justification and without due dignity, and looked upon the Christians as misguided enthusiasts, who had to be punished as the law then stood, but whom he no more than Hadrian and Antoninus Pius wished to punish.",
+          "answer_href": "https://www.reddit.com/r/Stoicism/comments/1bjnwcf/what_did_ancient_stoics_such_as_emperor_marcus/#:~:text=Marcus%20felt%20Christians%20had%20eagerness,Antoninus%20Pius%20wished%20to%20punish.",
+          "answer_page_title": "What did ancient stoics such as Emperor Marcus Aurelius think of ...",
+          "ai_overview": false,
+          "ai_overview_hrefs": null,
+          "ai_overview_page_titles": null,
+          "results": []
+        },
+        {
+          "question": "What religion are Stoics?",
+          "answer_excerpt": "The academic community considers Stoicism to be a philosophical school that reached its peak in Rome during the first few centuries of the Common Era. Often overlooked are Stoicism's religious over tones. Beyond its philosophical dimension, Roman Stoicism should be categorized as a religion.",
+          "answer_href": "https://scholars.csus.edu/esploro/outputs/graduate/Is-stoicism-a-religion/99257830864301671#:~:text=The%20academic%20community%20considers%20Stoicism,be%20categorized%20as%20a%20religion.",
+          "answer_page_title": "Is stoicism a religion? - California State University, Sacramento",
+          "ai_overview": false,
+          "ai_overview_hrefs": null,
+          "ai_overview_page_titles": null,
+          "results": []
+        },
+        {
+          "question": "Does God exist in Stoicism?",
+          "answer_excerpt": "The Stoics were materialists (or corporealists) for whom God could not exist as a metaphysical or supernatural entity apart from physical Nature. They were therefore renowned for interpreting Greek myths about the gods allegorically, as metaphors for natural forces and processes.",
+          "answer_href": "https://donaldrobertson.name/2012/10/07/stoicism-god-or-atoms/#:~:text=The%20Stoics%20were%20materialists%20(or,for%20natural%20forces%20and%20processes.",
+          "answer_page_title": "Stoicism: God or Atoms? - Donald J. Robertson",
+          "ai_overview": false,
+          "ai_overview_hrefs": null,
+          "ai_overview_page_titles": null,
+          "results": []
+        },
+        {
+          "question": "What is the Stoic approach to Christianity?",
+          "answer_excerpt": "Stoicism is a philosophy of understanding the world around you with the center axis being control: what you control, what you don't. Christian Stoicism follows that same train of thought except it focuses more on our relationship in the faith: what is in God's hands and what is in mine.",
+          "answer_href": "https://www.amazon.com/Stoic-Approach-Christianity-Other-Essays/dp/B0DPR8LZH3#:~:text=Stoicism%20is%20a%20philosophy%20of,and%20what%20is%20in%20mine.",
+          "answer_page_title": "A Stoic Approach to Christianity And Other Essays - Amazon.com",
+          "ai_overview": false,
+          "ai_overview_hrefs": null,
+          "ai_overview_page_titles": null,
+          "results": []
+        }
+      ]
+    }
+  ]
+}

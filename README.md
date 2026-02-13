@@ -107,6 +107,13 @@ npx tsx scripts/set-reflectable.ts --local  # local
 
 This resets every entry to `reflectable = 1`, then re-applies the exclusion rules (short fragments under 10 words and manually listed mid-argument continuations). Any manual toggles made via the admin API will be overwritten.
 
+### Notes
+
+Thematic pages at `/notes/:slug` curate Stoic entries around a specific topic — anxiety, anger, grief, resilience, relationships, daily practice, work, control, the four virtues, the evolution of Stoicism, the Stoic mindset, the main goal of Stoicism, leadership, Gen Z, impermanence, Marcus Aurelius on virtue, community, the mind, amor fati, and book recommendations. Each page runs semantic search against Vectorize at request time to find the most relevant passages, renders FAQ structured data (JSON-LD) for SEO, and links to related notes. Some notes pin specific entries to always appear first (e.g., Meditations 3.6 on the Four Stoic Virtues page, where Marcus Aurelius names all four virtues by name).
+
+- `GET /notes` — index of all thematic pages
+- `GET /notes/:slug` — individual note (e.g., `/notes/the-four-stoic-virtues`)
+
 ## Development
 
 ```bash
