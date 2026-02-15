@@ -32,15 +32,15 @@ const html = `<!DOCTYPE html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Stoic Sage — Meditations &amp; Discourses</title>
-  <meta name="description" content="Semantic search through Stoic philosophy. Search the Meditations by Marcus Aurelius, and the Discourses, Enchiridion and Fragments by Epictetus, with AI-powered explanations.">
+  <title>Stoic Sage — Marcus Aurelius, Seneca &amp; Epictetus</title>
+  <meta name="description" content="Semantic search through Stoic philosophy. Search the Meditations by Marcus Aurelius, On the Tranquillity of Mind and On the Shortness of Life by Seneca, and the Discourses, Enchiridion and Fragments by Epictetus, with AI-powered explanations.">
   <meta property="og:title" content="Stoic Sage">
-  <meta property="og:description" content="Semantic search through Stoic philosophy. Meditations by Marcus Aurelius, Discourses, Enchiridion and Fragments by Epictetus. AI-powered explanations.">
+  <meta property="og:description" content="Semantic search through Stoic philosophy. Meditations by Marcus Aurelius, Seneca's essays, Discourses, Enchiridion and Fragments by Epictetus. AI-powered explanations.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://stoicsage.ai">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Stoic Sage">
-  <meta name="twitter:description" content="Semantic search through Stoic philosophy. Meditations, Discourses, Enchiridion and Fragments.">
+  <meta name="twitter:description" content="Semantic search through Stoic philosophy. Marcus Aurelius, Seneca and Epictetus.">
   <meta name="color-scheme" content="light dark">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛️</text></svg>">
   <style>
@@ -297,7 +297,7 @@ const html = `<!DOCTYPE html>
 <body>
   <div class="container">
     <h1>Stoic Sage</h1>
-    <p class="subtitle">Meditations &amp; Discourses</p>
+    <p class="subtitle">Marcus Aurelius, Seneca &amp; Epictetus</p>
 
     <form class="search-form" id="search-form">
       <input
@@ -318,7 +318,7 @@ const html = `<!DOCTYPE html>
 
     <footer>
       <a href="/notes">Notes</a> \u00B7
-      <a href="https://vreeman.com/meditations">Meditations</a> (Gregory Hays) \u00B7 <a href="https://vreeman.com/discourses/">Discourses</a> \u00B7 <a href="https://vreeman.com/discourses/enchiridion">Enchiridion</a> \u00B7 <a href="https://vreeman.com/discourses/fragments">Fragments</a> (Robert Dobbin)
+      <a href="https://vreeman.com/meditations">Meditations</a> (Gregory Hays) \u00B7 <a href="https://vreeman.com/seneca/on-the-tranquillity-of-mind">On the Tranquillity of Mind</a> \u00B7 <a href="https://vreeman.com/seneca/on-the-shortness-of-life">On the Shortness of Life</a> (Seneca) \u00B7 <a href="https://vreeman.com/discourses/">Discourses</a> \u00B7 <a href="https://vreeman.com/discourses/enchiridion">Enchiridion</a> \u00B7 <a href="https://vreeman.com/discourses/fragments">Fragments</a> (Robert Dobbin)
     </footer>
   </div>
 
@@ -332,6 +332,8 @@ const html = `<!DOCTYPE html>
     var lastEntries = [];
 
     function formatCitation(entry) {
+      if (entry.source === "seneca-tranquillity") return "On the Tranquillity of Mind " + entry.book + '.' + escapeHtml(String(entry.entry));
+      if (entry.source === "seneca-shortness") return "On the Shortness of Life " + entry.book + '.' + escapeHtml(String(entry.entry));
       if (entry.source === "discourses") return "Discourses " + entry.book + '.' + escapeHtml(String(entry.entry));
       if (entry.source === "enchiridion") return "Enchiridion " + entry.book + '.' + escapeHtml(String(entry.entry));
       if (entry.source === "fragments") return "Fragments " + entry.book + '.' + escapeHtml(String(entry.entry));
@@ -518,7 +520,7 @@ app.get("/", (c) => {
   return c.html(html);
 });
 
-const VALID_SOURCES = ["meditations", "discourses", "enchiridion", "fragments"];
+const VALID_SOURCES = ["meditations", "discourses", "enchiridion", "fragments", "seneca-tranquillity", "seneca-shortness"];
 
 // Source weights imported from weighted-random.ts (single source of truth)
 const SOURCE_WEIGHTS = REFLECTION_WEIGHTS.SOURCE_WEIGHTS;
@@ -636,6 +638,8 @@ app.post("/api/explain", async (c) => {
 
   const sourceLabels: Record<string, string> = {
     meditations: "Meditations",
+    "seneca-tranquillity": "On the Tranquillity of Mind",
+    "seneca-shortness": "On the Shortness of Life",
     discourses: "Discourses",
     enchiridion: "Enchiridion",
     fragments: "Fragments",
@@ -649,11 +653,15 @@ app.post("/api/explain", async (c) => {
     .join("\n\n");
 
   const hasMeditations = entries.some((e) => !e.source || e.source === "meditations");
+  const hasSenecaTranquillity = entries.some((e) => e.source === "seneca-tranquillity");
+  const hasSenecaShortness = entries.some((e) => e.source === "seneca-shortness");
   const hasDiscourses = entries.some((e) => e.source === "discourses");
   const hasEnchiridion = entries.some((e) => e.source === "enchiridion");
   const hasFragments = entries.some((e) => e.source === "fragments");
   const authors = [
     hasMeditations ? "Marcus Aurelius (Meditations)" : "",
+    hasSenecaTranquillity ? "Seneca (On the Tranquillity of Mind)" : "",
+    hasSenecaShortness ? "Seneca (On the Shortness of Life)" : "",
     hasDiscourses ? "Epictetus (Discourses)" : "",
     hasEnchiridion ? "Epictetus (Enchiridion)" : "",
     hasFragments ? "Epictetus (Fragments)" : "",
@@ -663,7 +671,7 @@ app.post("/api/explain", async (c) => {
 
 RULES:
 - ONLY use the entries provided below. Never invent or assume content not present.
-- Cite entries by source and number (e.g., "In Meditations 6.26, Marcus writes...", "In Discourses 1.1.1, Epictetus teaches...", "In Enchiridion 1.5, Epictetus says...", or "In Fragments 8, Epictetus states...").
+- Cite entries by source and number (e.g., "In Meditations 6.26, Marcus writes...", "In On the Tranquillity of Mind 2.1, Seneca advises...", "In On the Shortness of Life 1.3, Seneca argues...", "In Discourses 1.1.1, Epictetus teaches...", "In Enchiridion 1.5, Epictetus says...", or "In Fragments 8, Epictetus states...").
 - Quote short phrases directly from the text when relevant.
 - Keep your explanation concise: 2-4 short paragraphs.
 - Write in plain, modern English.

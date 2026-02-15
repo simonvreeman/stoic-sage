@@ -6,7 +6,7 @@
  *
  * Layer 0: Base weight — spaced repetition (never-seen 10x, recharges over 30 days)
  * Layer 1: Marked boost — curated <mark> passages get 1.3x (VRE-284)
- * Layer 2: Source weight — Meditations 1.0, Discourses/Enchiridion 0.85, Fragments 0.75
+ * Layer 2: Source weight — Meditations 1.0, Seneca/Discourses/Enchiridion 0.85, Fragments 0.75
  * Layer 3: Rating multiplier — 0.7x to 1.3x based on avg of last 3 ratings (VRE-271)
  *
  * Used by /api/daily (seeded PRNG for deterministic daily entry)
@@ -41,6 +41,8 @@ export const REFLECTION_WEIGHTS = {
   /** Source priority weights — same values used in search. */
   SOURCE_WEIGHTS: {
     meditations: 1.0,
+    "seneca-tranquillity": 0.85,
+    "seneca-shortness": 0.85,
     discourses: 0.85,
     enchiridion: 0.85,
     fragments: 0.75,

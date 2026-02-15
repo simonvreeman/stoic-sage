@@ -1104,6 +1104,8 @@ function formatCitation(entry: {
 }): string {
   const labels: Record<string, string> = {
     meditations: "Meditations",
+    "seneca-tranquillity": "On the Tranquillity of Mind",
+    "seneca-shortness": "On the Shortness of Life",
     discourses: "Discourses",
     enchiridion: "Enchiridion",
     fragments: "Fragments",
@@ -1490,7 +1492,7 @@ function renderNotesIndex(): string {
 
     <footer>
       <a href="/">Stoic Sage</a> \u00B7
-      <a href="https://vreeman.com/meditations">Meditations</a> (Gregory Hays) \u00B7 <a href="https://vreeman.com/discourses/">Discourses</a> \u00B7 <a href="https://vreeman.com/discourses/enchiridion">Enchiridion</a> \u00B7 <a href="https://vreeman.com/discourses/fragments">Fragments</a> (Robert Dobbin)
+      <a href="https://vreeman.com/meditations">Meditations</a> (Gregory Hays) \u00B7 <a href="https://vreeman.com/seneca/on-the-tranquillity-of-mind">On the Tranquillity of Mind</a> \u00B7 <a href="https://vreeman.com/seneca/on-the-shortness-of-life">On the Shortness of Life</a> (Seneca) \u00B7 <a href="https://vreeman.com/discourses/">Discourses</a> \u00B7 <a href="https://vreeman.com/discourses/enchiridion">Enchiridion</a> \u00B7 <a href="https://vreeman.com/discourses/fragments">Fragments</a> (Robert Dobbin)
     </footer>
   </div>
 </body>
@@ -1600,7 +1602,7 @@ function renderNotePage(
 
     <footer>
       <a href="/">Stoic Sage</a> \u00B7 <a href="/notes">Notes</a> \u00B7
-      <a href="https://vreeman.com/meditations">Meditations</a> (Gregory Hays) \u00B7 <a href="https://vreeman.com/discourses/">Discourses</a> \u00B7 <a href="https://vreeman.com/discourses/enchiridion">Enchiridion</a> \u00B7 <a href="https://vreeman.com/discourses/fragments">Fragments</a> (Robert Dobbin)
+      <a href="https://vreeman.com/meditations">Meditations</a> (Gregory Hays) \u00B7 <a href="https://vreeman.com/seneca/on-the-tranquillity-of-mind">On the Tranquillity of Mind</a> \u00B7 <a href="https://vreeman.com/seneca/on-the-shortness-of-life">On the Shortness of Life</a> (Seneca) \u00B7 <a href="https://vreeman.com/discourses/">Discourses</a> \u00B7 <a href="https://vreeman.com/discourses/enchiridion">Enchiridion</a> \u00B7 <a href="https://vreeman.com/discourses/fragments">Fragments</a> (Robert Dobbin)
     </footer>
   </div>
 </body>

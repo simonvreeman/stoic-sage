@@ -1,6 +1,6 @@
 # Stoic Sage
 
-A personal semantic search engine for Stoic philosophy, running entirely on Cloudflare's free tier. Currently indexes *Meditations* by Marcus Aurelius, and the *Discourses*, *Enchiridion* and *Fragments* by Epictetus.
+A personal semantic search engine for Stoic philosophy, running entirely on Cloudflare's free tier. Currently indexes *Meditations* by Marcus Aurelius, *On the Tranquillity of Mind* and *On the Shortness of Life* by Seneca, and the *Discourses*, *Enchiridion* and *Fragments* by Epictetus.
 
 ## Architecture
 
@@ -33,6 +33,8 @@ src/
     stoicism-and-leadership.ts   — ~33KB, Stoicism in global conflict
 scripts/
   parse-meditations.ts    — HTML parser for Meditations (generates data/meditations.json)
+  parse-seneca-tranquillity.ts — HTML parser for On the Tranquillity of Mind (generates data/seneca-tranquillity.json)
+  parse-seneca-shortness.ts — HTML parser for On the Shortness of Life (generates data/seneca-shortness.json)
   parse-enchiridion.ts    — HTML parser for Enchiridion (generates data/enchiridion.json)
   parse-fragments.ts      — HTML parser for Fragments (generates data/fragments.json)
   parse-discourses.ts     — HTML parser for Discourses (generates data/discourses.json)
@@ -43,6 +45,8 @@ scripts/
   cluster-paa.ts          — Clusters PAA questions into themes
 data/
   meditations.json        — Parsed Meditations entries (499 records, includes heading and marked fields)
+  seneca-tranquillity.json — Parsed On the Tranquillity of Mind entries (43 records)
+  seneca-shortness.json   — Parsed On the Shortness of Life entries (40 records, 16 marked)
   enchiridion.json        — Parsed Enchiridion entries (84 records)
   fragments.json          — Parsed Fragments entries (31 records)
   discourses.json         — Parsed Discourses entries (722 records)
@@ -96,7 +100,7 @@ Daily/random responses include view tracking: `{ "source": "meditations", "book"
 
 Search responses: `{ "results": [{ "source": "meditations", "book": 6, "entry": "26", "text": "...", "score": 0.76, "weightedScore": 0.76 }] }`
 
-Search results are sorted by `weightedScore` (raw cosine similarity × source weight). The `score` field preserves the original unweighted similarity for debugging. Source weights: Meditations 1.0, Discourses 0.85, Enchiridion 0.85, Fragments 0.75. The explain endpoint receives these weighted-sorted entries from the frontend as LLM context.
+Search results are sorted by `weightedScore` (raw cosine similarity × source weight). The `score` field preserves the original unweighted similarity for debugging. Source weights: Meditations 1.0, Seneca/Discourses/Enchiridion 0.85, Fragments 0.75. The explain endpoint receives these weighted-sorted entries from the frontend as LLM context.
 
 Explain request: `POST { "query": "...", "entries": [{ "source": "meditations", "book": 6, "entry": "26", "text": "..." }] }`
 Explain response: Server-Sent Events stream (text/event-stream) from `@cf/meta/llama-3.3-70b-instruct-fp8-fast`.
@@ -139,6 +143,39 @@ Gregory Hays translation from vreeman.com/meditations. 12 books, 499 entries tot
 - `<mark>` tags highlight notable passages — parser detects these and sets `marked: true`
 - Book 1 `<h3>` headings contain person/topic names — parser extracts these into `heading` field
 - Parser must use a DOM library (cheerio/linkedom) to handle nested HTML correctly
+
+### On the Tranquillity of Mind — Seneca
+
+From vreeman.com/seneca/on-the-tranquillity-of-mind. 17 chapters, 43 entries total. Philosophical dialogue between Serenus and Seneca — Serenus presents his spiritual unease in Chapter 1, Seneca responds with practical Stoic advice in Chapters 2–17. Entry-level chunking — each paragraph within a chapter is a separate entry.
+
+**Marked entries** — 0 marked entries in this text.
+
+#### Tranquillity HTML Structure
+
+- Single `<main>` element, flat paragraph structure
+- Content boundary: between `<main>` and `<h2 id="fn">` (footnotes section)
+- Chapter markers: `<p>` containing `<strong id="chapter-N">`
+- Continuation paragraphs: plain `<p>` without `<strong id="chapter-...">` belong to preceding chapter
+- Blockquotes: 1 (Lucretius poetry) — continuation content for preceding entry
+- Footnote refs: 29 `<sup>` refs — stripped during parsing
+- No `<mark>` tags
+
+### On the Shortness of Life — Seneca
+
+From vreeman.com/seneca/on-the-shortness-of-life. 20 chapters, 40 entries total. Continuous essay/letter addressed to Paulinus arguing that life is long enough if we stop wasting it. Entry-level chunking — each paragraph within a chapter is a separate entry.
+
+**Marked entries** — The source HTML contains `<mark>` tags highlighting 16 notable/quotable passages. The parser captures this as a `marked: boolean` field. These get the 1.3x boost in daily/random weighted selection.
+
+#### Shortness HTML Structure
+
+- Identical to On the Tranquillity of Mind (same HTML template)
+- Single `<main>` element, flat paragraph structure
+- Content boundary: between `<main>` and `<h2 id="fn">` (footnotes section)
+- Chapter markers: `<p>` containing `<strong id="chapter-N">`
+- Continuation paragraphs belong to preceding chapter
+- Blockquotes: 1 (Virgil poetry in Ch 9) — continuation content
+- Footnote refs: 46 `<sup>` refs — stripped during parsing
+- 16 `<mark>` tags highlight notable passages → `marked: true`
 
 ### Enchiridion — Epictetus
 
@@ -189,8 +226,8 @@ Robert Dobbin translation from vreeman.com/discourses/fragments. 31 entries (num
 ```
 entries (D1):
   id       INTEGER PRIMARY KEY AUTOINCREMENT
-  source   TEXT NOT NULL DEFAULT 'meditations'  -- 'meditations', 'discourses', 'enchiridion', or 'fragments'
-  book     INTEGER NOT NULL                     -- book (1-12 / 1-4), chapter (1-53), or fragment number (1-28)
+  source   TEXT NOT NULL DEFAULT 'meditations'  -- 'meditations', 'seneca-tranquillity', 'seneca-shortness', 'discourses', 'enchiridion', or 'fragments'
+  book     INTEGER NOT NULL                     -- book (1-12 / 1-4), chapter (1-53 / 1-17 / 1-20), or fragment number (1-28)
   entry    TEXT NOT NULL                         -- string to support "49a" suffixes
   text     TEXT NOT NULL
   marked   INTEGER NOT NULL DEFAULT 0           -- 1 if entry contains <mark> highlights in source HTML
@@ -212,13 +249,17 @@ entry_views (D1):
 
 ```bash
 npx tsx scripts/parse-meditations.ts           # Fetch HTML → data/meditations.json (499 entries)
+npx tsx scripts/parse-seneca-tranquillity.ts   # Fetch HTML → data/seneca-tranquillity.json (43 entries)
+npx tsx scripts/parse-seneca-shortness.ts      # Fetch HTML → data/seneca-shortness.json (40 entries)
 npx tsx scripts/parse-enchiridion.ts           # Fetch HTML → data/enchiridion.json (84 entries)
 npx tsx scripts/parse-fragments.ts             # Fetch HTML → data/fragments.json (31 entries)
 npx tsx scripts/parse-discourses.ts            # Fetch HTML → data/discourses.json (722 entries)
-npx tsx scripts/seed-d1.ts data/meditations.json   # Insert → D1 database
-npx tsx scripts/seed-d1.ts data/enchiridion.json   # Insert → D1 database
-npx tsx scripts/seed-d1.ts data/fragments.json     # Insert → D1 database
-npx tsx scripts/seed-d1.ts data/discourses.json    # Insert → D1 database
+npx tsx scripts/seed-d1.ts data/meditations.json            # Insert → D1 database
+npx tsx scripts/seed-d1.ts data/seneca-tranquillity.json    # Insert → D1 database
+npx tsx scripts/seed-d1.ts data/seneca-shortness.json       # Insert → D1 database
+npx tsx scripts/seed-d1.ts data/enchiridion.json            # Insert → D1 database
+npx tsx scripts/seed-d1.ts data/fragments.json              # Insert → D1 database
+npx tsx scripts/seed-d1.ts data/discourses.json             # Insert → D1 database
 npx tsx scripts/set-reflectable.ts                 # Set reflectable=0 on non-standalone entries (remote)
 npx tsx scripts/set-reflectable.ts --local         # Set reflectable=0 (local)
 ```
@@ -227,15 +268,17 @@ npx tsx scripts/set-reflectable.ts --local         # Set reflectable=0 (local)
 
 ```bash
 # Requires CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_API_TOKEN env vars
-npx tsx scripts/embed-entries.ts data/meditations.json   # Embed → Vectorize (499 vectors)
-npx tsx scripts/embed-entries.ts data/enchiridion.json   # Embed → Vectorize (84 vectors)
-npx tsx scripts/embed-entries.ts data/fragments.json     # Embed → Vectorize (31 vectors)
-npx tsx scripts/embed-entries.ts data/discourses.json    # Embed → Vectorize (722 vectors)
+npx tsx scripts/embed-entries.ts data/meditations.json            # Embed → Vectorize (499 vectors)
+npx tsx scripts/embed-entries.ts data/seneca-tranquillity.json    # Embed → Vectorize (43 vectors)
+npx tsx scripts/embed-entries.ts data/seneca-shortness.json       # Embed → Vectorize (40 vectors)
+npx tsx scripts/embed-entries.ts data/enchiridion.json            # Embed → Vectorize (84 vectors)
+npx tsx scripts/embed-entries.ts data/fragments.json              # Embed → Vectorize (31 vectors)
+npx tsx scripts/embed-entries.ts data/discourses.json             # Embed → Vectorize (722 vectors)
 ```
 
 - Embedding model: `@cf/baai/bge-base-en-v1.5` (768 dimensions, mean pooling)
 - Index: `meditations-index` (cosine similarity)
-- Vector IDs: `{source}-{book}-{entry}` (e.g., `meditations-6-26`, `enchiridion-1-3`, `fragments-10-10a`, `discourses-1-1.1`)
+- Vector IDs: `{source}-{book}-{entry}` (e.g., `meditations-6-26`, `seneca-tranquillity-2-1`, `seneca-shortness-1-3`, `enchiridion-1-3`, `fragments-10-10a`, `discourses-1-1.1`)
 - Metadata: `{ source, book, entry }` stored with each vector
 - Batches embeddings in groups of 100, upserts via `wrangler vectorize upsert`
 
@@ -247,7 +290,7 @@ Single-page HTML served inline from Hono's `GET /` route. Features:
 - **"Show me another"** — Fetches `/api/random` for a truly random entry
 - **Semantic search** — Search box queries `/api/search`, displays ranked results with scores
 - **AI explanations** — "Explain these results" button streams `/api/explain` via SSE
-- **Source attribution** — Citations show "Meditations 6.26", "Discourses 1.1.1", "Enchiridion 1.3", or "Fragments 8"
+- **Source attribution** — Citations show "Meditations 6.26", "On the Tranquillity of Mind 2.1", "On the Shortness of Life 1.3", "Discourses 1.1.1", "Enchiridion 1.3", or "Fragments 8"
 - **Dark mode** — Follows the user's OS preference via `prefers-color-scheme` media query. All colors defined as CSS custom properties in `:root`, overridden in `@media (prefers-color-scheme: dark)`. No manual toggle — system setting only.
 - **Fade-in transitions** — Content area animates on load/update
 - **Meta tags** — OG (title, description, type, url), Twitter Card, description meta, `color-scheme` meta
@@ -258,14 +301,14 @@ Single-page HTML served inline from Hono's `GET /` route. Features:
 ## Key Decisions
 
 - **Entry-level chunking** — Meditations is written as atomic thoughts. Entry = retrieval unit.
-- **Vector search only (no FTS)** — ~1336 entries from four texts; hybrid search is over-engineered.
+- **Vector search only (no FTS)** — ~1419 entries from six texts; hybrid search is over-engineered.
 - **Hono router** — Lightweight, TypeScript-native, popular with Workers.
 - **Not using AutoRAG** — Need control over chunk boundaries.
 - **Date-seeded daily entry** — Hash of `YYYY-MM-DD` string for deterministic, timezone-agnostic daily selection. Uses Mulberry32 seeded PRNG for weighted random sampling.
 - **Source column** — `source` field in D1 and vector metadata enables multi-text support without schema changes.
-- **Source priority weighting** — Search results weighted by `SOURCE_WEIGHTS` (Meditations 1.0, Discourses/Enchiridion 0.85, Fragments 0.75). Post-processing step after Vectorize; returns both `score` and `weightedScore`. Tunable via the constant in `src/index.ts`.
+- **Source priority weighting** — Search results weighted by `SOURCE_WEIGHTS` (Meditations 1.0, Seneca/Discourses/Enchiridion 0.85, Fragments 0.75). Post-processing step after Vectorize; returns both `score` and `weightedScore`. Tunable via the constant in `src/index.ts`.
 - **Weighted daily/random selection** — Daily and random entries are selected using weighted reservoir sampling (`src/weighted-random.ts`). Four-layer weighting stack: `final_weight = base_weight × marked_boost × source_weight × rating_multiplier`. Layer 0 (spaced repetition) strongly favors unseen entries (10x) and entries not seen recently (recharges over 30 days, decayed by log2 of view count). Layer 1 (marked boost, 1.3x) and Layer 2 (source weight) apply editorial and source quality signals. Layer 3 (user ratings) maps avg of last 3 ratings to multipliers: 1→0.7x, 2→1.0x, 3→1.3x, unrated→1.0x. All tunable via `REFLECTION_WEIGHTS` constant. Views are tracked in `entry_views` table; daily records at most one view per day per entry.
-- **Reflectable filter** — `reflectable` column in D1 excludes non-standalone entries from daily/random selection. 32 entries excluded: 11 Meditations (cryptic fragments under 10 words) and 21 Discourses (mid-argument dialogue continuations). Reflection pool: 1,304 entries. Admin routes allow toggling any entry's status. Managed by `scripts/set-reflectable.ts` (idempotent, resets all to 1 first). Search and entry lookup are unaffected.
+- **Reflectable filter** — `reflectable` column in D1 excludes non-standalone entries from daily/random selection. 33 entries excluded: 11 Meditations (cryptic fragments under 10 words), 21 Discourses (mid-argument dialogue continuations), and 1 Seneca (author attribution). Reflection pool: 1,386 entries. Admin routes allow toggling any entry's status. Managed by `scripts/set-reflectable.ts` (idempotent, resets all to 1 first). Search and entry lookup are unaffected.
 - **System-only dark mode** — No manual toggle. Pure CSS via `prefers-color-scheme` media query. Zero JS, zero localStorage. KISS.
 - **Notes as a Hono sub-app** — Thematic SEO pages live in `src/notes.ts`, mounted via `app.route("/notes", notesApp)`. Each note defines `searchQueries` (semantic search terms for Vectorize), `faqs` (static Q&A), `relatedSlugs`, and optionally `pinnedEntries` (specific entries to always show first) and `content` (raw HTML essay, rendered directly without escaping). Entries are fetched at request time via Vectorize + D1, cached for 1 hour. Pinned entries are fetched from D1 and prepended before semantic search results, with duplicates excluded. FAQ structured data (JSON-LD FAQPage schema) is included for SEO. Notes live at `/notes/:slug`. PAA questions from AlsoAsked API drive the FAQ content (data in `data/alsoasked/`).
 - **Essay content** — 11 notes include long-form essay content from the original `stoicsage.pages.dev` site, stored in `src/content/` as TypeScript template literal strings. Content is trusted HTML rendered inside a `<div class="note-essay">` between the intro paragraph and "What the Stoics Said" section. Scoped CSS styles under `.note-essay` handle headings, lists, blockquotes, tables, and links with automatic dark mode via CSS custom properties. The 9 notes without essays are unaffected (the `content` field is optional).
