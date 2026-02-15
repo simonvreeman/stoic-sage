@@ -16,6 +16,7 @@ All infrastructure runs on Cloudflare:
 ```
 src/
   index.ts                — Hono app, all API routes
+  search.ts               — Shared semantic-first hybrid search engine (API + notes)
   notes.ts                — Notes sub-app: thematic SEO pages at /notes/:slug
   weighted-random.ts      — Weighted random selection utility (daily/random endpoints)
   content/                — Long-form essay content for 11 notes (HTML in template literals)
@@ -79,7 +80,7 @@ CORS is enabled on all `/api/*` routes via Hono's `cors()` middleware.
 | GET | `/api/entry/:book/:id?source=` | Get a specific entry by source, book/chapter, and entry ID | Live |
 | GET | `/api/random` | Random entry from any source | Live |
 | GET | `/api/daily` | Daily entry (date-seeded, consistent within a day) | Live |
-| GET | `/api/search?q=...&topK=5` | Semantic search across all sources, weighted by source priority | Live |
+| GET | `/api/search?q=...&topK=5` | Semantic-first hybrid search across core Stoic sources (notes excluded) | Live |
 | POST | `/api/explain` | AI explanation of entries (streamed SSE) | Live |
 | PUT | `/api/views/:viewId/rating` | Rate a viewed entry (body: `{ rating: 1\|2\|3 }`) | Live |
 | PUT | `/api/admin/entry/:source/:book/:entry/reflectable` | Toggle reflectable status (auth required) | Live |
@@ -100,7 +101,16 @@ Daily/random responses include view tracking: `{ "source": "meditations", "book"
 
 Search responses: `{ "results": [{ "source": "meditations", "book": 6, "entry": "26", "text": "...", "score": 0.76, "weightedScore": 0.76 }] }`
 
-Search results are sorted by `weightedScore` (raw cosine similarity × source weight). The `score` field preserves the original unweighted similarity for debugging. Source weights: Meditations 1.0, Seneca/Discourses/Enchiridion 0.85, Fragments 0.75. The explain endpoint receives these weighted-sorted entries from the frontend as LLM context.
+Search results are sorted by `weightedScore` from `src/search.ts`. The `score` field preserves the raw semantic similarity (Vectorize cosine score) for debugging and observability.
+
+Search behavior:
+
+- **Semantic-first ranking** — Vectorize retrieval is primary; lexical signals are used mainly to rerank semantic candidates.
+- **Lexical rescue + fallback** — Strong lexical hits (exact phrase / high token overlap) and citation matches can be admitted when semantic misses them; full lexical mode is used if semantic retrieval fails/returns nothing.
+- **Citation boost** — Direct citation queries (e.g., `6.26`, `discourses 1.1`) are explicitly recognized and boosted.
+- **Source whitelist** — Only core text sources are eligible: `meditations`, `seneca-tranquillity`, `seneca-shortness`, `discourses`, `enchiridion`, `fragments`.
+- **Notes excluded** — `notes` content is not eligible for `/api/search` results.
+- **Diversity control** — A soft per-source cap is applied in top results to reduce source clumping.
 
 Explain request: `POST { "query": "...", "entries": [{ "source": "meditations", "book": 6, "entry": "26", "text": "..." }] }`
 Explain response: Server-Sent Events stream (text/event-stream) from `@cf/meta/llama-3.3-70b-instruct-fp8-fast`.
@@ -276,7 +286,7 @@ npx tsx scripts/embed-entries.ts data/fragments.json              # Embed → Ve
 npx tsx scripts/embed-entries.ts data/discourses.json             # Embed → Vectorize (722 vectors)
 ```
 
-- Embedding model: `@cf/baai/bge-base-en-v1.5` (768 dimensions, mean pooling)
+- Embedding model: `@cf/baai/bge-base-en-v1.5` (768 dimensions, CLS pooling)
 - Index: `meditations-index` (cosine similarity)
 - Vector IDs: `{source}-{book}-{entry}` (e.g., `meditations-6-26`, `seneca-tranquillity-2-1`, `seneca-shortness-1-3`, `enchiridion-1-3`, `fragments-10-10a`, `discourses-1-1.1`)
 - Metadata: `{ source, book, entry }` stored with each vector
@@ -301,14 +311,14 @@ Single-page HTML served inline from Hono's `GET /` route. Features:
 ## Key Decisions
 
 - **Entry-level chunking** — Meditations is written as atomic thoughts. Entry = retrieval unit.
-- **Vector search only (no FTS)** — ~1419 entries from six texts; hybrid search is over-engineered.
+- **Semantic-first hybrid search** — `/api/search` uses Vectorize as primary retrieval with lexical reranking/fallback in `src/search.ts`.
 - **Hono router** — Lightweight, TypeScript-native, popular with Workers.
 - **Not using AutoRAG** — Need control over chunk boundaries.
 - **Date-seeded daily entry** — Hash of `YYYY-MM-DD` string for deterministic, timezone-agnostic daily selection. Uses Mulberry32 seeded PRNG for weighted random sampling.
 - **Source column** — `source` field in D1 and vector metadata enables multi-text support without schema changes.
-- **Source priority weighting** — Search results weighted by `SOURCE_WEIGHTS` (Meditations 1.0, Seneca/Discourses/Enchiridion 0.85, Fragments 0.75). Post-processing step after Vectorize; returns both `score` and `weightedScore`. Tunable via the constant in `src/index.ts`.
+- **Search score blending** — `weightedScore` blends normalized semantic score and lexical score, then applies damped source preference from `SOURCE_WEIGHTS` in `src/search.ts`. Semantic receives dominant weight when semantic candidates exist.
 - **Weighted daily/random selection** — Daily and random entries are selected using weighted reservoir sampling (`src/weighted-random.ts`). Four-layer weighting stack: `final_weight = base_weight × marked_boost × source_weight × rating_multiplier`. Layer 0 (spaced repetition) strongly favors unseen entries (10x) and entries not seen recently (recharges over 30 days, decayed by log2 of view count). Layer 1 (marked boost, 1.3x) and Layer 2 (source weight) apply editorial and source quality signals. Layer 3 (user ratings) maps avg of last 3 ratings to multipliers: 1→0.7x, 2→1.0x, 3→1.3x, unrated→1.0x. All tunable via `REFLECTION_WEIGHTS` constant. Views are tracked in `entry_views` table; daily records at most one view per day per entry.
 - **Reflectable filter** — `reflectable` column in D1 excludes non-standalone entries from daily/random selection. 33 entries excluded: 11 Meditations (cryptic fragments under 10 words), 21 Discourses (mid-argument dialogue continuations), and 1 Seneca (author attribution). Reflection pool: 1,386 entries. Admin routes allow toggling any entry's status. Managed by `scripts/set-reflectable.ts` (idempotent, resets all to 1 first). Search and entry lookup are unaffected.
 - **System-only dark mode** — No manual toggle. Pure CSS via `prefers-color-scheme` media query. Zero JS, zero localStorage. KISS.
-- **Notes as a Hono sub-app** — Thematic SEO pages live in `src/notes.ts`, mounted via `app.route("/notes", notesApp)`. Each note defines `searchQueries` (semantic search terms for Vectorize), `faqs` (static Q&A), `relatedSlugs`, and optionally `pinnedEntries` (specific entries to always show first) and `content` (raw HTML essay, rendered directly without escaping). Entries are fetched at request time via Vectorize + D1, cached for 1 hour. Pinned entries are fetched from D1 and prepended before semantic search results, with duplicates excluded. FAQ structured data (JSON-LD FAQPage schema) is included for SEO. Notes live at `/notes/:slug`. PAA questions from AlsoAsked API drive the FAQ content (data in `data/alsoasked/`).
+- **Notes as a Hono sub-app** — Thematic SEO pages live in `src/notes.ts`, mounted via `app.route("/notes", notesApp)`. Each note defines `searchQueries`, `faqs`, `relatedSlugs`, and optionally `pinnedEntries` and `content`. Note entries are fetched at request time through the shared search engine (`src/search.ts`) and merged with pinned entries; query variants are fused via reciprocal rank fusion (RRF) for coverage. FAQ structured data (JSON-LD FAQPage schema) is included for SEO. Notes live at `/notes/:slug`. PAA questions from AlsoAsked API drive the FAQ content (data in `data/alsoasked/`).
 - **Essay content** — 11 notes include long-form essay content from the original `stoicsage.pages.dev` site, stored in `src/content/` as TypeScript template literal strings. Content is trusted HTML rendered inside a `<div class="note-essay">` between the intro paragraph and "What the Stoics Said" section. Scoped CSS styles under `.note-essay` handle headings, lists, blockquotes, tables, and links with automatic dark mode via CSS custom properties. The 9 notes without essays are unaffected (the `content` field is optional).

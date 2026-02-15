@@ -1,7 +1,8 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
-import { selectDailyEntry, selectRandomEntry, REFLECTION_WEIGHTS } from "./weighted-random";
+import { selectDailyEntry, selectRandomEntry } from "./weighted-random";
 import { notesApp } from "./notes";
+import { searchEntriesHybrid } from "./search";
 
 type Bindings = {
   DB: D1Database;
@@ -522,9 +523,6 @@ app.get("/", (c) => {
 
 const VALID_SOURCES = ["meditations", "discourses", "enchiridion", "fragments", "seneca-tranquillity", "seneca-shortness"];
 
-// Source weights imported from weighted-random.ts (single source of truth)
-const SOURCE_WEIGHTS = REFLECTION_WEIGHTS.SOURCE_WEIGHTS;
-
 app.get("/api/entry/:book/:id", async (c) => {
   const bookParam = c.req.param("book");
   const entryId = c.req.param("id");
@@ -558,65 +556,10 @@ app.get("/api/search", async (c) => {
     return c.json({ error: "Query parameter 'q' is required." }, 400);
   }
 
-  // Cap query length to avoid oversized embedding requests
-  const query = rawQuery.trim().slice(0, 500);
-
   const topK = Math.min(Math.max(parseInt(c.req.query("topK") || "5", 10) || 5, 1), 20);
-
-  // Embed the query
-  const embeddingResult = await c.env.AI.run("@cf/baai/bge-base-en-v1.5", {
-    text: [query],
-  });
-
-  const queryVector = embeddingResult.data[0];
-
-  // Search Vectorize
-  const vectorResults = await c.env.VECTORIZE.query(queryVector, {
-    topK,
-    returnMetadata: "all",
-  });
-
-  if (!vectorResults.matches || vectorResults.matches.length === 0) {
-    return c.json({ results: [] });
-  }
-
-  // Fetch full text from D1 for each match
-  const results = await Promise.all(
-    vectorResults.matches.map(async (match) => {
-      const meta = match.metadata as { source: string; book: number; entry: string };
-      const source = meta.source || "meditations";
-      const row = await c.env.DB.prepare(
-        "SELECT source, book, entry, text FROM entries WHERE source = ? AND book = ? AND entry = ?",
-      )
-        .bind(source, meta.book, meta.entry)
-        .first();
-
-      return row
-        ? { source: row.source, book: row.book, entry: row.entry, text: row.text, score: match.score }
-        : null;
-    }),
-  );
-
-  // Deduplicate by source+book+entry (old vectors without source prefix may duplicate new ones)
-  const seen = new Set<string>();
-  const deduped = results.filter(
-    (r): r is NonNullable<typeof r> => {
-      if (!r) return false;
-      const key = `${r.source}-${r.book}-${r.entry}`;
-      if (seen.has(key)) return false;
-      seen.add(key);
-      return true;
-    },
-  );
-
-  const weighted = deduped.map((r) => ({
-    ...r,
-    weightedScore: Math.round(r.score * (SOURCE_WEIGHTS[r.source as string] || 1.0) * 1e8) / 1e8,
-  }));
-
-  weighted.sort((a, b) => b.weightedScore - a.weightedScore);
-
-  return c.json({ results: weighted });
+  const query = rawQuery.trim().slice(0, 500);
+  const results = await searchEntriesHybrid(c.env, query, { topK });
+  return c.json({ results });
 });
 
 app.post("/api/explain", async (c) => {

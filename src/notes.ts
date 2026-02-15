@@ -1,6 +1,6 @@
 import { Hono } from "hono";
-import { REFLECTION_WEIGHTS } from "./weighted-random";
 import * as essays from "./content";
+import { searchEntriesHybrid } from "./search";
 
 type Bindings = {
   DB: D1Database;
@@ -1080,12 +1080,6 @@ const NOTES: Note[] = [
 ];
 
 // ---------------------------------------------------------------------------
-// Source weights (reuse from weighted-random.ts)
-// ---------------------------------------------------------------------------
-
-const SOURCE_WEIGHTS = REFLECTION_WEIGHTS.SOURCE_WEIGHTS;
-
-// ---------------------------------------------------------------------------
 // HTML helpers
 // ---------------------------------------------------------------------------
 
@@ -1618,63 +1612,56 @@ async function searchEntries(
   queries: string[],
   maxResults = 8,
 ): Promise<{ source: string; book: number; entry: string; text: string }[]> {
-  // Embed all queries in parallel
-  const embeddings = await Promise.all(
-    queries.map((q) =>
-      env.AI.run("@cf/baai/bge-base-en-v1.5", { text: [q] }),
+  const uniqueQueries = [...new Set(queries.map((q) => q.trim()).filter(Boolean))].slice(0, 6);
+  if (uniqueQueries.length === 0) return [];
+
+  const perQueryResults = await Promise.all(
+    uniqueQueries.map((query) =>
+      searchEntriesHybrid(env, query, {
+        topK: Math.max(maxResults, 6),
+        semanticTopK: 30,
+        lexicalLimit: 100,
+        diversitySoftCap: 2,
+      }),
     ),
   );
 
-  // Query Vectorize for each embedding
-  const vectorResults = await Promise.all(
-    embeddings.map((emb) =>
-      env.VECTORIZE.query(emb.data[0], { topK: 5, returnMetadata: "all" }),
-    ),
-  );
+  // Reciprocal rank fusion across query variants improves topic coverage.
+  const fused = new Map<
+    string,
+    {
+      score: number;
+      entry: { source: string; book: number; entry: string; text: string };
+    }
+  >();
+  const rrfK = 30;
 
-  // Flatten and deduplicate
-  const seen = new Set<string>();
-  const allMatches: { source: string; book: number; entry: string; score: number }[] = [];
-
-  for (const vr of vectorResults) {
-    if (!vr.matches) continue;
-    for (const match of vr.matches) {
-      const meta = match.metadata as { source: string; book: number; entry: string };
-      const source = meta.source || "meditations";
-      const key = `${source}-${meta.book}-${meta.entry}`;
-      if (seen.has(key)) continue;
-      seen.add(key);
-      allMatches.push({ source, book: meta.book, entry: meta.entry, score: match.score });
+  for (const list of perQueryResults) {
+    for (let i = 0; i < list.length; i++) {
+      const row = list[i];
+      const key = `${row.source}-${row.book}-${row.entry}`;
+      const contribution = 1 / (rrfK + i + 1);
+      const existing = fused.get(key);
+      if (existing) {
+        existing.score += contribution;
+      } else {
+        fused.set(key, {
+          score: contribution,
+          entry: {
+            source: row.source,
+            book: row.book,
+            entry: row.entry,
+            text: row.text,
+          },
+        });
+      }
     }
   }
 
-  // Weight and sort
-  const weighted = allMatches.map((m) => ({
-    ...m,
-    weightedScore:
-      m.score * (SOURCE_WEIGHTS[m.source as keyof typeof SOURCE_WEIGHTS] || 1.0),
-  }));
-  weighted.sort((a, b) => b.weightedScore - a.weightedScore);
-
-  // Take top N and fetch full text
-  const top = weighted.slice(0, maxResults);
-  const entries = await Promise.all(
-    top.map(async (m) => {
-      const row = await env.DB.prepare(
-        "SELECT source, book, entry, text FROM entries WHERE source = ? AND book = ? AND entry = ?",
-      )
-        .bind(m.source, m.book, m.entry)
-        .first<{ source: string; book: number; entry: string; text: string }>();
-      return row;
-    }),
-  );
-
-  return entries.filter(Boolean) as {
-    source: string;
-    book: number;
-    entry: string;
-    text: string;
-  }[];
+  return [...fused.values()]
+    .sort((a, b) => b.score - a.score)
+    .slice(0, maxResults)
+    .map((item) => item.entry);
 }
 
 // ---------------------------------------------------------------------------

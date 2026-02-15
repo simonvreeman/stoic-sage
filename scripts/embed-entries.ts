@@ -71,7 +71,7 @@ async function getEmbeddings(texts: string[]): Promise<number[][]> {
       Authorization: `Bearer ${API_TOKEN}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ text: texts }),
+    body: JSON.stringify({ text: texts, pooling: "cls" }),
   });
 
   const json = (await res.json()) as EmbeddingResponse;
